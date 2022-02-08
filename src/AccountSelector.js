@@ -66,6 +66,7 @@ function Main(props) {
             src={`${process.env.PUBLIC_URL}/assets/substrate-logo.png`}
             size="mini"
           />
+          <Label> This is W</Label>
         </Menu.Menu>
         <Menu.Menu position="right" style={{ alignItems: 'center' }}>
           {!currentAccount ? (
