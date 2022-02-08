@@ -66,9 +66,12 @@ function Main(props) {
             src={`${process.env.PUBLIC_URL}/assets/substrate-logo.png`}
             size="mini"
           />
-          <Label> This is W</Label>
         </Menu.Menu>
-        <Menu.Menu position="right" style={{ alignItems: 'center' }}>
+
+        <Menu.Menu position="right" >
+        <h1 style = {{marginTop:0}} > This is Web Interface for SCV chain project</h1>
+        </Menu.Menu>
+        <Menu.Menu position="right" style={{ alignItems: 'center', justifyContent: 'center', alignItems:'center'  }}>
           {!currentAccount ? (
             <span>
               Create an account with Polkadot-JS Extension (
