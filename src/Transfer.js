@@ -25,21 +25,23 @@ export default function Main(props) {
   })
 
   return (
-    <Grid.Column width={8}>
+    <Grid.Column>
       <h1>Transfer</h1>
       <Form>
-        <Form.Field>
-          <Label basic color="teal">
+        <Form.Field > 
+          <Form.Group style={{justifyContent: 'center', alignItems:'center' }}>
+          <Label basic color="purple" style={{ marginLeft: 0, marginTop: '.5em' }}>
             <Icon name="hand point right" />1 Unit = 1000000000000&nbsp;
           </Label>
           <Label
             basic
-            color="teal"
+            color="purple"
             style={{ marginLeft: 0, marginTop: '.5em' }}
           >
             <Icon name="hand point right" />
             Transfer more than the existential amount for account with 0 balance
           </Label>
+          </Form.Group>
         </Form.Field>
 
         <Form.Field>

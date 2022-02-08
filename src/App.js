@@ -22,6 +22,7 @@ import NodeInfo from './NodeInfo'
 import TemplateModule from './TemplateModule'
 import Transfer from './Transfer'
 import Upgrade from './Upgrade'
+// import Submission from './Submission'
 
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
@@ -70,16 +71,18 @@ function Main() {
             <BlockNumber />
             <BlockNumber finalized />
           </Grid.Row>
-          <Grid.Row stretched>
-            <Balances />
+          <Grid.Row>
+            <Interactor />
           </Grid.Row>
           <Grid.Row>
             <Transfer />
-            <Upgrade />
           </Grid.Row>
           <Grid.Row>
-            <Interactor />
             <Events />
+            <Upgrade />
+          </Grid.Row>
+          <Grid.Row stretched>
+            <Balances />
           </Grid.Row>
           <Grid.Row>
             <TemplateModule />
@@ -87,6 +90,7 @@ function Main() {
         </Grid>
       </Container>
       <DeveloperConsole />
+      {/* <Submission /> */}
     </div>
   )
 }

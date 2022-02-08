@@ -161,10 +161,10 @@ function Main(props) {
       : 'Leaving this field as blank will submit a NONE value'
 
   return (
-    <Grid.Column width={8}>
+    <Grid.Column>
       <h1>Pallet Interactor</h1>
       <Form>
-        <Form.Group style={{ overflowX: 'auto' }} inline>
+        <Form.Group style={{ overflowX: 'auto', justifyContent: 'center', alignItems:'center' }} inline>
           <label>Interaction Type</label>
           <Form.Radio
             label="Extrinsic"
