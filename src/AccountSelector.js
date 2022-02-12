@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-
 import {
   Menu,
   Button,
@@ -9,6 +8,7 @@ import {
   Icon,
   Image,
   Label,
+  Moment
 } from 'semantic-ui-react'
 
 import { useSubstrate, useSubstrateState } from './substrate-lib'
@@ -69,8 +69,13 @@ function Main(props) {
         </Menu.Menu>
 
         <Menu.Menu position="right" >
-        <h1 style = {{marginTop:0}} > This is Web Interface for SCV chain project</h1>
+        <h1 style = {{marginTop:0}} > SCV CHAIN </h1>
         </Menu.Menu>
+        {/* <Menu.Menu position="right">
+          <Moment unix format="HH:mm">
+          {endsAt / 1000}
+          </Moment>
+        </Menu.Menu> */}
         <Menu.Menu position="right" style={{ alignItems: 'center', justifyContent: 'center', alignItems:'center'  }}>
           {!currentAccount ? (
             <span>
