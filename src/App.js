@@ -6,6 +6,9 @@ import {
   Grid,
   Sticky,
   Message,
+  Dropdown,
+  Form,
+  Divider,
 } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
@@ -22,10 +25,29 @@ import NodeInfo from './NodeInfo'
 import TemplateModule from './TemplateModule'
 import Transfer from './Transfer'
 import Upgrade from './Upgrade'
-// import Submission from './Submission'
+// import ReactDOM from 'react-dom'
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+// import HeaderMenu from "./HeaderMenu";
+// import Footer from "./Footer";
+// import styled from "styled-components";
+
+
+// const Home = () => <h1>Home</h1>;
+// const Places = () => <h1>Places</h1>;
+// const Venues = () => <h1>Venues</h1>;
+// const Floors = () => <h1>Floors</h1>;
+// const MissingPage = () => <h1>URL doesn't exist</h1>;
+
 
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
+  const options = [
+    { key: 1, text: 'SYS-MAN', value: 1 },
+    { key: 2, text: 'ORG', value: 2 },
+    { key: 3, text: 'User', value: 3 },
+  ]
+  
 
   const loader = text => (
     <Dimmer active>
@@ -57,7 +79,27 @@ function Main() {
   }
 
   const contextRef = createRef()
-
+  // const onSelectorRolesChange = (_, data) => {
+  //   setFormState(formState => {
+  //     let res
+  //     const { state, value } = data
+  //     if (typeof state === 'object') {
+  //       // Input parameter updated
+  //       const {
+  //         ind,
+  //         paramField: { type },
+  //       } = state
+  //       const inputParams = [...formState.inputParams]
+  //       inputParams[ind] = { type, value }
+  //       res = { ...formState, inputParams }
+  //     } else if (state === 'palletRpc') {
+  //       res = { ...formState, [state]: value, callable: '', inputParams: [] }
+  //     } else if (state === 'callable') {
+  //       res = { ...formState, [state]: value, inputParams: [] }
+  //     }
+  //     return res
+  //   })
+  // }
   return (
     <div ref={contextRef}>
       <Sticky context={contextRef}>
@@ -77,20 +119,38 @@ function Main() {
           <Grid.Row>
             <Transfer />
           </Grid.Row>
-          <Grid.Row>
-            <Events />
-            <Upgrade />
-          </Grid.Row>
           <Grid.Row stretched>
             <Balances />
           </Grid.Row>
           <Grid.Row>
             <TemplateModule />
           </Grid.Row>
+          <Grid.Row>
+            <Events />
+            <Upgrade />
+          </Grid.Row>
+          <Grid.Row>
+            {/* <Dropdown 
+              options={options}
+              text="Role"
+              attached
+              placeholder="Pallets / RPC"
+              fluid
+              label="Selector_Roles"
+              onChange={onSelectorRolesChange}
+              search
+              selection
+              state="palletRpc"
+              value={option}
+              options={options}
+            /> */}
+
+          </Grid.Row>
+
         </Grid>
+
       </Container>
       <DeveloperConsole />
-      {/* <Submission /> */}
     </div>
   )
 }

@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Grid, Form, Dropdown, Input, Label } from 'semantic-ui-react'
-
+import { Grid, Form, Dropdown, Input, Label, Container, MenuItem, Segment, GridColumn } from 'semantic-ui-react'
+import {
+  Menu,
+  Icon,
+  Image,
+  Header
+} from 'semantic-ui-react'
 import { useSubstrateState } from './substrate-lib'
 import { TxButton, TxGroupButton } from './substrate-lib/components'
 
@@ -195,32 +200,45 @@ function Main(props) {
             onChange={onInterxTypeChange}
           />
         </Form.Group>
-        <Form.Field>
-          <Dropdown
-            placeholder="Pallets / RPC"
-            fluid
-            label="Pallet / RPC"
-            onChange={onPalletCallableParamChange}
-            search
-            selection
-            state="palletRpc"
-            value={palletRpc}
-            options={palletRPCs}
-          />
-        </Form.Field>
-        <Form.Field>
-          <Dropdown
-            placeholder="Callables"
-            fluid
-            label="Callable"
-            onChange={onPalletCallableParamChange}
-            search
-            selection
-            state="callable"
-            value={callable}
-            options={callables}
-          />
-        </Form.Field>
+          <Form.Field position = "right">
+            <Grid columns={2}>
+              <Grid.Column>
+
+                <Dropdown
+                    // text="Pallet / RPC"
+                    attached
+                    placeholder="Pallets / RPC"
+                    fluid
+                    label="Pallet / RPC"
+                    onChange={onPalletCallableParamChange}
+                    search
+                    selection
+                    state="palletRpc"
+                    value={palletRpc}
+                    options={palletRPCs}
+                  />
+              </Grid.Column>
+              
+              <Grid.Column>
+                  <Dropdown
+                    // text='Callable'
+                    placeholder="Callables"
+                    fluid
+                    label="Callable"
+                    onChange={onPalletCallableParamChange}
+                    search
+                    selection
+                    state="callable"
+                    value={callable}
+                    options={callables}
+                  />
+              </Grid.Column>
+            </Grid>
+            
+
+
+          </Form.Field>
+
         {paramFields.map((paramField, ind) => (
           <Form.Field key={`${paramField.name}-${paramField.type}`}>
             <Input
@@ -236,7 +254,7 @@ function Main(props) {
               <Label
                 basic
                 pointing
-                color="teal"
+                color="red"
                 content={getOptionalMsg(interxType)}
               />
             ) : null}
