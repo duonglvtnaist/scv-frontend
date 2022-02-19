@@ -1,0 +1,24 @@
+.sidebar {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 !important;
+}
+
+.menu-parent {
+    color: rgb(37, 32, 32);
+    font-weight: bold;
+    align-items: center;
+    padding: 10px;
+}
+
+.menu-item {
+    background-color: rgb(255, 255, 255) !important;
+    border: none !important;
+    padding: 20px;
+    width: 100% !important;
+}
+
+.menu-parent:hover {
+    background-color: rgb(236, 236, 236);
+}

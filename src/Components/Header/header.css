@@ -1,0 +1,18 @@
+body {
+    background-color: rgb(252, 252, 252);
+}
+
+.header-left {
+    width: 100px;
+    margin-left: 30px;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 800;
+    color: rgb(7, 17, 26);
+}
+
+.header-right {
+    margin-right: 30px;
+}
