@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
-import { Container, Dropdown, Icon, Menu } from 'semantic-ui-react'
+import { Container, Dropdown, Icon, Image, Menu } from 'semantic-ui-react'
 import SidebarMenu from '../Sidebar/SidebarMenu'
 import MenuItem from '../Menu/MenuItem'
 import './header.css'
-import SysMan from './../Container/ApproveOrRevokeSysMan/SysMan'
-import Organization from './../Container/ApproveOrRevokeOrganization/Organization'
+import SysMan from '../Container/ApproveSysMan/ApproveSysMan'
+import Organization from '../Container/ApproveOrganization/ApproveOrganization'
 import { SidebarAccountType } from '../Data/Data'
+import { Link } from 'react-router-dom'
 
 export default class Header extends Component {
   render() {
     return (
       <Menu
-        attached="top"
         tabular
         style={{
-          backgroundColor: 'white',
+          backgroundColor: 'rgb(0,151,202)',
           border: 'none',
           alignItems: 'center',
           borderRadius: 'none',
@@ -23,9 +23,12 @@ export default class Header extends Component {
       >
         <Container>
           <Menu.Menu>
-            <div className="header-left">
-              <div className="logo">Scv - Chain</div>
-            </div>
+            <Link to="/home-page" className="link">
+              <Image
+                src={`${process.env.PUBLIC_URL}/assets/logo-scv.png`}
+                className="logo"
+              />
+            </Link>
           </Menu.Menu>
           {/* <Menu.Menu position="right">
             <SidebarMenu />

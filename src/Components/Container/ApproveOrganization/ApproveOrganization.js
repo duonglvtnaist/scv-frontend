@@ -1,53 +1,39 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, createRef } from 'react'
 import {
-  Grid,
-  Segment,
-  Input,
-  Dropdown,
   Container,
-  Icon,
+  Grid,
+  Input,
+  Segment,
+  TextArea,
+  Form,
   Button,
   Menu,
   Label,
-  Form,
-  List,
 } from 'semantic-ui-react'
-import './viewCV.css'
-import SidebarMenu from '../../Sidebar/SidebarMenu'
-import { SidebarORG } from '../../Data/Data'
 import { useSubstrateState } from '../../../substrate-lib'
+import './approveOrganization.css'
 import { TxButton, TxGroupButton } from '../../../substrate-lib/components'
-import { decorateStorage } from '@polkadot/types'
+import SidebarMenu from '../../Sidebar/SidebarMenu'
+import { SidebarSysMan } from '../../Data/Data'
+import AccountSelector from '../../../AccountSelector'
 import AccountMain from '../AddCV/AccountMain'
-import Query from './Query'
-
 const argIsOptional = arg => arg.type.toString().startsWith('Option<')
-export default function ViewCV() {
 
+export default function ApproveOrganization(props) {
   const { api, jsonrpc } = useSubstrateState()
-  const [status, setStatus] = useState('')
-  const [choosing, setChoosing] = useState('itemById')
-  const [interxType, setInterxType] = useState('QUERY')
+  const [status, setStatus] = useState(null)
+
+  const [interxType, setInterxType] = useState('EXTRINSIC')
   const [palletRPCs, setPalletRPCs] = useState([])
   const [callables, setCallables] = useState([])
   const [paramFields, setParamFields] = useState([])
-  const [infor, setInfor] = useState('')
-  // const [jsonStatus, setJsonStatus] = useState(JSON.parse(status))
+
   const initFormState = {
-    palletRpc: 'cv',
-    callable: 'itemById',
+    palletRpc: 'sysMan',
+    callable: 'approveOrg',
     inputParams: [],
   }
-  const itemByIdState = {
-    palletRpc: 'cv',
-    callable: 'itemById',
-    inputParams: [],
-  }
-  const itemsByAccountIdState = {
-    palletRpc: 'cv',
-    callable: 'itemsByAccountId',
-    inputParams: [],
-  }
+
   const [formState, setFormState] = useState(initFormState)
   const { palletRpc, callable, inputParams } = formState
 
@@ -62,20 +48,23 @@ export default function ViewCV() {
       return api.consts
     }
   }
-  const labelCVs = [
+  const labelNames = [
     {
-      value: 'CV ID',
+      value: 'Account ID',
+    },
+    {
+      value: 'Metadata',
+    },
+    {
+      value: 'Original Date',
+    },
+    {
+      value: 'Expired Date',
+    },
+    {
+      value: 'Certificate ID',
     },
   ]
-
-  const labelAccounts = [
-    {
-      value: 'Account ID'
-    },
-  ]
-
-  const [labelNames, setLabelNames] = useState(labelCVs)
-
   const updatePalletRPCs = () => {
     if (!api) {
       return
@@ -190,88 +179,49 @@ export default function ViewCV() {
   }
 
   const onInterxTypeChange = (ev, data) => {
-    setChoosing(data.value)
+    setInterxType(data.value)
     // clear the formState
-    if (data.value === 'itemById') {
-      setInfor('Choose first')
-      setFormState(itemByIdState)
-      setLabelNames(labelCVs)
-    } else if (data.value === 'itemsByAccountId') {
-      setInfor('Choose second')
-      setFormState(itemsByAccountIdState)
-      setLabelNames(labelAccounts)
-    }
-    updatePalletRPCs()
-    updateCallables()
+    setFormState(initFormState)
   }
 
   const getOptionalMsg = interxType =>
     interxType === 'RPC'
       ? 'Optional Parameter'
       : 'Leaving this field as blank will submit a NONE value'
-  return (
-    <Container style={{ marginTop: '20px' }}>
-      <Grid>
-        <Grid.Column width={4}>
-          <Menu fluid vertical tabular>
-            {SidebarORG.map(MenuOrg => (
-              <SidebarMenu
-                link={MenuOrg.link}
-                icon={MenuOrg.icon}
-                title={MenuOrg.title}
-                key={MenuOrg.id}
-              />
-            ))}
-          </Menu>
-        </Grid.Column>
-        <Grid.Column width="12">
-          <Container>
+    return (
+      <Container style={{ marginTop: '20px' }}>
+        <Grid>
+          <Grid.Column width={4}>
+            <Menu fluid vertical tabular>
+              {SidebarSysMan.map(MenuSysMan => (
+                <SidebarMenu
+                  link={MenuSysMan.link}
+                  title={MenuSysMan.title}
+                  icon={MenuSysMan.icon}
+                  key={MenuSysMan.id}
+                />
+              ))}
+            </Menu>
+          </Grid.Column>
+          <Grid.Column width={12}>
             <Segment.Group>
               <Segment raised style={{ backgroundColor: 'rgb(252, 252, 252)' }}>
                 <Label color="blue" ribbon>
-                  VIEW CV
+                  APPROVE ORGANIZATION
                 </Label>
               </Segment>
-              <div className="view-cv">
-                <AccountMain />
-                {/* <Input
-                  label={{ basic: true, content: 'CV EnKey' }}
-                  labelPosition="left"
-                  placeholder="CV EnKey ..."
-                  className="input-id"
-                  value={JSON.stringify(formState) + " - " + choosing + " - " + infor}
-                ></Input>
-                <div className="button-submit">
-                  <Button className="button-view-cv">View</Button>
-                </div> */}
+              <div className="approve">
+              <AccountMain />
+
                 <Form style={{ marginTop: '10px' }}>
-                  <Form.Group style={{ overflowX: 'auto' }} inline>
-                    <label>Interaction Type</label>
-                    <Form.Radio
-                      label="View by ID"
-                      name="choosing"
-                      value="itemById"
-                      checked={choosing === 'itemById'}
-                      onChange={onInterxTypeChange}
-                    />
-                    <Form.Radio
-                      label="View by Account"
-                      name="choosing"
-                      value="itemsByAccountId"
-                      checked={choosing === 'itemsByAccountId'}
-                      onChange={onInterxTypeChange}
-                    />
-                  </Form.Group>
-                </Form>
-                <Form>
                   {paramFields.map((paramField, ind) => (
                     <Form.Field key={`${paramField.name}-${paramField.type}`}>
                       <Input
-                        placeholder="Bytes"
+                        placeholder={paramField.type}
                         fluid
                         type="text"
                         label={labelNames[ind].value}
-                        className="input-cv"
+                        // label={palletRPCs[ind].value}
                         state={{ ind, paramField }}
                         value={inputParams[ind] ? inputParams[ind].value : ''}
                         onChange={onPalletCallableParamChange}
@@ -287,7 +237,41 @@ export default function ViewCV() {
                     </Form.Field>
                   ))}
                 </Form>
-                <Form>
+                {/* <Form>
+                  <Form.Field style={{ margin: '0px' }}>
+                    <Input
+                      label={{ basic: true, content: 'Type' }}
+                      labelPosition="left"
+                      placeholder="Type"
+                      style={{ margin: '10px 10px 10px 0px' }}
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <Input
+                      label={{ basic: true, content: 'KeyWork' }}
+                      labelPosition="left"
+                      placeholder="Ex: English, ReactJs, ..."
+                      style={{ margin: '0px 10px 10px 0px' }}
+                    />
+                  </Form.Field>
+                </Form>
+                <Input
+                  label={{ basic: true, content: 'ID' }}
+                  labelPosition="left"
+                  placeholder="Enter ID ..."
+                  className="input-id"
+                  // action={{ icon: 'search' }}
+                ></Input>
+                <Form style={{ paddingBottom: '20px' }}>
+                  <TextArea placeholder="Description ..." />
+                </Form>
+                <div className="button-submit">
+                  <Button positive className="button-approve">
+                    APPROVE
+                  </Button>
+                </div> */}
+              </div>
+              <Form style={{ paddingBottom: '20px' }}>
                   <Form.Field style={{ textAlign: 'center' }}>
                     <InteractorSubmit
                       setStatus={setStatus}
@@ -301,71 +285,22 @@ export default function ViewCV() {
                     />
                   </Form.Field>
                 </Form>
-              </div>
+                <div style={{ overflowWrap: 'break-word' }} className = 'approve'>{status}</div>
             </Segment.Group>
-            <Segment.Group>
-              <Segment raised style={{ backgroundColor: 'rgb(252, 252, 252)' }}>
-                <Label color="blue" ribbon className="show-title">
-                  CV INFORMATION
-                </Label>
-              </Segment>
-              <div className="show-cv">
-                {/* <div className="cv-info">
-                  <label>CID: </label>
-                  <span className="show-content">0</span>
-                </div>
-                <div className="cv-info">
-                  <label>Owner ID: </label>
-                  <span className="show-content">
-                    5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
-                  </span>
-                </div>
-                <div className="cv-info">
-                  <label>SCORE: </label>
-                  <span className="show-content">5</span>
-                  <Icon name="star" color="yellow" />
-                </div>
-                <div className="cv-info">
-                  <label>METADATA: </label>
-                  <span className="show-content">0x6d6f74</span>
-                </div>
-                <div className="cv-info">
-                  <label>OrigDate: </label>
-                  <span className="show-content">01/01/2022</span>
-                </div>
-                <div className="cv-info">
-                  <label>ExpDate: </label>
-                  <span className="show-content">31/12/2022</span>
-                </div> */}
-                <div className="cv-info">
-                  <Query value={status}/>
-                </div>
-                {/* <div style={{ overflowWrap: 'break-word' }}>{status}</div> */}
-              </div>
-            </Segment.Group>
-          </Container>
-        </Grid.Column>
-      </Grid>
-    </Container>
-  )
+          </Grid.Column>
+        </Grid>
+      </Container>
+    )
 }
 function InteractorSubmit(props) {
   const {
     attrs: { interxType },
   } = props
   if (interxType === 'QUERY') {
-    return <TxButton label="View" type="QUERY" color="blue" backgroundColor="blue" {...props} />
+    return <TxButton label="Query" type="QUERY" color="blue" {...props} />
   } else if (interxType === 'EXTRINSIC') {
     return <TxGroupButton {...props} />
   } else if (interxType === 'RPC' || interxType === 'CONSTANT') {
     return <TxButton label="Submit" type={interxType} color="blue" {...props} />
   }
-}
-function IsJsonString(str) {
-  try {
-      JSON.parse(str);
-  } catch (e) {
-      return false;
-  }
-  return true;
 }

@@ -10,14 +10,13 @@ import {
   Menu,
   Label,
 } from 'semantic-ui-react'
-import './revokeCV.css'
-import SidebarMenu from '../../Sidebar/SidebarMenu'
-import { SidebarORG } from '../../Data/Data'
+import './revokeCertificate.css'
 import AccountMain from '../AddCV/AccountMain'
+import SidebarMenu from '../../Sidebar/SidebarMenu'
 import { useSubstrateState } from '../../../substrate-lib'
 import { TxButton, TxGroupButton } from '../../../substrate-lib/components'
 const argIsOptional = arg => arg.type.toString().startsWith('Option<')
-export default function RevokeCV(props) {
+export default function RevokeCertificate(props) {
   const { api, jsonrpc } = useSubstrateState()
   const [status, setStatus] = useState(null)
 
@@ -27,8 +26,8 @@ export default function RevokeCV(props) {
   const [paramFields, setParamFields] = useState([])
 
   const initFormState = {
-    palletRpc: 'cv',
-    callable: 'revokeItem',
+    palletRpc: 'certificate',
+    callable: 'revokeCertificate',
     inputParams: [],
   }
 
@@ -48,7 +47,7 @@ export default function RevokeCV(props) {
   }
   const labelNames = [
     {
-      value: 'CV ID',
+      value: 'Certificate ID',
     },
   ]
   const updatePalletRPCs = () => {
@@ -176,93 +175,93 @@ export default function RevokeCV(props) {
       : 'Leaving this field as blank will submit a NONE value'
 
   return (
-    <Container style={{ marginTop: '20px' }}>
-      <Grid>
-        <Grid.Column width={4}>
-          <Menu fluid vertical tabular>
-            {props.MenuName.map(Menu => (
-              <SidebarMenu
-                link={Menu.link}
-                icon={Menu.icon}
-                title={Menu.title}
-                key={Menu.id}
-              />
-            ))}
-          </Menu>
-        </Grid.Column>
-        <Grid.Column width={12}>
-          <Container>
-            <Segment.Group>
-              <Segment raised style={{ backgroundColor: 'rgb(252, 252, 252)' }}>
-                <Label color="blue" ribbon>
-                  REVOKE CV
-                </Label>
-              </Segment>
+  <Container style={{ marginTop: '20px' }}>
+    <Grid>
+      <Grid.Column width={4}>
+        <Menu fluid vertical tabular>
+          {props.MenuName.map(Menu => (
+            <SidebarMenu
+              link={Menu.link}
+              icon={Menu.icon}
+              title={Menu.title}
+              key={Menu.id}
+            />
+          ))}
+        </Menu>
+      </Grid.Column>
+      <Grid.Column width={12}>
+        <Container>
+          <Segment.Group>
+            <Segment raised style={{ backgroundColor: 'rgb(252, 252, 252)' }}>
+              <Label color="blue" ribbon>
+                REVOKE CERTIFICATE
+              </Label>
+            </Segment>
 
-              <div className="revokeCV">
-                <AccountMain />
-                {/* <Input
-                  label={{ basic: true, content: 'CV ID' }}
-                  labelPosition="left"
-                  placeholder="Enter CID ..."
-                  className="input-cv-id"
-                  // action={{ icon: 'search' }}
-                ></Input>
-                <Input
-                  label={{ basic: true, content: 'CID' }}
-                  labelPosition="left"
-                  placeholder="Enter CID ..."
-                  className="input-cid"
-                /> */}
-                <Form style={{ marginTop: '10px' }}>
-                  {paramFields.map((paramField, ind) => (
-                    <Form.Field key={`${paramField.name}-${paramField.type}`}>
-                      <Input
-                        placeholder={paramField.type}
-                        fluid
-                        type="text"
-                        label={labelNames[ind].value}
-                        className="input-cv"
-                        state={{ ind, paramField }}
-                        value={inputParams[ind] ? inputParams[ind].value : ''}
-                        onChange={onPalletCallableParamChange}
-                      />
-                      {paramField.optional ? (
-                        <Label
-                          basic
-                          pointing
-                          color="teal"
-                          content={getOptionalMsg(interxType)}
-                        />
-                      ) : null}
-                    </Form.Field>
-                  ))}
-                </Form>
-                <Form>
-                  <Form.Field style={{ textAlign: 'center' }}>
-                    <InteractorSubmit
-                      setStatus={setStatus}
-                      attrs={{
-                        interxType,
-                        palletRpc,
-                        callable,
-                        inputParams,
-                        paramFields,
-                      }}
+            <div className="revokeCertificate">
+              <AccountMain />
+              {/* <Input
+                label={{ basic: true, content: 'CV ID' }}
+                labelPosition="left"
+                placeholder="Enter CID ..."
+                className="input-cv-id"
+                // action={{ icon: 'search' }}
+              ></Input>
+              <Input
+                label={{ basic: true, content: 'CID' }}
+                labelPosition="left"
+                placeholder="Enter CID ..."
+                className="input-cid"
+              /> */}
+              <Form style={{ marginTop: '10px' }}>
+                {paramFields.map((paramField, ind) => (
+                  <Form.Field key={`${paramField.name}-${paramField.type}`}>
+                    <Input
+                      placeholder={paramField.type}
+                      fluid
+                      type="text"
+                      label={labelNames[ind].value}
+                      className="input-certificate-id"
+                      state={{ ind, paramField }}
+                      value={inputParams[ind] ? inputParams[ind].value : ''}
+                      onChange={onPalletCallableParamChange}
                     />
+                    {paramField.optional ? (
+                      <Label
+                        basic
+                        pointing
+                        color="teal"
+                        content={getOptionalMsg(interxType)}
+                      />
+                    ) : null}
                   </Form.Field>
-                </Form>
-                <div style={{ overflowWrap: 'break-word' }}>{status}</div>
-              </div>
+                ))}
+              </Form>
+              <Form>
+                <Form.Field style={{ textAlign: 'center' }}>
+                  <InteractorSubmit
+                    setStatus={setStatus}
+                    attrs={{
+                      interxType,
+                      palletRpc,
+                      callable,
+                      inputParams,
+                      paramFields,
+                    }}
+                  />
+                </Form.Field>
+              </Form>
+              <div style={{ overflowWrap: 'break-word' }}>{status}</div>
+            </div>
 
-              {/* <div className="button-submit">
-                <Button className="button-revoke-cv">REVOKE</Button>
-              </div> */}
-            </Segment.Group>
-          </Container>
-        </Grid.Column>
-      </Grid>
-    </Container>
+            {/* <div className="button-submit">
+              <Button className="button-revoke-cv">REVOKE</Button>
+            </div> */}
+          </Segment.Group>
+        </Container>
+      </Grid.Column>
+    </Grid>
+  </Container>
   )
 }
 function InteractorSubmit(props) {
