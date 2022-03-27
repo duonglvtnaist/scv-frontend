@@ -1,0 +1,83 @@
+.userBalance {
+    width: 86%;
+    height: 100vh;
+}
+
+.balanceInfo {
+    width: 80%;
+    height: 431px;
+    margin: 7% auto 0 auto;
+    background: #f3f3f3;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 87px;
+}
+
+.balanceNumber {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.textBalanceNumber {
+    font-weight: 700;
+    font-size: 150px;
+    color: #090909;
+    margin-bottom: 50px;
+}
+
+.textAB {
+    padding-top: 20px;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 35px;
+
+    color: #000000;
+}
+
+.buttonWithDraw {
+    width: 169px;
+    height: 50px;
+    border: 2px solid black;
+    border-radius: 25px;
+    margin-bottom: 100px;
+
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 29px;
+    text-align: center;
+    padding: 10px 30px;
+    color: #000000;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
+}
+
+.paymentHistory {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 20px;
+    height: 60px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.iconPayment {
+    width: 36px !important;
+    height: 48px !important;
+    margin-right: 10px;
+}
+
+.textPayment {
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 35px;
+
+    /* Text */
+
+    color: #090909;
+}

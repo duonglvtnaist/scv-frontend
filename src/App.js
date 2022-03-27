@@ -11,6 +11,7 @@ import Sidebar from './Layout/Dashboard/Sidebar/Sidebar'
 import Dashboard from './Layout/Dashboard/Dashboard'
 import Profile from './Layout/Dashboard/Profile/Profile'
 import EditProfile from './Components/EditProfile/EditProfile'
+import UserBalance from './Components/Balance/Balance'
 
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
@@ -55,6 +56,7 @@ function Main() {
         <Route path="dashboard" element={<Dashboard />}>
           <Route index element={<Profile />}></Route>
           <Route path="profile" element={<Profile />}></Route>
+          <Route path="balance" element={<UserBalance />}></Route>
         </Route>
         <Route path="profile/edit-profile" element={<EditProfile />}></Route>
       </Routes>

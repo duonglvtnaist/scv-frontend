@@ -21,12 +21,21 @@ export default function Login() {
           <p className="titleLogin">Welcome</p>
           <Icon name="user circle" size="massive" className="iconUser"></Icon>
           <div className="loginForm">
-            <input placeholder="Email Address" className="inputInfo" />
-            <input
-              placeholder="Password"
-              className="inputPassword"
-              type="password"
-            />
+            <form style={{ display: 'flex', flexDirection: 'column' }}>
+              <input
+                type="email"
+                placeholder="Email Address"
+                className="inputInfo"
+                name="username"
+              />
+              <input
+                placeholder="Password"
+                className="inputPassword"
+                type="password"
+                name="password"
+                autoComplete="email"
+              />
+            </form>
             <Link to="/dashboard">
               <Button type="submit" className="buttonLogin">
                 LOG IN

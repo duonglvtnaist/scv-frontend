@@ -37,7 +37,7 @@
     background-color: #959595;
 }
 
-.menuDashboard:active {
+.menuDashboard:focus {
     background-color: #959595;
 }
 
