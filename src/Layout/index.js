@@ -22,13 +22,15 @@ import RevokeCertificate from './../Components/Container/RevokeCertificate/Revok
 import RevokeSysMan from './../Components/Container/RevokeSysMan/RevokeSysMan'
 import RevokeOrganization from './../Components/Container/RevokeOrganization/RevokeOrganization'
 import HomePage from './HomePage/HomePage'
+import HeaderLanding from './LandingPage/HeaderLandingPage/HeaderLanding'
+import LandingPage from './LandingPage/LandingPage'
 
 export default class SystemManage extends Component {
   render() {
     return (
       <Router>
-        <Header />
         <Routes>
+          <Route path="/" element={<LandingPage />}></Route>
           <Route path="/home-page" element={<HomePage />}></Route>
           {/* Router sys-man */}
           <Route path="/system-manage" element={<SystemManLayout />}></Route>
