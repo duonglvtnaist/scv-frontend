@@ -1,19 +1,16 @@
 import React, { createRef } from 'react'
-import {
-  Container,
-  Dimmer,
-  Loader,
-  Grid,
-  Sticky,
-  Message,
-} from 'semantic-ui-react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'
-
+import { Dimmer, Grid, Loader, Message } from 'semantic-ui-react'
+import HomePage from './Layout/HomePage/HomePage'
+import LandingPage from './Layout/LandingPage/LandingPage'
 import { SubstrateContextProvider, useSubstrateState } from './substrate-lib'
-import { DeveloperConsole } from './substrate-lib/components'
-import SystemManage from './Layout/index'
-import AccountSelector from './AccountSelector'
-import Interactor from './Interactor'
+import Login from './Components/Login/Login'
+import SignUp from './Components/SignUp/SignUp'
+import Sidebar from './Layout/Dashboard/Sidebar/Sidebar'
+import Dashboard from './Layout/Dashboard/Dashboard'
+import Profile from './Layout/Dashboard/Profile/Profile'
+import EditProfile from './Components/EditProfile/EditProfile'
 
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
@@ -49,12 +46,19 @@ function Main() {
 
   const contextRef = createRef()
   return (
-    <div>
-      
-      {/* <AccountSelector />
-      <Interactor /> */}
-      <SystemManage />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />}></Route>
+        <Route path="home-page" element={<HomePage />}></Route>
+        <Route path="login" element={<Login />}></Route>
+        <Route path="sign-up" element={<SignUp />}></Route>
+        <Route path="dashboard" element={<Dashboard />}>
+          <Route index element={<Profile />}></Route>
+          <Route path="profile" element={<Profile />}></Route>
+        </Route>
+        <Route path="profile/edit-profile" element={<EditProfile />}></Route>
+      </Routes>
+    </Router>
   )
 }
 
