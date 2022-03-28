@@ -36,7 +36,9 @@ export default class Header extends Component {
         <div className="headerButton">
           <div className="headerButtonUpLoad">UPLOAD SCHOLARSHIP</div>
           <div className="headerButtonPostJob">POST JOB</div>
-          <div className="headerButtonCreateCV">CREATE CV</div>
+          <Link to="/create-cv">
+            <div className="headerButtonCreateCV">CREATE CV</div>
+          </Link>
         </div>
       </div>
     )

@@ -13,6 +13,7 @@ import Profile from './Layout/Dashboard/Profile/Profile'
 import EditProfile from './Components/EditProfile/EditProfile'
 import UserBalance from './Layout/Dashboard/Balance/Balance'
 import History from './Layout/Dashboard/History/History'
+import CreateCV from './Components/CreateCV/CreateCV'
 
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
@@ -52,6 +53,7 @@ function Main() {
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="home-page" element={<HomePage />}></Route>
+        <Route path="/create-cv" element={<CreateCV />}></Route>
         <Route path="login" element={<Login />}></Route>
         <Route path="sign-up" element={<SignUp />}></Route>
         <Route path="dashboard" element={<Dashboard />}>
