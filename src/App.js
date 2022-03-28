@@ -11,7 +11,8 @@ import Sidebar from './Layout/Dashboard/Sidebar/Sidebar'
 import Dashboard from './Layout/Dashboard/Dashboard'
 import Profile from './Layout/Dashboard/Profile/Profile'
 import EditProfile from './Components/EditProfile/EditProfile'
-import UserBalance from './Components/Balance/Balance'
+import UserBalance from './Layout/Dashboard/Balance/Balance'
+import History from './Layout/Dashboard/History/History'
 
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
@@ -57,6 +58,7 @@ function Main() {
           <Route index element={<Profile />}></Route>
           <Route path="profile" element={<Profile />}></Route>
           <Route path="balance" element={<UserBalance />}></Route>
+          <Route path="history" element={<History />}></Route>
         </Route>
         <Route path="profile/edit-profile" element={<EditProfile />}></Route>
       </Routes>

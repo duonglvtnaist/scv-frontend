@@ -2,14 +2,12 @@ import React from 'react'
 import './profile.css'
 import { Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import HeaderDashboard from '../HeaderDashboard/HeaderDashboard'
 
 export default function Profile() {
   return (
     <div className="profile">
-      <div className="navbar">
-        <Icon name="bell outline" size="big"></Icon>
-        <Icon name="user circle" size="huge"></Icon>
-      </div>
+      <HeaderDashboard />
       <div className="userProfile">
         <div className="userInfo">
           <div className="userInfoDetail">

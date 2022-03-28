@@ -1,15 +1,13 @@
 import React from 'react'
 import { Icon, Image } from 'semantic-ui-react'
-import iconPayment from '../../assets/Image/iconPayment.png'
+import iconPayment from '../../../assets/Image/iconPayment.png'
 import './balance.css'
+import HeaderDashboard from '../HeaderDashboard/HeaderDashboard'
 
 export default function UserBalance() {
   return (
     <div className="userBalance">
-      <div className="navbar">
-        <Icon name="bell outline" size="big"></Icon>
-        <Icon name="user circle" size="huge"></Icon>
-      </div>
+      <HeaderDashboard />
       <div className="balanceInfo">
         <div className="balanceNumber">
           <div className="textBalanceNumber">$0</div>
