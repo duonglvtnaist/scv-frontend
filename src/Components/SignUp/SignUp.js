@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Icon, Button, Image, Form } from 'semantic-ui-react'
+import { Container, Icon, Button, Image } from 'semantic-ui-react'
 import iconWallet from '../../assets/Image/iconWallet.png'
 import './signUp.css'
 import { Link } from 'react-router-dom'
@@ -19,18 +19,10 @@ export default function SignUp() {
         </div>
         <div className="loginCenter">
           <p className="titleLogin">Sign Up</p>
-          <form className="loginForm">
-            <input
-              placeholder="First Name"
-              className="inputInfo"
-              name="fname"
-            />
-            <input placeholder="Last Name" className="inputInfo" name="lname" />
-            <input
-              placeholder="Email Address"
-              className="inputInfo"
-              name="email"
-            />
+          <div className="loginForm">
+            <input placeholder="First Name" className="inputInfo" />
+            <input placeholder="Last Name" className="inputInfo" />
+            <input placeholder="Email Address" className="inputInfo" />
             <input
               placeholder="Password"
               className="inputPassword"
@@ -41,7 +33,7 @@ export default function SignUp() {
                 SIGN UP
               </Button>
             </Link>
-          </form>
+          </div>
         </div>
       </Container>
     </div>
