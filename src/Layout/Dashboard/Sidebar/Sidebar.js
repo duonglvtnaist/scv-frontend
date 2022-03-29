@@ -31,10 +31,12 @@ export default function Sidebar() {
             <span className="textMenu">History</span>
           </div>
         </Link>
-        <div className="menuDashboard">
-          <Icon name="upload" className="iconMenu" size="big"></Icon>
-          <span className="textMenu">Update CV</span>
-        </div>
+        <Link to="update-cv">
+          <div className="menuDashboard">
+            <Icon name="upload" className="iconMenu" size="big"></Icon>
+            <span className="textMenu">Update CV</span>
+          </div>
+        </Link>
       </div>
       <div className="buttonLogOut">
         <Icon name="sign-out" className="iconMenu" size="big"></Icon>
