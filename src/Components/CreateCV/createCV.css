@@ -23,6 +23,8 @@
 }
 
 .formFieldCreateCV label {
+    margin-right: 22px !important;
+    width: 250px;
     font-weight: 400 !important;
     font-size: 22px !important;
     line-height: 28px !important;
