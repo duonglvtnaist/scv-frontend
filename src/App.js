@@ -16,6 +16,7 @@ import History from './Layout/Dashboard/History/History'
 import CreateCV from './Components/CreateCV/CreateCV'
 import CreateJob from './Components/CreateJob/CreateJob'
 import CreateScholarship from './Components/CreateScholarship/CreateScholarship'
+import UpdateCV from './Layout/Dashboard/UpdateCV/UpdateCV'
 
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
@@ -68,6 +69,7 @@ function Main() {
           <Route path="profile" element={<Profile />}></Route>
           <Route path="balance" element={<UserBalance />}></Route>
           <Route path="history" element={<History />}></Route>
+          <Route path="update-cv" element={<UpdateCV />}></Route>
         </Route>
         <Route path="profile/edit-profile" element={<EditProfile />}></Route>
       </Routes>
