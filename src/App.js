@@ -61,6 +61,8 @@ function Main() {
         <Route path="dashboard" element={<Dashboard />}>
           <Route index element={<Profile />}></Route>
           <Route path="profile" element={<Profile />}></Route>
+          <Route path="balance" element={<UserBalance />}></Route>
+          <Route path="history" element={<History />}></Route>
         </Route>
         <Route path="profile/edit-profile" element={<EditProfile />}></Route>
       </Routes>
