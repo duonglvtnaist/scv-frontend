@@ -15,6 +15,7 @@ import UserBalance from './Layout/Dashboard/Balance/Balance'
 import History from './Layout/Dashboard/History/History'
 import CreateCV from './Components/CreateCV/CreateCV'
 import CreateJob from './Components/CreateJob/CreateJob'
+import CreateScholarship from './Components/CreateScholarship/CreateScholarship'
 
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
@@ -56,11 +57,17 @@ function Main() {
         <Route path="home-page" element={<HomePage />}></Route>
         <Route path="/create-cv" element={<CreateCV />}></Route>
         <Route path="/upload-job" element={<CreateJob />}></Route>
+        <Route
+          path="/upload-scholarship"
+          element={<CreateScholarship />}
+        ></Route>
         <Route path="login" element={<Login />}></Route>
         <Route path="sign-up" element={<SignUp />}></Route>
         <Route path="dashboard" element={<Dashboard />}>
           <Route index element={<Profile />}></Route>
           <Route path="profile" element={<Profile />}></Route>
+          <Route path="balance" element={<UserBalance />}></Route>
+          <Route path="history" element={<History />}></Route>
         </Route>
         <Route path="profile/edit-profile" element={<EditProfile />}></Route>
       </Routes>
