@@ -17,6 +17,7 @@ import CreateCV from './Components/CreateCV/CreateCV'
 import CreateJob from './Components/CreateJob/CreateJob'
 import CreateScholarship from './Components/CreateScholarship/CreateScholarship'
 import UpdateCV from './Layout/Dashboard/UpdateCV/UpdateCV'
+import ContentHomePage from './Layout/HomePage/Components/Container/ContentHomePage'
 
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
@@ -55,13 +56,15 @@ function Main() {
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
-        <Route path="home-page" element={<HomePage />}></Route>
-        <Route path="/create-cv" element={<CreateCV />}></Route>
-        <Route path="/upload-job" element={<CreateJob />}></Route>
-        <Route
-          path="/upload-scholarship"
-          element={<CreateScholarship />}
-        ></Route>
+        <Route path="home" element={<HomePage />}>
+          <Route index element={<ContentHomePage />}></Route>
+          <Route path="create-cv" element={<CreateCV />}></Route>
+          <Route path="upload-job" element={<CreateJob />}></Route>
+          <Route
+            path="upload-scholarship"
+            element={<CreateScholarship />}
+          ></Route>
+        </Route>
         <Route path="login" element={<Login />}></Route>
         <Route path="sign-up" element={<SignUp />}></Route>
         <Route path="dashboard" element={<Dashboard />}>

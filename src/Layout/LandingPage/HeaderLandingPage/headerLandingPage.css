@@ -7,7 +7,7 @@
 .headerContainer {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .logoSCV {
@@ -23,7 +23,7 @@
 .headerCenter {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     width: 30%;
 }
