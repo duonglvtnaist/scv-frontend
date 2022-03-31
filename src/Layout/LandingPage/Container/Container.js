@@ -32,7 +32,7 @@ export default function ContainerLanding() {
           <br /> Smart Matching.
           <br /> High Privacy Protection.
         </span>
-        <Link to="/home-page">
+        <Link to="home">
           <button className="buttonUseApp">Use App</button>
         </Link>
         <button className="buttonSignUp">Sign up</button>

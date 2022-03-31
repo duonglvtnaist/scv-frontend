@@ -7,7 +7,7 @@ export default function Sidebar() {
   return (
     <div className="sidebar">
       <div>
-        <Link to="/home-page">
+        <Link to="/home">
           <div className="menuDashboard">
             <Icon name="home" className="iconMenu" size="big"></Icon>
             <span className="textMenu">Home</span>
@@ -38,10 +38,12 @@ export default function Sidebar() {
           </div>
         </Link>
       </div>
-      <div className="buttonLogOut">
-        <Icon name="sign-out" className="iconMenu" size="big"></Icon>
-        <span className="textMenu">Log Out</span>
-      </div>
+      <Link to="/">
+        <div className="buttonLogOut">
+          <Icon name="sign-out" className="iconMenu" size="big"></Icon>
+          <span className="textMenu">Log Out</span>
+        </div>
+      </Link>
     </div>
   )
 }
