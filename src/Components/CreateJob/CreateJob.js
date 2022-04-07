@@ -35,9 +35,10 @@ export default class JobForm extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    const job = this.state.job
+    const job = this.state.job;
+
+    // update job info
     job[name] = value;
-    console.log(value)
     this.setState({
       
       job
@@ -52,8 +53,6 @@ export default class JobForm extends React.Component {
     event.preventDefault();
     
     const res = await createJob(this.state.job);
-
-    console.log(res);
 
     if (res.status === 201) {
       alert("Create Job Successfully");

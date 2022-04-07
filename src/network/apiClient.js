@@ -18,7 +18,6 @@ function (response){
     return response;
 
 }, function (error) {
-  console.log(error);
     if (error.response) {
       let response = {
         status: error.response.status,
