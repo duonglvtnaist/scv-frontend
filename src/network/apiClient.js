@@ -18,13 +18,18 @@ function (response){
     return response;
 
 }, function (error) {
-  console.log(error);
     if (error.response) {
-      return error.response
+      let response = {
+        status: error.response.status,
+        statusText: error.response.statusText,
+        data: error.response.data
+        
+      }
+      return response
     } else if (error.request){
       return error.request
     } else {
-      return {status: 501, "statusText": "unknown_error", "message": error.message}
+      return {status: 501, statusText: "unknown_error", "message": error.message}
     }
 
     // return Promise.reject(error);

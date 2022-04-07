@@ -9,13 +9,18 @@ export default class JobForm extends React.Component {
     super(props);
     this.state = {
       job: {
-        jobId: '',
-        jobTitle: '',
-        postedBy: '',
-        jobType: 'Remote',
-        location: '',
-        keywords: [],
-        deadLine: '',
+        job_id: "",
+        job_title: "",
+        posted_by: "",
+        job_type: "Remote",
+        location: "",
+        keywords: "",
+        deadline: "",
+        description_in_detail: "",
+        category: "",
+        position: "",
+        experience: "",
+
       }
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -26,18 +31,21 @@ export default class JobForm extends React.Component {
   }
 
   handleInputChange(event) {
-
     const target = event.target;
-
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
+    const job = this.state.job;
+
+    // update job info
+    job[name] = value;
     this.setState({
-      job: {
-        [name]: value
-      }
+      
+      job
       
     });
+
+    console.log(this.state.job)
 
   }
 
@@ -46,9 +54,9 @@ export default class JobForm extends React.Component {
     
     const res = await createJob(this.state.job);
 
-    console.log(res);
-
-    if (res.status !== 200) {
+    if (res.status === 201) {
+      alert("Create Job Successfully");
+    }else {
       this.errorFallback(res);
     }
   }
@@ -63,26 +71,34 @@ export default class JobForm extends React.Component {
             <Form className="formInputCreateCV" >
               <Form.Field className="formFieldCreateCV">
                 <label>Job ID</label>
-                <input type="text" className="inputCV" name="jobId" value={this.state.jobId} onChange={this.handleInputChange}></input>
+                <input type="text" className="inputCV" name="job_id" value={this.state.job_id} onChange={this.handleInputChange}></input>
               </Form.Field>
               <Form.Field className="formFieldCreateCV">
                 <label> Job Title</label>
-                <input type="text" className="inputCV" name="jobTitle" value={this.state.jobTitle} onChange={this.handleInputChange}/>
-              </Form.Field>
-              <Form.Field className="formFieldCreateCV">
-                <label> Posted By</label>
-                <input type="text" className="inputCV" name="postedBy" value={this.state.postedBy} onChange={this.handleInputChange}/>
+                <input type="text" className="inputCV" name="job_title" value={this.state.job_title} onChange={this.handleInputChange}/>
               </Form.Field>
               <Form.Field className="formFieldCreateCV">
                 <label> Job type</label>
                 <div className="formFieldGroupRadio">
                   <div className="formFieldRadio">
-                    <input type="radio" value="Remote" name="jobType" checked={this.state.jobType === "Remote"} onChange={this.handleInputChange}/> Remote
+                    <input type="radio" id="job_type" name="job_type" value="Remote" onChange={this.handleInputChange}/> Remote
                   </div>
                   <div className="formFieldRadio">
-                    <input type="radio" value="On site" name="jobType" checked={this.state.jobType === "On site"} onChange={this.handleInputChange}/> On site
+                    <input type="radio" id="job_type" name="job_type" value="On site" onChange={this.handleInputChange}/> On site
                   </div>
                 </div>
+              </Form.Field>
+              <Form.Field className="formFieldCreateCV">
+                <label>Category</label>
+                <input type="text" className="inputCV" name="category" value={this.state.category} onChange={this.handleInputChange}/>
+              </Form.Field>
+              <Form.Field className="formFieldCreateCV">
+                <label>Experience</label>
+                <input type="text" className="inputCV" name="experience" value={this.state.experience} onChange={this.handleInputChange}/>
+              </Form.Field>
+              <Form.Field className="formFieldCreateCV">
+                <label>Position</label>
+                <input type="text" className="inputCV" name="position" value={this.state.position} onChange={this.handleInputChange}/>
               </Form.Field>
               <Form.Field className="formFieldCreateCV">
                 <label>Location</label>
@@ -102,6 +118,10 @@ export default class JobForm extends React.Component {
                   value={this.state.deadline} onChange={this.handleInputChange}
                 />
               </Form.Field>
+              <Form.Field className="formFieldCreateCV">
+                <label> Posted By</label>
+                <input type="text" className="inputCV" id="posted_by" name="posted_by" value={this.state.posted_by} onChange={this.handleInputChange}/>
+              </Form.Field>
               <Form.Field className="formFieldCreateCV contentForm">
                 <label>Content</label>
                 <input
@@ -109,8 +129,8 @@ export default class JobForm extends React.Component {
                   placeholder="Content"
                   className="textContent"
                   id="content"
-                  name="content"
-                  value={this.state.content} onChange={this.handleInputChange}
+                  name="description_in_detail"
+                  value={this.state.description_in_detail} onChange={this.handleInputChange}
                 />
               </Form.Field>
             </Form>
@@ -132,11 +152,14 @@ export default class JobForm extends React.Component {
   
   }
 
-   errorFallback({error, componentStack, resetErrorBoundary}) {
+   errorFallback(res) {
+    alert(res.data.message);
     return (
+      
       <div role="alert">
-        <p>Something went wrong:</p>
-        <pre>{error.message}</pre>
+        
+        {/* <p>Something went wrong:</p> */}
+        {/* <pre>{error.message}</pre> */}
       </div>
     )
   }
