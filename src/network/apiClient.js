@@ -29,7 +29,7 @@ function (response){
     } else if (error.request){
       return error.request
     } else {
-      return {status: 501, statusText: "unknown_error", "message": error.message}
+      return {status: 501, statusText: "unknown_error", "message": "An unknown error has occurred"}
     }
 
     // return Promise.reject(error);
