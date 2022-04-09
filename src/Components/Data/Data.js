@@ -1,4 +1,3 @@
-import React from 'react'
 import imgChuong from '../../assets/Image/vanchuong.png'
 
 export const SidebarUser = [
@@ -93,15 +92,60 @@ export const MemberListData = [
 
 export const workingType = [
   {
-    key: 'Jenny Hess',
-    text: 'Jenny Hess',
-    value: 'Jenny Hess',
+    key: '1',
+    text: 'Working Type 1',
+    value: 'Working Type 1',
+  },
+
+  {
+    key: '2',
+    text: 'Working Type 2',
+    value: 'Working Type 2',
+  }
+]
+
+export const scholarshipTypes = [
+  {
+    text: 'Scholarship 1',
+    value: 'Scholarship 1',
   },
   {
-    key: 'Elliot Fu',
-    text: 'Elliot Fu',
-    value: 'Elliot Fu',
+    text: 'Scholarship 2',
+    value: 'Scholarship 2',
+  },  
+  {
+
+    text: 'Scholarship 3',
+    value: 'Scholarship 3',
+  },  {
+    text: 'Scholarship 4',
+    value: 'Scholarship 4',
+  },  {
+    text: 'Scholarship 5',
+    value: 'Scholarship 5',
   },
+]
+
+export const schoolarshipFieldTypes = [
+  {
+    value: 'Mathemetics',
+    text: 'Mathemetics'
+  },
+
+  {
+    value: 'Literature',
+    text: 'Literature'
+  },
+
+  {
+    value: 'Biology',
+    text: 'LitBiologyerature'
+  },
+
+  {
+    value: 'Computer Sciene',
+    text: 'Computer Sciene'
+  }
 ]
 export const category = [
   {
@@ -127,6 +171,14 @@ export const position = [
     value: 'Justen Kitsune',
   },
 ]
+
+export const defaultData = {
+  defaultScholarshipField: {
+    key: '0',
+    value: "",
+    text: "Select a field",
+  }
+}
 
 export const experience = [
   {
