@@ -2,25 +2,26 @@ import React from 'react'
 import './cardJob.css'
 import JobImg from '../../../../assets/Image/img1.png'
 import { Image, Button } from 'semantic-ui-react'
-
-export default function CardJob() {
+import moment from 'moment'
+export default function CardJob({job}) {
   return (
+    <>
     <div className="cardJob">
       <Image src={JobImg} alt="JobIMG" className="imageJob" />
       <div className="jobInfo">
         <div className="jobInfoTop">
-          <span className="jobTitle">Product Manager</span>
-          <span className="jobSalary">$10k - $15k / month</span>
+          <span className="jobTitle">{job.jobTitle}</span>
+          <span className="jobSalary">{job.position}</span>
         </div>
         <div className="jobInfoCenter">
           <div style={{ display: 'flex' }}>
-            <p className="jobAddress">Los Angeles</p>
-            <p className="jobTime">Full Time</p>
-            <p className="jobProject">Big Project</p>
+            <p className="jobAddress">{job.location}</p>
+            <p className="jobTime">{moment(job.applicationDeadline).format('YYYY/DD/MM')}</p>
+            <p className="jobProject">{job.description}</p>
           </div>
           <div style={{ display: 'flex', marginTop: '10px' }}>
             <p className="jobCompany" style={{ fontWeight: 'bold' }}>
-              Apple Inc
+              {job.experience}
             </p>
             <p className="jobView">
               <span style={{ fontWeight: 'bold' }}>0</span> views
@@ -31,10 +32,9 @@ export default function CardJob() {
           </div>
         </div>
         <div className="jobInfoBottom">
-          <span className="jobRequest">User Experience </span>
-          <span className="jobRequest">Figma </span>
-          <span className="jobRequest">Adobe Illustrator </span>
-          <span className="jobRequest">User Interface</span>
+          {job.keywords.split(',').map(item => (
+            <span className="jobRequest">{item} </span>
+          ))}
         </div>
       </div>
       <div className="buttonJobDetail">
@@ -46,5 +46,6 @@ export default function CardJob() {
         />
       </div>
     </div>
+    </>
   )
 }

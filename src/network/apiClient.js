@@ -35,5 +35,5 @@ function (response){
     // return Promise.reject(error);
 })
 
-export { axiosClient };
+export default axiosClient;
 
