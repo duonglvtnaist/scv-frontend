@@ -1,4 +1,4 @@
-import axiosClient  from '../apiClient';
+import { axiosClient } from '../apiClient';
 
 export const createJob = async (job) => {
   return await axiosClient.post('/job', job);
