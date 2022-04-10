@@ -1,5 +1,4 @@
 .createJobContainer {
-    height: 100vh;
     padding: 82px;
     background: #f3f3f3;
 }
@@ -22,3 +21,4 @@
     width: 17px !important;
     height: 17px !important;
 }
+
