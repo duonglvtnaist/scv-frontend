@@ -32,6 +32,15 @@
     color: #090909 !important;
 }
 
+.validate-error-message {
+    display: flex !important;
+    margin-bottom: 30px;
+    justify-content: center !important;
+    /* font-weight: 400 !important; */
+    font-size: 20px !important;
+    color: red !important;
+}
+
 .inputCV {
     width: 80% !important;
     height: 56px;

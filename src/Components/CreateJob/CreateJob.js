@@ -1,14 +1,14 @@
-import React from 'react';
+import { React, useState } from 'react';
+import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 import { Button, Container, Form, Icon, Message } from 'semantic-ui-react';
 import { createJob } from '../../network/api/job';
 import './createJob.css';
 
-export default class JobForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      job: {
+export default function JobForm() {
+
+    const [job, setJob] = useState({
+
         job_id: "",
         job_title: "",
         posted_by: "",
@@ -21,93 +21,85 @@ export default class JobForm extends React.Component {
         position: "",
         experience: "",
 
-      }, 
+      });
       
-      message: {
+      const [message, setMessage]=  useState({
         status: 0,
         visible: false,
         message: '',
         isError: false,
         defaultMessage: 'Something went wrong. Please try again later.'
-      }
+      })
       
-    };
-    this.handleInputChange = this.handleInputChange.bind(this);
 
-    this.handleSubmit = this.handleSubmit.bind(this);
+  let { register, handleSubmit, watch, formState: { errors } } = useForm();
+  watch("job_id")
 
-    this.onDismiss = this.onDismiss.bind(this);
-  }
-
-  handleInputChange(event) {
+  const handleInputChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    const job = this.state.job;
-
+    console.log(value, name)
     // update job info
     job[name] = value;
-    this.setState({
-      
+    setJob(
       job
-      
-    });
-
+    );
+    console.log(job)
   }
 
-  async handleSubmit(event){
+  const onSubmit = async (data, event) => {
+    console.log(event)
     event.preventDefault();
     
-    const res = await createJob(this.state.job);
+    const res = await createJob(job);
 
     if (res.status === 201) {
-      this.setState({
-        job: {},
-        message: {
+      setJob({})
+      setMessage(
+        {
           visible: true,
           status: res.status,
           message: res.message || 'Successfully created scholarship',
           isError: false,
         }
-      })
+      )
+      
     }else {
-      this.setState({
-        scholarship: this.state.scholarship,
-        message: {
-          visible: true,
-          status: res.status || 501,
-          message: res.message || 'Failed to create scholarship',
-          isError: true,
+      setJob({});
+      setMessage(
+        {
+        visible: true,
+        status: res.status || 501,
+        message: res.message || 'Failed to create scholarship',
+        isError: true,
         }
-      })
+      )
+      
     }
 
-    this.hideMessageAfter(5000);
+    hideMessageAfter(5000);
     return
   }
 
-  hideMessageAfter(miliseconds) {
-    const message = this.state.message;
+  const hideMessageAfter = (miliseconds) => {
     message.visible = false;
     setTimeout(() => {
 
-      this.setState({
+      setMessage(
         message
-      })
+      )
     }, miliseconds);
   }
 
-  onDismiss() {
-    const message = this.state.message;
+  const onDismiss= () => {
     message.visible = false;
-    this.setState({
+    setMessage(
       message
-    })
+    )
     
   }
-  
-  render () {
     
     return (
       <div className="createJobContainer">
@@ -116,49 +108,74 @@ export default class JobForm extends React.Component {
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Form className="formInputCreateCV" >
               <div style={{ width: '100%', justifyContent: 'center', marginBottom:'30px', marginLeft:'60px', fontSize:'20px' }}>
-                <Message visible={this.state.message.visible} success={!this.state.message.isError} error={this.state.message.isError} onDismiss={this.onDismiss}>
-                  <p>{this.state.message.message || this.state.message.defaultMessage}</p>
+                <Message visible={message.visible} success={!message.isError} error={message.isError} onDismiss={onDismiss}>
+                  <p>{message.message || message.defaultMessage}</p>
                 </Message>
               </div>
               <Form.Field className="formFieldCreateCV">
                 <label>Job ID</label>
-                <input type="text" className="inputCV" name="job_id" value={this.state.job.job_id} onChange={this.handleInputChange}></input>
+                <input type="text" className="inputCV" name="job_id" {...register("job_id", {required: true})} onChange={handleInputChange}></input>
               </Form.Field>
+              <div className="validate-error-message" >
+                <span >{errors.job_id && 'This field is required' }</span>
+              </div>
+              
               <Form.Field className="formFieldCreateCV">
                 <label> Job Title</label>
-                <input type="text" className="inputCV" name="job_title" value={this.state.job.job_title} onChange={this.handleInputChange}/>
+                <input type="text" className="inputCV" name="job_title" {...register("job_title", {required: true})} onChange={handleInputChange}/>
               </Form.Field>
+              <div className="validate-error-message" >
+                <span >{errors.job_title && 'This field is required' }</span>
+              </div>
               <Form.Field className="formFieldCreateCV">
                 <label> Job type</label>
                 <div className="formFieldGroupRadio">
                   <div className="formFieldRadio">
-                    <input type="radio" id="job_type" name="job_type" value="Remote" checked={this.state.job.job_type === "Remote"} onChange={this.handleInputChange}/> Remote
+                    <input type="radio" id="job_type" name="job_type" value="Remote" {...register("job_type", {required: true})} onChange={handleInputChange}/> Remote
                   </div>
                   <div className="formFieldRadio">
-                    <input type="radio" id="job_type" name="job_type" value="On site" checked={this.state.job.job_type === "On site"} onChange={this.handleInputChange}/> On site
+                    <input type="radio" id="job_type" name="job_type" value="On site" {...register("job_type", {required: true})} onChange={handleInputChange}/> On site
                   </div>
                 </div>
               </Form.Field>
+              <div className="validate-error-message" >
+                <span >{errors.job_type && 'This field is required' }</span>
+              </div>
               <Form.Field className="formFieldCreateCV">
                 <label>Category</label>
-                <input type="text" className="inputCV" name="category" value={this.state.job.category} onChange={this.handleInputChange}/>
+                <input type="text" className="inputCV" name="category" {...register("category", {required: true})} onChange={handleInputChange}/>
               </Form.Field>
+              <div className="validate-error-message" >
+                <span >{errors.category && 'This field is required' }</span>
+              </div>
               <Form.Field className="formFieldCreateCV">
                 <label>Experience</label>
-                <input type="text" className="inputCV" name="experience" value={this.state.job.experience} onChange={this.handleInputChange}/>
+                <input type="text" className="inputCV" name="experience" {...register("experience", {required: true})}  onChange={handleInputChange}/>
               </Form.Field>
+              <div className="validate-error-message" >
+                <span >{errors.experience && 'This field is required' }</span>
+              </div>
               <Form.Field className="formFieldCreateCV">
                 <label>Position</label>
-                <input type="text" className="inputCV" name="position" value={this.state.job.position} onChange={this.handleInputChange}/>
+                <input type="text" className="inputCV" name="position" {...register("position", {required: true})} onChange={handleInputChange}/>
               </Form.Field>
+              <div className="validate-error-message" >
+                <span >{errors.position && 'This field is required' }</span>
+              </div>
               <Form.Field className="formFieldCreateCV">
                 <label>Location</label>
-                <input type="text" className="inputCV" name="location" value={this.state.job.location} onChange={this.handleInputChange}/>
+                <input type="text" className="inputCV" name="location" {...register("location", {required: true})} onChange={handleInputChange}/>
               </Form.Field>
+              <div className="validate-error-message" >
+                <span >{errors.location && 'This field is required' }</span>
+              </div>
               <Form.Field className="formFieldCreateCV">
                 <label>Keywords</label>
-                <input type="text" className="inputCV" name="keywords" value={this.state.job.keywords} onChange={this.handleInputChange}/>
+                <input type="text" className="inputCV" name="keywords" {...register("keywords", {required: true})} onChange={handleInputChange}/>
               </Form.Field>
+              <div className="validate-error-message" >
+                <span >{errors.keywords && 'This field is required' }</span>
+              </div>
               <Form.Field className="formFieldCreateCV">
                 <label>Application Deadline</label>
                 <input
@@ -166,13 +183,20 @@ export default class JobForm extends React.Component {
                   className="inputCV"
                   id="deadline"
                   name="deadline"
-                  value={this.state.job.deadline} onChange={this.handleInputChange}
+                  {...register("deadline", {required: true})}
+                   onChange={handleInputChange}
                 />
               </Form.Field>
+              <div className="validate-error-message" >
+                <span >{errors.deadline && 'This field is required' }</span>
+              </div>
               <Form.Field className="formFieldCreateCV">
                 <label> Posted By</label>
-                <input type="text" className="inputCV" id="posted_by" name="posted_by" value={this.state.job.posted_by} onChange={this.handleInputChange}/>
+                <input type="text" className="inputCV" id="posted_by" name="posted_by" {...register("posted_by", {required: true})} onChange={handleInputChange}/>
               </Form.Field>
+              <div className="validate-error-message" >
+                <span >{errors.posted_by && 'This field is required' }</span>
+              </div>
               <Form.Field className="formFieldCreateCV contentForm">
                 <label>Content</label>
                 <input
@@ -181,7 +205,8 @@ export default class JobForm extends React.Component {
                   className="textContent"
                   id="content"
                   name="description_in_detail"
-                  value={this.state.job.description_in_detail} onChange={this.handleInputChange}
+                  {...register("description_in_detail", {required: false})}
+                  onChange={handleInputChange}
                 />
               </Form.Field>
             </Form>
@@ -193,14 +218,12 @@ export default class JobForm extends React.Component {
             <Button type="submit" className="buttonSaveCV">
               Save
             </Button>
-            <Button type="submit" className="buttonPostCV" onClick={this.handleSubmit}>
+            <Button type="submit" className="buttonPostCV" onClick={handleSubmit(onSubmit)}>
               Post
             </Button>
           </div>
         </Container>
       </div>
     )
-  
-  }
   
 }
