@@ -17,6 +17,7 @@ import ContentHomePage from './Layout/HomePage/Components/Container/ContentHomeP
 import HomePage from './Layout/HomePage/HomePage'
 import LandingPage from './Layout/LandingPage/LandingPage'
 import { SubstrateContextProvider, useSubstrateState } from './substrate-lib'
+import NetWorkService from '../src/network/network.service'
 
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
@@ -51,12 +52,22 @@ function Main() {
   }
 
   const contextRef = createRef()
+  const { onChangeKeywords, onSearchSmartCV, listOfJob } = NetWorkService()
   return (
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="home" element={<HomePage />}>
-          <Route index element={<ContentHomePage />}></Route>
+          <Route
+            index
+            element={
+              <ContentHomePage
+                onChangeKeywords={onChangeKeywords}
+                onSearchSmartCV={onSearchSmartCV}
+                listOfJob={listOfJob}
+              />
+            }
+          ></Route>
           <Route path="create-cv" element={<CreateCV />}></Route>
           <Route path="upload-job" element={<CreateJob />}></Route>
           <Route

@@ -5,8 +5,11 @@ import Search from '../Search/Search'
 import './containerHomePage.css'
 import { Link } from 'react-router-dom'
 
-export default function ContentHomePage({onChangeKeywords, onSearchSmartCV, listOfJob}) {
-  
+export default function ContentHomePage({
+  onChangeKeywords,
+  onSearchSmartCV,
+  listOfJob,
+}) {
   return (
     <div className="contentHomePage">
       <div className="headerButton">
@@ -25,9 +28,12 @@ export default function ContentHomePage({onChangeKeywords, onSearchSmartCV, list
           <button className="chooseOrg ">For Organization</button>
           <button className="chooseTalent">For Talents</button>
         </div>
-        <Search onChangeKeywords={onChangeKeywords} onSearchSmartCV={onSearchSmartCV} />
+        <Search
+          onChangeKeywords={onChangeKeywords}
+          onSearchSmartCV={onSearchSmartCV}
+        />
         <div style={{ paddingBottom: '20px' }}>
-          {listOfJob.map(item =>(
+          {listOfJob.map(item => (
             <React.Fragment key={item.id}>
               <CardJob job={item} />
             </React.Fragment>
