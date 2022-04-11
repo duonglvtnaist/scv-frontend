@@ -1,7 +1,9 @@
 import React from 'react'
 import { Dropdown, Icon } from 'semantic-ui-react'
-import { position, workingType } from '../../../../Components/Data/Data'
-import { category, experience } from './../../../../Components/Data/Data'
+import {
+  category,
+  experience, position, searchType, workingType
+} from '../../../../Components/Data/Data'
 import './search.css'
 
 export default function Search({ onChangeKeywords, onSearchSmartCV }) {
@@ -13,6 +15,12 @@ export default function Search({ onChangeKeywords, onSearchSmartCV }) {
           className="inputSearch"
           type="search"
           onChange={onChangeKeywords}
+        />
+        <Dropdown
+          placeholder="Search Type"
+          selection
+          options={searchType}
+          className="searchOption"
         />
         <button className="iconSearch" onClick={onSearchSmartCV}>
           <Icon name="search" style={{ color: '#ffffff' }} size="large" />
@@ -55,7 +63,7 @@ export default function Search({ onChangeKeywords, onSearchSmartCV }) {
           className="sortBy"
           selection
           placeholder="Sort By"
-          options={experience}
+          options={searchType}
         ></Dropdown>
       </div>
     </div>

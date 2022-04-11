@@ -3,7 +3,7 @@ import imgChuong from '../../assets/Image/vanchuong.png'
 export const SidebarUser = [
   {
     id: 1,
-    link: '/home-page',
+    link: '/home',
     title: 'Home',
     icon: 'home',
   },
@@ -90,6 +90,20 @@ export const MemberListData = [
   },
 ]
 
+export const searchType = [
+  {
+    key: '1',
+    text: 'Keywords',
+    value: 'Keywords',
+  },
+
+  {
+    key: '2',
+    text: 'ID',
+    value: 'ID',
+  },
+]
+
 export const workingType = [
   {
     key: '1',
@@ -101,7 +115,7 @@ export const workingType = [
     key: '2',
     text: 'Working Type 2',
     value: 'Working Type 2',
-  }
+  },
 ]
 
 export const scholarshipTypes = [
@@ -112,15 +126,16 @@ export const scholarshipTypes = [
   {
     text: 'Scholarship 2',
     value: 'Scholarship 2',
-  },  
+  },
   {
-
     text: 'Scholarship 3',
     value: 'Scholarship 3',
-  },  {
+  },
+  {
     text: 'Scholarship 4',
     value: 'Scholarship 4',
-  },  {
+  },
+  {
     text: 'Scholarship 5',
     value: 'Scholarship 5',
   },
@@ -129,66 +144,66 @@ export const scholarshipTypes = [
 export const schoolarshipFieldTypes = [
   {
     value: 'Mathemetics',
-    text: 'Mathemetics'
+    text: 'Mathemetics',
   },
 
   {
     value: 'Literature',
-    text: 'Literature'
+    text: 'Literature',
   },
 
   {
     value: 'Biology',
-    text: 'LitBiologyerature'
+    text: 'LitBiologyerature',
   },
 
   {
     value: 'Computer Sciene',
-    text: 'Computer Sciene'
-  }
+    text: 'Computer Sciene',
+  },
 ]
 export const category = [
   {
-    key: 'Stevie Feliciano',
-    text: 'Stevie Feliciano',
-    value: 'Stevie Feliciano',
+    key: '0',
+    text: 'Dev Website',
+    value: 'Dev Website',
   },
   {
-    key: 'Christian',
-    text: 'Christian',
-    value: 'Christian',
+    key: '1',
+    text: 'Dev Mobile',
+    value: 'Dev Mobile',
   },
 ]
 export const position = [
   {
-    key: 'Matt',
-    text: 'Matt',
-    value: 'Matt',
+    key: '0',
+    text: 'Manage Project',
+    value: 'Manage Project',
   },
   {
-    key: 'Justen Kitsune',
-    text: 'Justen Kitsune',
-    value: 'Justen Kitsune',
+    key: '1',
+    text: 'Accounting',
+    value: 'Accounting',
   },
 ]
 
 export const defaultData = {
   defaultScholarshipField: {
     key: '0',
-    value: "",
-    text: "Select a field",
-  }
+    value: '',
+    text: 'Select a field',
+  },
 }
 
 export const experience = [
   {
-    key: 'Matt',
-    text: 'Matt',
-    value: 'Matt',
+    key: '0',
+    text: '1 year',
+    value: '1 year',
   },
   {
-    key: 'Justen Kitsune',
-    text: 'Justen Kitsune',
-    value: 'Justen Kitsune',
+    key: '1',
+    text: '2 year',
+    value: '2 year',
   },
 ]

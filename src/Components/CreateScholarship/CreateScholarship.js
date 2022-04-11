@@ -6,6 +6,7 @@ import { Button, Container, Dropdown, Form, Icon, Message } from 'semantic-ui-re
 import * as yup from 'yup'
 import { createScholarship } from '../../network/api/scholarship'
 import { scholarshipTypes, schoolarshipFieldTypes } from './../Data/Data'
+import AddTagKeyWord from './AddTagKeyWord'
 import './createScholarship.css'
 
 export default function CreateScholarship(props) {
@@ -50,15 +51,13 @@ export default function CreateScholarship(props) {
   const handleInputChange = (event, data) => {
     const target = event.target;
 
-    let name, value;
-    if(data?.type === "dropdown") {
-      value = data.value;
-      name = data.name;
-    }
-    else {
-
-       value = target.type === 'checkbox' ? target.checked : target.value;
-       name = target.name;
+    let name, value
+    if (data?.type === 'dropdown') {
+      value = data.value
+      name = data.name
+    } else {
+      value = target.type === 'checkbox' ? target.checked : target.value
+      name = target.name
     }
 
     // update scholarship info
@@ -81,6 +80,7 @@ export default function CreateScholarship(props) {
           status: res.status,
           message: res.message || 'Successfully created scholarship',
           isError: false,
+
         })
     }else {
       setMessage({
@@ -105,7 +105,6 @@ export default function CreateScholarship(props) {
   const onDismiss= () => {
     message.visible = false;
     setMessage(message);
-    
   }
    
     return (
@@ -113,7 +112,6 @@ export default function CreateScholarship(props) {
         <Container>
           <div className="createCVTitle">Upload Scholarship</div>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-
             <Form className="formInputCreateCV">
               <div style={{ width: '100%', justifyContent: 'center', marginBottom:'30px', marginLeft:'60px', fontSize:'20px' }}>
                 <Message visible={message.visible} success={!message.isError} error={message.isError} onDismiss={onDismiss}>
@@ -142,6 +140,7 @@ export default function CreateScholarship(props) {
                 <input type="text" className="inputCV" name="title" 
                   {...register('title',{ required: true })}
                   onChange={handleInputChange}/>
+
               </Form.Field>
               {
                 errors.title ? 
@@ -152,9 +151,11 @@ export default function CreateScholarship(props) {
               }
               <Form.Field className="formFieldCreateCV">
                 <label> Posted By</label>
+
                 <input type="text" className="inputCV" name="posted_by"
                   {...register('posted_by',{ required: true })}
                   onChange={handleInputChange}/>
+
               </Form.Field>
               {
                 errors.posted_by ? 
@@ -211,7 +212,7 @@ export default function CreateScholarship(props) {
                 <label>Field</label>
                 <Dropdown
                   placeholder="Select A Field"
-                  style={{fontSize:'20px'}}
+                  style={{ fontSize: '20px' }}
                   type="dropdown"
                   fluid
                   selection
@@ -231,17 +232,11 @@ export default function CreateScholarship(props) {
               }
               <Form.Field className="formFieldCreateCV">
                 <label>Keywords</label>
-                <input type="text" className="inputCV" name="keywords"
-                  {...register('keywords',{ required: true })}
-                  onChange={handleInputChange}/>
+                <AddTagKeyWord
+                  {...register('keywords', { required: true })}
+                  onChange={handleInputChange}
+                />
               </Form.Field>
-              {
-                errors.keywords ? 
-                <div className="validate-error-message" >
-                  <span >This field is required</span>
-                </div>
-                : null
-              }
               <Form.Field className="formFieldCreateCV">
                 <label>Application Deadline</label>
                 <input
