@@ -49,8 +49,7 @@ export default function JobForm() {
     console.log(job)
   }
 
-  const onSubmit = async (data, event) => {
-    console.log(event)
+  const onSubmit = async (_, event) => {
     event.preventDefault();
     
     const res = await createJob(job);
@@ -116,17 +115,25 @@ export default function JobForm() {
                 <label>Job ID</label>
                 <input type="text" className="inputCV" name="job_id" {...register("job_id", {required: true})} onChange={handleInputChange}></input>
               </Form.Field>
-              <div className="validate-error-message" >
-                <span >{errors.job_id && 'This field is required' }</span>
-              </div>
+              {
+                errors.job_id ? 
+                <div className="validate-error-message" >
+                  <span >This field is required</span>
+                </div>
+                : null
+              }
               
               <Form.Field className="formFieldCreateCV">
                 <label> Job Title</label>
                 <input type="text" className="inputCV" name="job_title" {...register("job_title", {required: true})} onChange={handleInputChange}/>
               </Form.Field>
-              <div className="validate-error-message" >
-                <span >{errors.job_title && 'This field is required' }</span>
-              </div>
+              {
+                errors.job_title ? 
+                <div className="validate-error-message" >
+                  <span>This field is required</span>
+                </div>
+                : null
+              }
               <Form.Field className="formFieldCreateCV">
                 <label> Job type</label>
                 <div className="formFieldGroupRadio">
@@ -138,44 +145,68 @@ export default function JobForm() {
                   </div>
                 </div>
               </Form.Field>
-              <div className="validate-error-message" >
-                <span >{errors.job_type && 'This field is required' }</span>
-              </div>
+              {
+                errors.job_type ? 
+                <div className="validate-error-message" >
+                  <span>This field is required</span>
+                </div>
+                : null
+              }
               <Form.Field className="formFieldCreateCV">
                 <label>Category</label>
                 <input type="text" className="inputCV" name="category" {...register("category", {required: true})} onChange={handleInputChange}/>
               </Form.Field>
-              <div className="validate-error-message" >
-                <span >{errors.category && 'This field is required' }</span>
-              </div>
+              {
+                errors.category ? 
+                <div className="validate-error-message" >
+                  <span>This field is required</span>
+                </div>
+                : null
+              }
               <Form.Field className="formFieldCreateCV">
                 <label>Experience</label>
                 <input type="text" className="inputCV" name="experience" {...register("experience", {required: true})}  onChange={handleInputChange}/>
               </Form.Field>
-              <div className="validate-error-message" >
-                <span >{errors.experience && 'This field is required' }</span>
-              </div>
+              {
+                errors.experience ? 
+                <div className="validate-error-message" >
+                  <span>This field is required</span>
+                </div>
+                : null
+              }
               <Form.Field className="formFieldCreateCV">
                 <label>Position</label>
                 <input type="text" className="inputCV" name="position" {...register("position", {required: true})} onChange={handleInputChange}/>
               </Form.Field>
-              <div className="validate-error-message" >
-                <span >{errors.position && 'This field is required' }</span>
-              </div>
+              {
+                errors.position ? 
+                <div className="validate-error-message" >
+                  <span>This field is required</span>
+                </div>
+                : null
+              }
               <Form.Field className="formFieldCreateCV">
                 <label>Location</label>
                 <input type="text" className="inputCV" name="location" {...register("location", {required: true})} onChange={handleInputChange}/>
               </Form.Field>
-              <div className="validate-error-message" >
-                <span >{errors.location && 'This field is required' }</span>
-              </div>
+              {
+                errors.location ? 
+                <div className="validate-error-message" >
+                  <span>This field is required</span>
+                </div>
+                : null
+              }
               <Form.Field className="formFieldCreateCV">
                 <label>Keywords</label>
                 <input type="text" className="inputCV" name="keywords" {...register("keywords", {required: true})} onChange={handleInputChange}/>
               </Form.Field>
-              <div className="validate-error-message" >
-                <span >{errors.keywords && 'This field is required' }</span>
-              </div>
+              {
+                errors.keywords ? 
+                <div className="validate-error-message" >
+                  <span>This field is required</span>
+                </div>
+                : null
+              }
               <Form.Field className="formFieldCreateCV">
                 <label>Application Deadline</label>
                 <input
@@ -187,21 +218,30 @@ export default function JobForm() {
                    onChange={handleInputChange}
                 />
               </Form.Field>
-              <div className="validate-error-message" >
-                <span >{errors.deadline && 'This field is required' }</span>
-              </div>
+              {
+                errors.deadline ? 
+                <div className="validate-error-message" >
+                  <span>This field is required</span>
+                </div>
+                : null
+              }
               <Form.Field className="formFieldCreateCV">
                 <label> Posted By</label>
                 <input type="text" className="inputCV" id="posted_by" name="posted_by" {...register("posted_by", {required: true})} onChange={handleInputChange}/>
               </Form.Field>
-              <div className="validate-error-message" >
-                <span >{errors.posted_by && 'This field is required' }</span>
-              </div>
+              {
+                errors.posted_by ? 
+                <div className="validate-error-message" >
+                  <span>This field is required</span>
+                </div>
+                : null
+              }
               <Form.Field className="formFieldCreateCV contentForm">
                 <label>Content</label>
                 <input
+                  style={{fontSize:'20px'}}
                   type="text"
-                  placeholder="Content"
+                  placeholder="Type in description"
                   className="textContent"
                   id="content"
                   name="description_in_detail"

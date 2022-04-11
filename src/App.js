@@ -1,7 +1,8 @@
-import React, { createRef } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'
 import { Dimmer, Grid, Loader, Message } from 'semantic-ui-react'
+import NetWorkService from '../src/network/network.service'
 import CreateCV from './Components/CreateCV/CreateCV'
 import CreateJob from './Components/CreateJob/CreateJob'
 import CreateScholarship from './Components/CreateScholarship/CreateScholarship'
@@ -17,7 +18,6 @@ import ContentHomePage from './Layout/HomePage/Components/Container/ContentHomeP
 import HomePage from './Layout/HomePage/HomePage'
 import LandingPage from './Layout/LandingPage/LandingPage'
 import { SubstrateContextProvider, useSubstrateState } from './substrate-lib'
-import NetWorkService from '../src/network/network.service'
 
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
@@ -51,7 +51,7 @@ function Main() {
     )
   }
 
-  const contextRef = createRef()
+  // const contextRef = createRef()
   const { onChangeKeywords, onSearchSmartCV, listOfJob } = NetWorkService()
   return (
     <Router>

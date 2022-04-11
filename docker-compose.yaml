@@ -1,0 +1,16 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    image: frontend
+    container_name: frontend
+    restart: unless-stopped
+    networks:
+      - app-network
+    ports:
+      - "3000:3000"
+networks:
+  app-network:
+    driver: bridge

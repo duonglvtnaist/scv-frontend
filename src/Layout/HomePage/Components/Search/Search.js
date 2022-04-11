@@ -1,8 +1,8 @@
 import React from 'react'
-import { Input, Icon, Dropdown } from 'semantic-ui-react'
+import { Dropdown, Icon } from 'semantic-ui-react'
 import { position, workingType } from '../../../../Components/Data/Data'
-import './search.css'
 import { category, experience } from './../../../../Components/Data/Data'
+import './search.css'
 
 export default function Search({ onChangeKeywords, onSearchSmartCV }) {
   return (
