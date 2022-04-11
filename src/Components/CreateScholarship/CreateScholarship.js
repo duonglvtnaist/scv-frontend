@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 import { Button, Container, Dropdown, Form, Icon, Message } from 'semantic-ui-react'
 import * as yup from 'yup'
 import { createScholarship } from '../../network/api/scholarship'
+import AddTagKeyWord from '../AddTagKeyWords/AddTagKeyWord'
 import { scholarshipTypes, schoolarshipFieldTypes } from './../Data/Data'
-import AddTagKeyWord from './AddTagKeyWord'
 import './createScholarship.css'
 
 export default function CreateScholarship(props) {
