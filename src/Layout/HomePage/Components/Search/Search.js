@@ -1,11 +1,8 @@
 import React from 'react'
-import { Input, Icon, Dropdown } from 'semantic-ui-react'
+import { Dropdown, Icon } from 'semantic-ui-react'
 import {
-  position,
-  workingType,
   category,
-  experience,
-  searchType,
+  experience, position, searchType, workingType
 } from '../../../../Components/Data/Data'
 import './search.css'
 

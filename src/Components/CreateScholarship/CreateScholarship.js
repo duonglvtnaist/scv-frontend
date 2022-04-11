@@ -1,51 +1,55 @@
-import React from 'react'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
-import {
-  Button,
-  Container,
-  Dropdown,
-  Form,
-  Icon,
-  Message,
-  Input,
-} from 'semantic-ui-react'
+import { Button, Container, Dropdown, Form, Icon, Message } from 'semantic-ui-react'
+import * as yup from 'yup'
 import { createScholarship } from '../../network/api/scholarship'
 import AddTagKeyWord from '../AddTagKeyWords/AddTagKeyWord'
 import { scholarshipTypes, schoolarshipFieldTypes } from './../Data/Data'
 import './createScholarship.css'
 
-export default class CreateScholarship extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      scholarship: {
-        scholarship_id: '',
-        title: '',
-        posted_by: '',
-        school: '',
-        scholarship_type: '',
-        scholarship_field: '',
-        keywords: '',
-        deadline: '2022-04-07',
-        description_in_detail: '',
-      },
-      message: {
-        status: 0,
-        visible: false,
-        message: '',
-        isError: false,
-        defaultMessage: 'Something went wrong. Please try again later.',
-      },
-    }
-    this.handleInputChange = this.handleInputChange.bind(this)
+export default function CreateScholarship(props) {
 
-    this.handleSubmit = this.handleSubmit.bind(this)
+    const [scholarship, setScholarship] = useState(
+      {
+        scholarship_id: "",
+        title: "",
+        posted_by: "",
+        school: "",
+        scholarship_type: "",
+        scholarship_field: "",
+        keywords: "",
+        deadline: "2022-04-07",
+        description_in_detail: ""
+      }
+      );
 
-    this.onDismiss = this.onDismiss.bind(this)
-  }
+      const [message, setMessage]= useState(
+        {
+          status: 0,
+          visible: false,
+          message: '',  
+          isError: false,
+          defaultMessage: 'Something went wrong. Please try again later.'
+        }
+      );
 
-  handleInputChange(event, data) {
-    const target = event.target
+  const validationSchema = yup.object().shape({
+    value: yup.string().required('This field is required')
+  })
+
+  const formOptions = {
+    mode: 'all',
+    reValidateMode: 'onChange',
+    resolver: yupResolver(validationSchema),
+  };
+
+  const {register, handleSubmit, formState: {errors}, control, field} = useForm(formOptions);
+
+
+  const handleInputChange = (event, data) => {
+    const target = event.target;
 
     let name, value
     if (data?.type === 'dropdown') {
@@ -56,90 +60,62 @@ export default class CreateScholarship extends React.Component {
       name = target.name
     }
 
-    const scholarship = this.state.scholarship
-
     // update scholarship info
-    scholarship[name] = value
-    this.setState({
-      scholarship,
-    })
+    scholarship[name] = value;
+    setScholarship(scholarship);
   }
 
-  async handleSubmit(event) {
-    event.preventDefault()
+  const onSumit = async(_, event) => {
+    event.preventDefault();
+    
+    console.log(errors)
+    const res = await createScholarship(scholarship);
 
-    const res = await createScholarship(this.state.scholarship)
+    console.log(res);
 
     if (res.status === 201) {
-      this.setState({
-        scholarship: {},
-        message: {
+      setScholarship({})
+        setMessage({
           visible: true,
           status: res.status,
           message: res.message || 'Successfully created scholarship',
           isError: false,
-        },
-      })
-    } else {
-      this.setState({
-        scholarship: this.state.scholarship,
-        message: {
-          visible: true,
-          status: res.status || 501,
-          message: res.message || 'Failed to create scholarship',
-          isError: true,
-        },
+
+        })
+    }else {
+      setMessage({
+        visible: true,
+        status: res.status || 501,
+        message: res.message || 'Failed to create scholarship',
+        isError: true,
       })
     }
 
-    this.hideMessageAfter(5000)
+    hideMessageAfter(5000);
     return
   }
 
-  hideMessageAfter(miliseconds) {
-    const message = this.state.message
-    message.visible = false
+  const hideMessageAfter =(miliseconds) => {
+    message.visible = false;
     setTimeout(() => {
-      this.setState({
-        message,
-      })
-    }, miliseconds)
+      setMessage(message)
+    }, miliseconds);
   }
 
-  onDismiss() {
-    const message = this.state.message
-    message.visible = false
-    this.setState({
-      message,
-    })
+  const onDismiss= () => {
+    message.visible = false;
+    setMessage(message);
   }
-
-  render() {
+   
     return (
       <div className="createCVContainer">
         <Container>
           <div className="createCVTitle">Upload Scholarship</div>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Form className="formInputCreateCV">
-              <div
-                style={{
-                  width: '100%',
-                  justifyContent: 'center',
-                  marginBottom: '30px',
-                  marginLeft: '60px',
-                  fontSize: '20px',
-                }}
-              >
-                <Message
-                  visible={this.state.message.visible}
-                  success={!this.state.message.isError}
-                  error={this.state.message.isError}
-                  onDismiss={this.onDismiss}
-                >
-                  <p>
-                    {this.state.message.message ||
-                      this.state.message.defaultMessage}
-                  </p>
+              <div style={{ width: '100%', justifyContent: 'center', marginBottom:'30px', marginLeft:'60px', fontSize:'20px' }}>
+                <Message visible={message.visible} success={!message.isError} error={message.isError} onDismiss={onDismiss}>
+                  <p>{message.message || message.defaultMessage}</p>
                 </Message>
               </div>
               <Form.Field className="formFieldCreateCV">
@@ -148,55 +124,90 @@ export default class CreateScholarship extends React.Component {
                   type="text"
                   className="inputCV"
                   name="scholarship_id"
-                  value={this.state.scholarship.scholarship_id}
-                  onChange={this.handleInputChange}
+                  {...register('scholarship_id',{ required: true })}
+                  onChange={handleInputChange}
                 ></input>
               </Form.Field>
+              {
+                errors.scholarship_id ? 
+                <div className="validate-error-message" >
+                  <span >This field is required</span>
+                </div>
+                : null
+              }
               <Form.Field className="formFieldCreateCV">
                 <label>Title</label>
-                <input
-                  type="text"
-                  className="inputCV"
-                  name="title"
-                  value={this.state.scholarship.title}
-                  onChange={this.handleInputChange}
-                />
+                <input type="text" className="inputCV" name="title" 
+                  {...register('title',{ required: true })}
+                  onChange={handleInputChange}/>
+
               </Form.Field>
+              {
+                errors.title ? 
+                <div className="validate-error-message" >
+                  <span >This field is required</span>
+                </div>
+                : null
+              }
               <Form.Field className="formFieldCreateCV">
                 <label> Posted By</label>
-                <input
-                  type="text"
-                  className="inputCV"
-                  name="posted_by"
-                  value={this.state.scholarship.posted_by}
-                  onChange={this.handleInputChange}
-                />
+
+                <input type="text" className="inputCV" name="posted_by"
+                  {...register('posted_by',{ required: true })}
+                  onChange={handleInputChange}/>
+
               </Form.Field>
+              {
+                errors.posted_by ? 
+                <div className="validate-error-message" >
+                  <span >This field is required</span>
+                </div>
+                : null
+              }
               <Form.Field className="formFieldCreateCV">
                 <label>School</label>
-                <input
-                  type="text"
-                  className="inputCV"
-                  name="school"
-                  value={this.state.scholarship.school}
-                  onChange={this.handleInputChange}
-                />
+                <input type="text" className="inputCV" name="school"
+                  {...register('school',{ required: true })}
+                  onChange={handleInputChange}/>
               </Form.Field>
+              {
+                errors.school ? 
+                <div className="validate-error-message" >
+                  <span >This field is required</span>
+                </div>
+                : null
+              }
               <Form.Field className="formFieldCreateCV">
                 <label>Type</label>
-                <Dropdown
-                  style={{ fontSize: '20px' }}
-                  type="dropdown"
-                  placeholder="Select A Type"
-                  fluid
-                  selection
-                  className="dropdownOption"
+                <Controller
                   name="scholarship_type"
-                  value={this.state.scholarship.scholarship_field}
-                  options={scholarshipTypes}
-                  onChange={this.handleInputChange}
-                ></Dropdown>
+                  control={control}
+                  // rules={{ required: 'This field is required'}}
+                  render={({field}) => {
+                    let {value, ...other} = field;
+                  return (
+                    <Dropdown
+                    {...other}
+                    style={{fontSize:'20px'}}
+                    type="dropdown"
+                    placeholder="Select A Type"
+                    fluid
+                    selection
+                    className="dropdownOption"
+                    name="scholarship_type"
+                    value={value}  
+                    options={scholarshipTypes}
+                    onChange={handleInputChange}
+                  ></Dropdown>
+                  )
+                  }}
+                />
               </Form.Field>
+              
+                <div className="validate-error-message" >
+                  <span >{errors.value?.message || ''}</span>
+                </div>
+                
               <Form.Field className="formFieldCreateCV">
                 <label>Field</label>
                 <Dropdown
@@ -207,16 +218,23 @@ export default class CreateScholarship extends React.Component {
                   selection
                   name="scholarship_field"
                   className="dropdownOption"
-                  value={this.state.scholarship.scholarship_type}
+                  {...register('scholarship_field',{ required: true })}
                   options={schoolarshipFieldTypes}
-                  onChange={this.handleInputChange}
+                  onChange={handleInputChange}
                 ></Dropdown>
               </Form.Field>
+              {
+                errors.scholarship_field ? 
+                <div className="validate-error-message" >
+                  <span >This field is required</span>
+                </div>
+                : null
+              }
               <Form.Field className="formFieldCreateCV">
                 <label>Keywords</label>
                 <AddTagKeyWord
-                  value={this.state.scholarship.keywords}
-                  onChange={this.handleInputChange}
+                  {...register('keywords', { required: true })}
+                  onChange={handleInputChange}
                 />
               </Form.Field>
               <Form.Field className="formFieldCreateCV">
@@ -226,19 +244,26 @@ export default class CreateScholarship extends React.Component {
                   className="inputCV"
                   id="deadline"
                   name="deadline"
-                  value={this.state.scholarship.deadline}
-                  onChange={this.handleInputChange}
+                  {...register('deadline',{ required: true })}
+                  onChange={handleInputChange}
                 />
               </Form.Field>
+              {
+                errors.deadline ? 
+                <div className="validate-error-message" >
+                  <span >This field is required</span>
+                </div>
+                : null
+              }
               <Form.Field className="formFieldCreateCV contentForm">
                 <label>Description In Detail</label>
                 <input
+                  style={{fontSize:'20px'}}
                   type="text"
                   placeholder="Type in description"
                   className="textContent"
                   name="description_in_detail"
-                  value={this.state.scholarship.description_in_detail}
-                  onChange={this.handleInputChange}
+                  onChange={handleInputChange}
                 />
               </Form.Field>
             </Form>
@@ -250,16 +275,11 @@ export default class CreateScholarship extends React.Component {
             <Button type="submit" className="buttonSaveCV">
               Save
             </Button>
-            <Button
-              type="submit"
-              className="buttonPostCV"
-              onClick={this.handleSubmit}
-            >
+            <Button type="submit" className="buttonPostCV" onClick={handleSubmit(onSumit)}>
               Post
             </Button>
           </div>
         </Container>
       </div>
     )
-  }
 }
