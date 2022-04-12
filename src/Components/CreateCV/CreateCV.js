@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Container, Form, Icon } from 'semantic-ui-react'
+import { Button, Container, Form, Icon, Input } from 'semantic-ui-react'
+import AddTagKeyWord from '../AddTagKeyWords/AddTagKeyWord'
 import './createCV.css'
 
 export default function CreateCV() {
@@ -40,7 +41,7 @@ export default function CreateCV() {
             </Form.Field>
             <Form.Field className="formFieldCreateCV">
               <label>Keywords</label>
-              <input type="text" className="inputCV" name="keywords" />
+              <AddTagKeyWord />
             </Form.Field>
             <Form.Field className="formFieldCreateCV contentForm">
               <label>Content</label>
@@ -53,7 +54,7 @@ export default function CreateCV() {
           </Form>
         </div>
         <div className="buttonSavePostCV">
-          <Link to="/home-page">
+          <Link to="/home">
             <Icon name="arrow left" size="big"></Icon>
           </Link>
           <Button type="submit" className="buttonSaveCV">

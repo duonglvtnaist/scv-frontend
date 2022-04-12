@@ -3,8 +3,7 @@ import { Outlet } from 'react-router-dom'
 import Header from './../../Components/Header/Header'
 import ContentHomePage from './Components/Container/ContentHomePage'
 import Footer from './../LandingPage/Footer/Footer'
-import NetWorkService from '../../network/network.service'
-
+import NetWorkService from '../../network/network.service';
 export default function HomePage() {
   const {
     onChangeKeywords,

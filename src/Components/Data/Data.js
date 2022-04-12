@@ -3,7 +3,7 @@ import imgChuong from '../../assets/Image/vanchuong.png'
 export const SidebarUser = [
   {
     id: 1,
-    link: '/home-page',
+    link: '/home',
     title: 'Home',
     icon: 'home',
   },
@@ -90,6 +90,20 @@ export const MemberListData = [
   },
 ]
 
+export const searchType = [
+  {
+    key: '1',
+    text: 'Keywords',
+    value: 'Keywords',
+  },
+
+  {
+    key: '2',
+    text: 'ID',
+    value: 'ID',
+  },
+]
+
 export const workingType = [
   {
     key: '0',
@@ -105,7 +119,7 @@ export const workingType = [
     key: '2',
     text: 'Working Type 2',
     value: 'Working Type 2',
-  }
+  },
 ]
 
 export const scholarshipTypes = [
@@ -116,15 +130,16 @@ export const scholarshipTypes = [
   {
     text: 'Scholarship 2',
     value: 'Scholarship 2',
-  },  
+  },
   {
-
     text: 'Scholarship 3',
     value: 'Scholarship 3',
-  },  {
+  },
+  {
     text: 'Scholarship 4',
     value: 'Scholarship 4',
-  },  {
+  },
+  {
     text: 'Scholarship 5',
     value: 'Scholarship 5',
   },
@@ -133,23 +148,23 @@ export const scholarshipTypes = [
 export const schoolarshipFieldTypes = [
   {
     value: 'Mathemetics',
-    text: 'Mathemetics'
+    text: 'Mathemetics',
   },
 
   {
     value: 'Literature',
-    text: 'Literature'
+    text: 'Literature',
   },
 
   {
     value: 'Biology',
-    text: 'LitBiologyerature'
+    text: 'LitBiologyerature',
   },
 
   {
     value: 'Computer Sciene',
-    text: 'Computer Sciene'
-  }
+    text: 'Computer Sciene',
+  },
 ]
 export const category = [
   {
@@ -189,9 +204,9 @@ export const position = [
 export const defaultData = {
   defaultScholarshipField: {
     key: '0',
-    value: "",
-    text: "Select a field",
-  }
+    value: '',
+    text: 'Select a field',
+  },
 }
 
 export const experience = [

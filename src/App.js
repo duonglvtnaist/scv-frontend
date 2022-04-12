@@ -1,7 +1,8 @@
-import React, { createRef } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'
 import { Dimmer, Grid, Loader, Message } from 'semantic-ui-react'
+import NetWorkService from '../src/network/network.service'
 import CreateCV from './Components/CreateCV/CreateCV'
 import CreateJob from './Components/CreateJob/CreateJob'
 import CreateScholarship from './Components/CreateScholarship/CreateScholarship'
@@ -50,13 +51,23 @@ function Main() {
     )
   }
 
-  const contextRef = createRef()
+  // const contextRef = createRef()
+  const { onChangeKeywords, onSearchSmartCV, listOfJob } = NetWorkService()
   return (
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="home" element={<HomePage />}>
-          <Route index element={<ContentHomePage />}></Route>
+          <Route
+            index
+            element={
+              <ContentHomePage
+                onChangeKeywords={onChangeKeywords}
+                onSearchSmartCV={onSearchSmartCV}
+                listOfJob={listOfJob}
+              />
+            }
+          ></Route>
           <Route path="create-cv" element={<CreateCV />}></Route>
           <Route path="upload-job" element={<CreateJob />}></Route>
           <Route

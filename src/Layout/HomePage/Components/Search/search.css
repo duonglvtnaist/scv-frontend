@@ -19,6 +19,21 @@
 
   outline-offset: 0;
 }
+
+.searchOption {
+  height: 49px !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-radius: 0px !important;
+  -webkit-border-radius: 0px !important;
+  -moz-border-radius: 0px !important;
+  -ms-border-radius: 0px !important;
+  -o-border-radius: 0px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
 .iconSearch {
   width: 49px;
   height: 49px;

@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 import {searchSmartJob} from './api/job';
+
 export default  function NetWorkService() {
   const [keyword, setKeyword] = useState('');
   const [workType, setWorkType] = useState(null);

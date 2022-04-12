@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Link } from 'react-router-dom'
 import { Container } from 'semantic-ui-react'
 import CardJob from '../CardJob/CardJob'
 import Search from '../Search/Search'
 import './containerHomePage.css'
-import { Link } from 'react-router-dom'
 
 export default function ContentHomePage({onChangeKeywords, onSearchSmartCV, listOfJob, onChangeWorkType,
   onChangeCategory, onChangePosition,onChangeExperience,onApplyToFilterJob, onKeySearch}) {
@@ -32,7 +32,7 @@ export default function ContentHomePage({onChangeKeywords, onSearchSmartCV, list
     onApplyToFilterJob = {onApplyToFilterJob}
     onKeySearch= {onKeySearch}/>
         <div style={{ paddingBottom: '20px' }}>
-          {listOfJob.map(item =>(
+          {listOfJob.map(item => (
             <React.Fragment key={item.id}>
               <CardJob job={item} key= {item.id} />
             </React.Fragment>
