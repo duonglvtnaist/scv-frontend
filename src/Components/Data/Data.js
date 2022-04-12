@@ -92,11 +92,15 @@ export const MemberListData = [
 
 export const workingType = [
   {
+    key: '0',
+    text: '',
+    value: '',
+  },
+  {
     key: '1',
     text: 'Working Type 1',
     value: 'Working Type 1',
   },
-
   {
     key: '2',
     text: 'Working Type 2',
@@ -149,24 +153,34 @@ export const schoolarshipFieldTypes = [
 ]
 export const category = [
   {
-    key: 'Stevie Feliciano',
+    key: '0',
+    text: '',
+    value: '',
+  },
+  {
+    key: '1',
     text: 'Stevie Feliciano',
     value: 'Stevie Feliciano',
   },
   {
-    key: 'Christian',
+    key: '2',
     text: 'Christian',
     value: 'Christian',
   },
 ]
 export const position = [
   {
-    key: 'Matt',
+    key: '0',
+    text: '',
+    value: '',
+  },
+  {
+    key: '1',
     text: 'Matt',
     value: 'Matt',
   },
   {
-    key: 'Justen Kitsune',
+    key: '2',
     text: 'Justen Kitsune',
     value: 'Justen Kitsune',
   },
@@ -182,13 +196,18 @@ export const defaultData = {
 
 export const experience = [
   {
-    key: 'Matt',
-    text: 'Matt',
-    value: 'Matt',
+    key: '0',
+    text: '',
+    value: '',
   },
   {
-    key: 'Justen Kitsune',
-    text: 'Justen Kitsune',
-    value: 'Justen Kitsune',
+    key: '1',
+    text: 'Two month',
+    value: 'Two month',
+  },
+  {
+    key: '2',
+    text: 'Once year',
+    value: 'Once year',
   },
 ]

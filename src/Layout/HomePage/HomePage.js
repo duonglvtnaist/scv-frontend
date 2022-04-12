@@ -9,13 +9,25 @@ export default function HomePage() {
   const {
     onChangeKeywords,
     onSearchSmartCV,
-    listOfJob
+    listOfJob,
+    onChangeWorkType,
+    onChangeCategory, 
+    onChangePosition,
+    onChangeExperience,
+    onApplyToFilterJob,
+    onKeySearch
   } = NetWorkService();
   return (
     <>
       <Header />
       {/* <Outlet /> */}
-      <ContentHomePage onChangeKeywords={onChangeKeywords} onSearchSmartCV= {onSearchSmartCV} listOfJob= {listOfJob}/>
+      <ContentHomePage onChangeKeywords={onChangeKeywords} onSearchSmartCV= {onSearchSmartCV} listOfJob= {listOfJob}
+      onChangeWorkType = {onChangeWorkType}
+      onChangeCategory = {onChangeCategory}
+      onChangePosition = {onChangePosition}
+      onChangeExperience = {onChangeExperience}
+      onApplyToFilterJob = {onApplyToFilterJob}
+      onKeySearch = {onKeySearch}/>
       <Footer />
     </>
   )

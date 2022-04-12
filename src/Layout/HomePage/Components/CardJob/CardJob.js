@@ -3,9 +3,8 @@ import './cardJob.css'
 import JobImg from '../../../../assets/Image/img1.png'
 import { Image, Button } from 'semantic-ui-react'
 import moment from 'moment'
-export default function CardJob({job}) {
+export default function CardJob({job, key}) {
   return (
-    <>
     <div className="cardJob">
       <Image src={JobImg} alt="JobIMG" className="imageJob" />
       <div className="jobInfo">
@@ -46,6 +45,5 @@ export default function CardJob({job}) {
         />
       </div>
     </div>
-    </>
   )
 }

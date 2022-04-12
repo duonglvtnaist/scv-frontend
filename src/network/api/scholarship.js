@@ -1,4 +1,4 @@
-import { axiosClient } from '../apiClient';
+import {axiosClient}  from '../apiClient';
 
 export const createScholarship = async (scholarship) => {
   return await axiosClient.post('/scholarship', scholarship);
