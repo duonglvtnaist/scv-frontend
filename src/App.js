@@ -11,7 +11,15 @@ import Sidebar from './Layout/Dashboard/Sidebar/Sidebar'
 import Dashboard from './Layout/Dashboard/Dashboard'
 import Profile from './Layout/Dashboard/Profile/Profile'
 import EditProfile from './Components/EditProfile/EditProfile'
-
+import UserBalance from './Layout/Dashboard/Balance/Balance'
+import History from './Layout/Dashboard/History/History'
+import CreateCV from './Components/CreateCV/CreateCV'
+import CreateJob from './Components/CreateJob/CreateJob'
+import CreateScholarship from './Components/CreateScholarship/CreateScholarship'
+import UpdateCV from './Layout/Dashboard/UpdateCV/UpdateCV'
+import SearchCV from './Layout/Dashboard/SearchCV/SearchCV'
+import CreateCVDB from './Layout/Dashboard/CreateCVDB/CreateCVDB'
+import RevokeCV from './Layout/Dashboard/RevokeCV/RevokeCV'
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
 
@@ -50,11 +58,23 @@ function Main() {
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="home-page" element={<HomePage />}></Route>
+        <Route path="/create-cv" element={<CreateCV />}></Route>
+        <Route path="/upload-job" element={<CreateJob />}></Route>
+        <Route
+          path="/upload-scholarship"
+          element={<CreateScholarship />}
+        ></Route>
         <Route path="login" element={<Login />}></Route>
         <Route path="sign-up" element={<SignUp />}></Route>
         <Route path="dashboard" element={<Dashboard />}>
           <Route index element={<Profile />}></Route>
           <Route path="profile" element={<Profile />}></Route>
+          <Route path="balance" element={<UserBalance />}></Route>
+          <Route path="history" element={<History />}></Route>
+          <Route path="create-cv-dashboard" element={<CreateCVDB />}></Route>
+          <Route path="revoke-cv" element={<RevokeCV />}></Route>
+          <Route path="search-cv" element={<SearchCV />}></Route>
+          <Route path="update-cv" element={<UpdateCV />}></Route>
         </Route>
         <Route path="profile/edit-profile" element={<EditProfile />}></Route>
       </Routes>

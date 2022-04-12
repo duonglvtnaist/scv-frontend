@@ -19,18 +19,42 @@ export default function Sidebar() {
             <span className="textMenu">My Profile</span>
           </div>
         </Link>
-        <div className="menuDashboard">
-          <Icon name="window restore" className="iconMenu" size="big"></Icon>
-          <span className="textMenu">Balance</span>
-        </div>
-        <div className="menuDashboard">
-          <Icon name="clock outline" className="iconMenu" size="big"></Icon>
-          <span className="textMenu">History</span>
-        </div>
-        <div className="menuDashboard">
-          <Icon name="upload" className="iconMenu" size="big"></Icon>
-          <span className="textMenu">Update CV</span>
-        </div>
+        <Link to="balance">
+          <div className="menuDashboard">
+            <Icon name="window restore" className="iconMenu" size="big"></Icon>
+            <span className="textMenu">Balance</span>
+          </div>
+        </Link>
+        <Link to="history">
+          <div className="menuDashboard">
+            <Icon name="clock outline" className="iconMenu" size="big"></Icon>
+            <span className="textMenu">History</span>
+          </div>
+        </Link>
+        <Link to="create-cv-dashboard">
+          <div className="menuDashboard">
+            <Icon name="save" className="iconMenu" size="big"></Icon>
+            <span className="textMenu">Create CV</span>
+          </div>
+        </Link>
+        <Link to="revoke-cv">
+          <div className="menuDashboard">
+            <Icon name="eraser" className="iconMenu" size="big"></Icon>
+            <span className="textMenu">Revoke CV</span>
+          </div>
+        </Link>
+        <Link to="search-cv">
+          <div className="menuDashboard">
+            <Icon name="address book" className="iconMenu" size="big"></Icon>
+            <span className="textMenu">Search CV</span>
+          </div>
+        </Link>
+        <Link to="update-cv">
+          <div className="menuDashboard">
+            <Icon name="upload" className="iconMenu" size="big"></Icon>
+            <span className="textMenu">Update CV</span>
+          </div>
+        </Link>
       </div>
       <div className="buttonLogOut">
         <Icon name="sign-out" className="iconMenu" size="big"></Icon>
