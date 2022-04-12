@@ -1,0 +1,11 @@
+.dropdownOption {
+    width: 80% !important;
+    height: 56px;
+    background: #ffffff;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 28px !important;
+    -webkit-border-radius: 28px !important;
+    -moz-border-radius: 28px !important;
+    -ms-border-radius: 28px !important;
+    -o-border-radius: 28px !important;
+}

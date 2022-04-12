@@ -1,0 +1,24 @@
+.createJobContainer {
+    height: 100vh;
+    padding: 82px;
+    background: #f3f3f3;
+}
+
+.formFieldGroupRadio {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.formFieldRadio {
+    font-weight: 400 !important;
+    font-size: 22px !important;
+    line-height: 28px !important;
+    text-align: right !important;
+    color: #090909 !important;
+}
+
+.formFieldRadio input {
+    width: 17px !important;
+    height: 17px !important;
+}
