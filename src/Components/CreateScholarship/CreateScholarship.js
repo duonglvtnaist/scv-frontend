@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import {
   Button,
@@ -8,7 +8,7 @@ import {
   Dropdown,
   Form,
   Icon,
-  Message,
+  Message
 } from 'semantic-ui-react'
 import * as yup from 'yup'
 import { createScholarship } from '../../network/api/scholarship'
@@ -200,34 +200,22 @@ export default function CreateScholarship(props) {
             ) : null}
             <Form.Field className="formFieldCreateCV">
               <label>Type</label>
-              <Controller
-                name="scholarship_type"
-                control={control}
-                // rules={{ required: 'This field is required'}}
-                render={({ field }) => {
-                  let { value, ...other } = field
-                  return (
-                    <Dropdown
-                      {...other}
-                      style={{ fontSize: '20px' }}
-                      type="dropdown"
-                      placeholder="Select A Type"
-                      fluid
-                      selection
-                      className="dropdownOption"
-                      name="scholarship_type"
-                      value={value}
-                      options={scholarshipTypes}
-                      onChange={handleInputChange}
-                    ></Dropdown>
-                  )
-                }}
-              />
+              <Dropdown
+                  style={{ fontSize: '20px' }}
+                  type="dropdown"
+                  placeholder="Select A Type"
+                  fluid
+                  selection
+                  className="dropdownOption"
+                  name="scholarship_type"
+                  options={scholarshipTypes}
+                  onChange={handleInputChange}
+                ></Dropdown>
             </Form.Field>
 
-            <div className="validate-error-message">
+            {/* <div className="validate-error-message">
               <span>{errors.value?.message || ''}</span>
-            </div>
+            </div> */}
 
             <Form.Field className="formFieldCreateCV">
               <label>Field</label>
@@ -244,11 +232,11 @@ export default function CreateScholarship(props) {
                 onChange={handleInputChange}
               ></Dropdown>
             </Form.Field>
-            {errors.scholarship_field ? (
+            {/* {errors.scholarship_field ? (
               <div className="validate-error-message">
                 <span>This field is required</span>
               </div>
-            ) : null}
+            ) : null} */}
             <Form.Field className="formFieldCreateCV">
               <label>Keywords</label>
               <AddTagKeyWord

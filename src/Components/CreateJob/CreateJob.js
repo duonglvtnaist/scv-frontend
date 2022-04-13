@@ -7,7 +7,7 @@ import {
   Form,
   Icon,
   Message,
-  TextArea,
+  TextArea
 } from 'semantic-ui-react'
 import { createJob } from '../../network/api/job'
 import AddTagKeyWord from '../AddTagKeyWords/AddTagKeyWord'
@@ -246,15 +246,15 @@ export default function JobForm() {
             <Form.Field className="formFieldCreateCV">
               <label>Keywords</label>
               <AddTagKeyWord
-                {...register('keywords', { required: true })}
+                {...register('keywords', { required: false })}
                 onChange={handleInputChange}
               />
             </Form.Field>
-            {errors.keywords ? (
+            {/* {errors.keywords ? (
               <div className="validate-error-message">
                 <span>This field is required</span>
               </div>
-            ) : null}
+            ) : null} */}
             <Form.Field className="formFieldCreateCV">
               <label>Application Deadline</label>
               <input
