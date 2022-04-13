@@ -17,9 +17,14 @@ export default class Header extends Component {
               <p className="logoSCV">SMARTCV</p>
             </div>
             <div className="headerCenter">
-              <div className="Menu">Home</div>
+              <Link to="/home">
+                <div className="Menu">Home</div>
+              </Link>
               <div className="Menu">Team</div>
               <div className="Menu">Docs</div>
+              <Link to="/dashboard">
+                <div className="Menu">Dashboard</div>
+              </Link>
             </div>
             <div className="headerRight">
               <button className="buttonConnectWallet">Connect wallet</button>

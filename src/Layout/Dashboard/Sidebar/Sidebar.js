@@ -7,7 +7,7 @@ export default function Sidebar() {
   return (
     <div className="sidebar">
       <div>
-        <Link to="/home-page">
+        <Link to="/home">
           <div className="menuDashboard">
             <Icon name="home" className="iconMenu" size="big"></Icon>
             <span className="textMenu">Home</span>

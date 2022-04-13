@@ -50,6 +50,8 @@
     color: #ffffff;
 }
 
+.dateCreateCV {
+}
 .created,
 .dateCreate {
     font-weight: 700;
@@ -110,8 +112,12 @@
     color: #090909 !important;
 }
 
-Input {
-    border-radius: 28px !important;
+Input[className="inputCV"] {
+    border-radius: 28px;
+    -webkit-border-radius: 28px;
+    -moz-border-radius: 28px;
+    -ms-border-radius: 28px;
+    -o-border-radius: 28px;
 }
 SemanticDatepicker {
     width: 100% !important;

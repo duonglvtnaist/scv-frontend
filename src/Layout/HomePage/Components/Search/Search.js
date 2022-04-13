@@ -1,15 +1,31 @@
 import React from 'react'
-import { Input, Icon, Dropdown } from 'semantic-ui-react'
-import { position, workingType } from '../../../../Components/Data/Data'
+import { Dropdown, Icon } from 'semantic-ui-react'
+import {
+  category,
+  experience,
+  position,
+  searchType,
+  workingType,
+} from '../../../../Components/Data/Data'
 import './search.css'
-import { category, experience } from './../../../../Components/Data/Data'
 
-export default function Search() {
+export default function Search({ onChangeKeywords, onSearchSmartCV }) {
   return (
     <div className="searchJob">
       <div className="search">
-        <input placeholder="Search" className="inputSearch" type="search" />
-        <button className="iconSearch">
+        <input
+          placeholder="Search"
+          className="inputSearch"
+          type="search"
+          onChange={onChangeKeywords}
+        />
+        {/* <Dropdown
+          placeholder="Search Type"
+          selection
+          options={searchType}
+          className="searchOption"
+        /> */}
+        <button className="iconSearch" onClick={onSearchSmartCV}>
           <Icon name="search" style={{ color: '#ffffff' }} size="large" />
         </button>
       </div>
@@ -50,7 +66,7 @@ export default function Search() {
           className="sortBy"
           selection
           placeholder="Sort By"
-          options={experience}
+          options={searchType}
         ></Dropdown>
       </div>
     </div>

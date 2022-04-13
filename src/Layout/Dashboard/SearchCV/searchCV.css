@@ -110,9 +110,9 @@
     color: #090909 !important;
 }
 
-Input {
+/* Input {
     border-radius: 28px !important;
-}
+} */
 SemanticDatepicker {
     width: 100% !important;
     height: 56px;

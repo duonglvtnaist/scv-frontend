@@ -24,6 +24,7 @@ import './createCV.css'
 import AccountMain from './AccountMain'
 import SemanticDatepicker from 'react-semantic-ui-datepickers'
 import { TxButton, TxGroupButton } from '../../substrate-lib/components'
+import AddTagKeyWord from '../AddTagKeyWords/AddTagKeyWord'
 
 const argIsOptional = arg => arg.type.toString().startsWith('Option<')
 
@@ -363,11 +364,19 @@ export default function CreateCV() {
               <input type="text" className="inputCV" name="type" />
             </Form.Field>
             <Form.Field className="formFieldCreateCV">
+<<<<<<< HEAD
               <label> Time original date</label>
               <input type="date" className="inputCV" name="datestart" />
             </Form.Field>
             <Form.Field className="formFieldCreateCV">
               <label> Time expired date</label>
+=======
+              <label> Time Orgdate</label>
+              <input type="date" className="inputCV" name="datestart" />
+            </Form.Field>
+            <Form.Field className="formFieldCreateCV">
+              <label> Time expdate</label>
+>>>>>>> d2281a623ebeb3b6224875dc815e7d48e0871192
               <input type="date" className="inputCV" name="dateend" />
             </Form.Field>
             <Form.Field className="formFieldCreateCV">
@@ -376,6 +385,7 @@ export default function CreateCV() {
             </Form.Field>
             <Form.Field className="formFieldCreateCV">
               <label>Keywords</label>
+<<<<<<< HEAD
               <input type="text" className="inputCV" name="keywords" />
             </Form.Field> */}
 
@@ -550,10 +560,11 @@ export default function CreateCV() {
                 // value={JSON.stringify(inputParams) + JSON.stringify(paramFields)}
               />
             </Form.Field>
+            {/* <AddTagKeyWord /> */}
           </Form>
         </div>
         <div className="buttonSavePostCV">
-          <Link to="/home-page">
+          <Link to="/home">
             <Icon name="arrow left" size="big"></Icon>
           </Link>
           <Button type="submit" className="buttonSaveCV">
