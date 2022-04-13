@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const axiosClient = axios.create({
+const axiosClient =  axios.create({
   baseUrl: 'http://localhost:9001/job-matching/v1',
   headers: { 
     'Content-Type': 'application/json',
@@ -35,5 +35,5 @@ function (response){
     // return Promise.reject(error);
 })
 
-export { axiosClient };
+export  {axiosClient};
 

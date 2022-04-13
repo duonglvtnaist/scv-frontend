@@ -21,7 +21,7 @@ export default function JobForm() {
     job_type: 'Remote',
     location: '',
     keywords: '',
-    deadline: '',
+    deadline: new Date(),
     description_in_detail: '',
     category: '',
     position: '',
@@ -48,13 +48,12 @@ export default function JobForm() {
     const target = event.target
     const value = target.type === 'checkbox' ? target.checked : target.value
     const name = target.name
-
-    console.log(value, name)
-    // update job info
     job[name] = value
     setJob(job)
-    console.log(job)
   }
+   const handleForKeywords = (data) =>{
+    job['keywords'] = data;
+   }
 
   const onSubmit = async (data, event) => {
     console.log(event)
@@ -63,7 +62,6 @@ export default function JobForm() {
     const res = await createJob(job)
 
     if (res.status === 201) {
-      setJob({})
       setMessage({
         visible: true,
         status: res.status,
@@ -71,7 +69,6 @@ export default function JobForm() {
         isError: false,
       })
     } else {
-      setJob({})
       setMessage({
         visible: true,
         status: res.status || 501,
@@ -245,16 +242,11 @@ export default function JobForm() {
             ) : null}
             <Form.Field className="formFieldCreateCV">
               <label>Keywords</label>
-              <AddTagKeyWord
-                {...register('keywords', { required: false })}
-                onChange={handleInputChange}
+              <AddTagKeyWord 
+                refs = {register('keywords', { required: false })}
+                onChangeKeywords={handleForKeywords}
               />
             </Form.Field>
-            {/* {errors.keywords ? (
-              <div className="validate-error-message">
-                <span>This field is required</span>
-              </div>
-            ) : null} */}
             <Form.Field className="formFieldCreateCV">
               <label>Application Deadline</label>
               <input

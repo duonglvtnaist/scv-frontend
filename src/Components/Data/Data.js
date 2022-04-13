@@ -106,11 +106,15 @@ export const searchType = [
 
 export const workingType = [
   {
+    key: '0',
+    text: '',
+    value: '',
+  },
+  {
     key: '1',
     text: 'Working Type 1',
     value: 'Working Type 1',
   },
-
   {
     key: '2',
     text: 'Working Type 2',
@@ -165,25 +169,35 @@ export const schoolarshipFieldTypes = [
 export const category = [
   {
     key: '0',
-    text: 'Dev Website',
-    value: 'Dev Website',
+    text: '',
+    value: '',
   },
   {
     key: '1',
-    text: 'Dev Mobile',
-    value: 'Dev Mobile',
+    text: 'Stevie Feliciano',
+    value: 'Stevie Feliciano',
+  },
+  {
+    key: '2',
+    text: 'Christian',
+    value: 'Christian',
   },
 ]
 export const position = [
   {
     key: '0',
-    text: 'Manage Project',
-    value: 'Manage Project',
+    text: '',
+    value: '',
   },
   {
     key: '1',
-    text: 'Accounting',
-    value: 'Accounting',
+    text: 'Matt',
+    value: 'Matt',
+  },
+  {
+    key: '2',
+    text: 'Justen Kitsune',
+    value: 'Justen Kitsune',
   },
 ]
 
@@ -198,12 +212,17 @@ export const defaultData = {
 export const experience = [
   {
     key: '0',
-    text: '1 year',
-    value: '1 year',
+    text: '',
+    value: '',
   },
   {
     key: '1',
-    text: '2 year',
-    value: '2 year',
+    text: 'Two month',
+    value: 'Two month',
+  },
+  {
+    key: '2',
+    text: 'Once year',
+    value: 'Once year',
   },
 ]
