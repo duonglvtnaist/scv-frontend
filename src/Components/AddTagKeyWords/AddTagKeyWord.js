@@ -5,24 +5,29 @@ export default function AddTagKeyWord(props) {
   const [tagKeyWords, setTagKeyWords] = useState([])
 
   function handleKeyDown(e) {
-    if (e.key !== 'Enter') return
-    const value = e.target.value
-    if (!value.trim()) return
-    setTagKeyWords([...tagKeyWords, value])
-    console.log(setTagKeyWords)
-    e.target.value = ''
+    e.preventDefault()
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      const value = e.target.value
+      if (!value.trim()) return
+      setTagKeyWords([...tagKeyWords, value])
+      props.onChangeKeywords([...tagKeyWords, value].toString())
+      e.target.value = ''
+    }
+    
   }
 
   function removeTag(index) {
     setTagKeyWords(tagKeyWords.filter((el, i) => i !== index))
+    props.onChangeKeywords(tagKeyWords.filter((el, i) => i !== index).toString())
   }
   return (
     <div className="tagKeyWordContainer">
       <div className="tagKeyWord">
         {tagKeyWords.map((tag, index) => (
-          <div className="tagItem">
-            <span className="textTag">{tag}</span>
-            <span onClick={() => removeTag(index)}>
+          <div className="tagItem" key={'tagItem'+index +1}>
+            <span className="textTag" key={'textTag'+index +1}>{tag}</span>
+            <span key={'rmTag'+ index +1} onClick={() => removeTag(index)}>
               <Icon name="times" size="small" className="iconClose" />
             </span>
           </div>
@@ -32,9 +37,9 @@ export default function AddTagKeyWord(props) {
           iconPosition="left"
           labelPosition="right"
           placeholder="Enter Keyword"
-          onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyDown}
           className="inputTagKeyWord"
-          name="keywords"
+          name="keyword"
         />
       </div>
     </div>

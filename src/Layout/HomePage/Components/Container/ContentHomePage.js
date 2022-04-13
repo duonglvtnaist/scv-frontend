@@ -5,9 +5,21 @@ import CardJob from '../CardJob/CardJob'
 import Search from '../Search/Search'
 import './containerHomePage.css'
 
-export default function ContentHomePage({onChangeKeywords, onSearchSmartCV, listOfJob, onChangeWorkType,
-  onChangeCategory, onChangePosition,onChangeExperience,onApplyToFilterJob, onKeySearch}) {
-  
+import NetWorkService from '../../../../network/network.service';
+import CardScholarship from '../CardScholaship/CardScholarship'
+
+export default function ContentHomePage() {
+    const {
+      onChangeKeywords,
+      onSearchSmartCV,
+      listOfSmartCv,
+      onChangeWorkType,
+      onChangeCategory, 
+      onChangePosition,
+      onChangeExperience,
+      onApplyToFilterJob,
+      onKeySearch
+    } = NetWorkService();
   return (
     <div className="contentHomePage">
       <div className="headerButton">
@@ -32,11 +44,18 @@ export default function ContentHomePage({onChangeKeywords, onSearchSmartCV, list
     onApplyToFilterJob = {onApplyToFilterJob}
     onKeySearch= {onKeySearch}/>
         <div style={{ paddingBottom: '20px' }}>
-          {listOfJob.map(item => (
-            <React.Fragment key={item.id}>
-              <CardJob job={item} key= {item.id} />
+          {listOfSmartCv?.jobs?.map(item => (
+            <React.Fragment key={'job_'+item.id}>
+              <CardJob job={item} key= {'job_'+item.id} />
             </React.Fragment>
           ))}
+          {
+            listOfSmartCv?.scholaships?.map(item => (
+              <React.Fragment key={'scholarchip_'+item.id}>
+                <CardScholarship  scholarship={item} key= {'scholarchip_'+item.id} />
+              </React.Fragment>
+            ))
+          }
         </div>
       </Container>
     </div>

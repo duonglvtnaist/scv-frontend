@@ -8,12 +8,12 @@ export default  function NetWorkService() {
   const [category, setCategory] = useState(null);
   const [position, setPosition] = useState(null);
   const [experience, setExperience] = useState(null);
-  const [listOfJob, setListOfJob] = useState([]);
+  const [listOfSmartCv, setListOfSmartCv] = useState({});
   const [searchParams, setSearchParams] = useState({});
   useEffect(()=>{
     searchSmartJob().then(res =>{
       if(res && res.data && res.data.content){
-        setListOfJob(res.data.content)
+        setListOfSmartCv(res.data.content)
       }
     })
   },[])
@@ -65,7 +65,7 @@ export default  function NetWorkService() {
   const onSearchSmartCV = async (e) =>{
     searchSmartJob(searchParams).then((res) => {
       if(res && res.data && res.data.content){
-        setListOfJob(res.data.content)
+        setListOfSmartCv(res.data.content)
       }
       
     });
@@ -75,7 +75,7 @@ export default  function NetWorkService() {
     if(e.key === 'Enter'){
       searchSmartJob(searchParams).then((res) => {
         if(res && res.data && res.data.content){
-          setListOfJob(res.data.content)
+          setListOfSmartCv(res.data.content)
         }
         
       });
@@ -90,7 +90,7 @@ export default  function NetWorkService() {
   return {
     onChangeKeywords,
     onSearchSmartCV,
-    listOfJob,
+    listOfSmartCv,
     onChangeWorkType,
     onChangeCategory, 
     onChangePosition,

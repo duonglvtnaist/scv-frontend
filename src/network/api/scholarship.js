@@ -9,3 +9,13 @@ export const updateScholarship = async (scholarship) => {
   return await axiosClient.put('/scholarship', scholarship);
 
 }
+
+export const searchSmartSholaship = async (objSearch) => {
+  //search job
+  console.log('service==========',objSearch)
+  return axiosClient.get('/advance-search',{
+    params:{
+      ...objSearch
+    }
+  })
+};

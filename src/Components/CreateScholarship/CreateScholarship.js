@@ -9,7 +9,7 @@ import AddTagKeyWord from '../AddTagKeyWords/AddTagKeyWord'
 import { scholarshipTypes, schoolarshipFieldTypes } from './../Data/Data'
 import './createScholarship.css'
 
-export default function CreateScholarship(props) {
+export default function CreateScholarship() {
 
     const [scholarship, setScholarship] = useState(
       {
@@ -45,7 +45,7 @@ export default function CreateScholarship(props) {
     resolver: yupResolver(validationSchema),
   };
 
-  const {register, handleSubmit, formState: {errors}, control, field} = useForm(formOptions);
+  const {register, handleSubmit, formState: {errors}} = useForm();
 
 
   const handleInputChange = (event, data) => {
@@ -65,8 +65,13 @@ export default function CreateScholarship(props) {
     setScholarship(scholarship);
   }
 
-  const onSumit = async(_, event) => {
-    event.preventDefault();
+  const handleForKeywords = (data) =>{
+    scholarship['keywords'] = data;
+   }
+
+  const onSumit = async(data, event) => {
+    console.log(event)
+    event.preventDefault()
     
     console.log(errors)
     const res = await createScholarship(scholarship);
@@ -74,7 +79,6 @@ export default function CreateScholarship(props) {
     console.log(res);
 
     if (res.status === 201) {
-      setScholarship({})
         setMessage({
           visible: true,
           status: res.status,
@@ -118,7 +122,7 @@ export default function CreateScholarship(props) {
                   <p>{message.message || message.defaultMessage}</p>
                 </Message>
               </div>
-              <Form.Field className="formFieldCreateCV">
+              <Form.Field className="formFieldCreateCV" required>
                 <label>Scholarship ID</label>
                 <input
                   type="text"
@@ -135,7 +139,7 @@ export default function CreateScholarship(props) {
                 </div>
                 : null
               }
-              <Form.Field className="formFieldCreateCV">
+              <Form.Field className="formFieldCreateCV" required>
                 <label>Title</label>
                 <input type="text" className="inputCV" name="title" 
                   {...register('title',{ required: true })}
@@ -149,7 +153,7 @@ export default function CreateScholarship(props) {
                 </div>
                 : null
               }
-              <Form.Field className="formFieldCreateCV">
+              <Form.Field className="formFieldCreateCV" required>
                 <label> Posted By</label>
 
                 <input type="text" className="inputCV" name="posted_by"
@@ -164,7 +168,7 @@ export default function CreateScholarship(props) {
                 </div>
                 : null
               }
-              <Form.Field className="formFieldCreateCV">
+              <Form.Field className="formFieldCreateCV" required>
                 <label>School</label>
                 <input type="text" className="inputCV" name="school"
                   {...register('school',{ required: true })}
@@ -179,34 +183,27 @@ export default function CreateScholarship(props) {
               }
               <Form.Field className="formFieldCreateCV">
                 <label>Type</label>
-                <Controller
-                  name="scholarship_type"
-                  control={control}
-                  // rules={{ required: 'This field is required'}}
-                  render={({field}) => {
-                    let {value, ...other} = field;
-                  return (
-                    <Dropdown
-                    {...other}
-                    style={{fontSize:'20px'}}
-                    type="dropdown"
-                    placeholder="Select A Type"
-                    fluid
-                    selection
-                    className="dropdownOption"
-                    name="scholarship_type"
-                    value={value}  
-                    options={scholarshipTypes}
-                    onChange={handleInputChange}
-                  ></Dropdown>
-                  )
-                  }}
+                <Dropdown
+                  placeholder="Select A Type"
+                  style={{ fontSize: '20px' }}
+                  type="dropdown"
+                  fluid
+                  selection
+                  name='scholarship_type'
+                  className="dropdownOption"
+                  refs={register('scholarship_type',{ required: false })}
+                  options={scholarshipTypes}
+                  onChange={handleInputChange}
                 />
               </Form.Field>
-              
-                <div className="validate-error-message" >
-                  <span >{errors.value?.message || ''}</span>
-                </div>
+                  {
+                    errors.scholarship_type?
+                    <div className="validate-error-message" >
+                      <span >This field is required</span>
+                    </div>
+                : null
+                  }
+                
                 
               <Form.Field className="formFieldCreateCV">
                 <label>Field</label>
@@ -218,10 +215,11 @@ export default function CreateScholarship(props) {
                   selection
                   name="scholarship_field"
                   className="dropdownOption"
-                  {...register('scholarship_field',{ required: true })}
+                  {...register('scholarship_field',{ required: false })}
                   options={schoolarshipFieldTypes}
                   onChange={handleInputChange}
                 ></Dropdown>
+                
               </Form.Field>
               {
                 errors.scholarship_field ? 
@@ -233,11 +231,11 @@ export default function CreateScholarship(props) {
               <Form.Field className="formFieldCreateCV">
                 <label>Keywords</label>
                 <AddTagKeyWord
-                  {...register('keywords', { required: true })}
-                  onChange={handleInputChange}
+                  refs = {register('keywords', { required: false })}
+                  onChangeKeywords={handleForKeywords}
                 />
               </Form.Field>
-              <Form.Field className="formFieldCreateCV">
+              <Form.Field className="formFieldCreateCV" required>
                 <label>Application Deadline</label>
                 <input
                   type="date"
