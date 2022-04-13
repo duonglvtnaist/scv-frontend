@@ -6,7 +6,8 @@ import {
   Container,
   Form,
   Icon,
-  Message
+  Message,
+  TextArea
 } from 'semantic-ui-react'
 import { createJob } from '../../network/api/job'
 import AddTagKeyWord from '../AddTagKeyWords/AddTagKeyWord'
@@ -20,7 +21,7 @@ export default function JobForm() {
     job_type: 'Remote',
     location: '',
     keywords: '',
-    deadline: '',
+    deadline: new Date(),
     description_in_detail: '',
     category: '',
     position: '',
@@ -54,13 +55,11 @@ export default function JobForm() {
     job['keywords'] = data;
    }
 
-
   const onSubmit = async (data, event) => {
     console.log(event)
     event.preventDefault()
 
     const res = await createJob(job)
-
 
     if (res.status === 201) {
       setMessage({
@@ -128,13 +127,11 @@ export default function JobForm() {
                 onChange={handleInputChange}
               ></input>
             </Form.Field>
-            {
-              errors.job_id ?
+            {errors.job_id ? (
               <div className="validate-error-message">
-              <span>This field is required</span>
+                <span>This field is required</span>
               </div>
-              : null
-            }
+            ) : null}
 
             <Form.Field className="formFieldCreateCV">
               <label> Job Title</label>
@@ -146,13 +143,11 @@ export default function JobForm() {
                 onChange={handleInputChange}
               />
             </Form.Field>
-            { 
-              errors.job_title ?
+            {errors.job_title ? (
               <div className="validate-error-message">
                 <span>This field is required'</span>
               </div>
-              : null
-            }
+            ) : null}
             <Form.Field className="formFieldCreateCV">
               <label> Job type</label>
               <div className="formFieldGroupRadio">
@@ -180,13 +175,11 @@ export default function JobForm() {
                 </div>
               </div>
             </Form.Field>
-            {
-              errors.job_type ?
+            {errors.job_type ? (
               <div className="validate-error-message">
                 <span>This field is required</span>
               </div>
-              : null
-            }
+            ) : null}
             <Form.Field className="formFieldCreateCV">
               <label>Category</label>
               <input
@@ -197,13 +190,11 @@ export default function JobForm() {
                 onChange={handleInputChange}
               />
             </Form.Field>
-            {
-              errors.category ?
+            {errors.category ? (
               <div className="validate-error-message">
                 <span>This field is required</span>
               </div>
-              : null
-            }
+            ) : null}
             <Form.Field className="formFieldCreateCV">
               <label>Experience</label>
               <input
@@ -214,13 +205,11 @@ export default function JobForm() {
                 onChange={handleInputChange}
               />
             </Form.Field>
-            {
-              errors.experience ?
+            {errors.experience ? (
               <div className="validate-error-message">
                 <span>This field is required</span>
               </div>
-              : null
-            }
+            ) : null}
             <Form.Field className="formFieldCreateCV">
               <label>Position</label>
               <input
@@ -231,13 +220,11 @@ export default function JobForm() {
                 onChange={handleInputChange}
               />
             </Form.Field>
-            {
-              errors.position ?
+            {errors.position ? (
               <div className="validate-error-message">
                 <span>This field is required</span>
               </div>
-              : null
-            }
+            ) : null}
             <Form.Field className="formFieldCreateCV">
               <label>Location</label>
               <input
@@ -248,13 +235,11 @@ export default function JobForm() {
                 onChange={handleInputChange}
               />
             </Form.Field>
-            {
-              errors.location ?
+            {errors.location ? (
               <div className="validate-error-message">
                 <span>This field is required</span>
               </div>
-              : null
-            }
+            ) : null}
             <Form.Field className="formFieldCreateCV">
               <label>Keywords</label>
               <AddTagKeyWord 
@@ -273,13 +258,11 @@ export default function JobForm() {
                 onChange={handleInputChange}
               />
             </Form.Field>
-            {
-              errors.deadline ?
-                <div className="validate-error-message">
-                  <span>This field is required</span>
-                </div>
-              : null
-            }
+            {errors.deadline ? (
+              <div className="validate-error-message">
+                <span>This field is required</span>
+              </div>
+            ) : null}
             <Form.Field className="formFieldCreateCV">
               <label> Posted By</label>
               <input
@@ -291,16 +274,14 @@ export default function JobForm() {
                 onChange={handleInputChange}
               />
             </Form.Field>
-            {
-              errors.posted_by ?
-                <div className="validate-error-message">
-                  <span>This field is required</span>
-                </div>
-              : null
-            }
+            {errors.posted_by ? (
+              <div className="validate-error-message">
+                <span>This field is required</span>
+              </div>
+            ) : null}
             <Form.Field className="formFieldCreateCV contentForm">
               <label>Content</label>
-              <input
+              <TextArea
                 type="text"
                 placeholder="Content"
                 className="textContent"

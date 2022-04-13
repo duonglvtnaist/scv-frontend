@@ -13,6 +13,9 @@ import UserBalance from './Layout/Dashboard/Balance/Balance'
 import Dashboard from './Layout/Dashboard/Dashboard'
 import History from './Layout/Dashboard/History/History'
 import Profile from './Layout/Dashboard/Profile/Profile'
+import SearchCV from './Layout/Dashboard/SearchCV/SearchCV'
+import CreateCVDB from './Layout/Dashboard/CreateCVDB/CreateCVDB'
+import RevokeCV from './Layout/Dashboard/RevokeCV/RevokeCV'
 import UpdateCV from './Layout/Dashboard/UpdateCV/UpdateCV'
 import ContentHomePage from './Layout/HomePage/Components/Container/ContentHomePage'
 import HomePage from './Layout/HomePage/HomePage'
@@ -82,6 +85,9 @@ function Main() {
           <Route path="profile" element={<Profile />}></Route>
           <Route path="balance" element={<UserBalance />}></Route>
           <Route path="history" element={<History />}></Route>
+          <Route path="create-cv-dashboard" element={<CreateCVDB />}></Route>
+          <Route path="revoke-cv" element={<RevokeCV />}></Route>
+          <Route path="search-cv" element={<SearchCV />}></Route>
           <Route path="update-cv" element={<UpdateCV />}></Route>
         </Route>
         <Route path="profile/edit-profile" element={<EditProfile />}></Route>

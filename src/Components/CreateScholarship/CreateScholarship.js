@@ -1,8 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
-import { Button, Container, Dropdown, Form, Icon, Message } from 'semantic-ui-react'
+import {
+  Button,
+  Container,
+  Dropdown,
+  Form,
+  Icon,
+  Message
+} from 'semantic-ui-react'
 import * as yup from 'yup'
 import { createScholarship } from '../../network/api/scholarship'
 import AddTagKeyWord from '../AddTagKeyWords/AddTagKeyWord'
@@ -10,33 +17,27 @@ import { scholarshipTypes, schoolarshipFieldTypes } from './../Data/Data'
 import './createScholarship.css'
 
 export default function CreateScholarship() {
-
-    const [scholarship, setScholarship] = useState(
-      {
-        scholarship_id: "",
-        title: "",
-        posted_by: "",
-        school: "",
-        scholarship_type: "",
-        scholarship_field: "",
-        keywords: "",
-        deadline: "2022-04-07",
-        description_in_detail: ""
-      }
-      );
-
-      const [message, setMessage]= useState(
-        {
-          status: 0,
-          visible: false,
-          message: '',  
-          isError: false,
-          defaultMessage: 'Something went wrong. Please try again later.'
-        }
-      );
+  const [scholarship, setScholarship] = useState({
+    scholarship_id: "",
+    title: "",
+    posted_by: "",
+    school: "",
+    scholarship_type: "",
+    scholarship_field: "",
+    keywords : "",
+    deadline: new Date(),
+    description_in_detail: "",
+  })
+  const [message, setMessage] = useState({
+    status: 0,
+    visible: false,
+    message: '',
+    isError: false,
+    defaultMessage: 'Something went wrong. Please try again later.',
+  })
 
   const validationSchema = yup.object().shape({
-    value: yup.string().required('This field is required')
+    value: yup.string().required('This field is required'),
   })
 
   const formOptions = {
@@ -45,11 +46,16 @@ export default function CreateScholarship() {
     resolver: yupResolver(validationSchema),
   };
 
-  const {register, handleSubmit, formState: {errors}} = useForm();
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+    field,
+  } = useForm()
 
   const handleInputChange = (event, data) => {
-    const target = event.target;
+    const target = event.target
 
     let name, value
     if (data?.type === 'dropdown') {
@@ -61,22 +67,21 @@ export default function CreateScholarship() {
     }
 
     // update scholarship info
-    scholarship[name] = value;
-    setScholarship(scholarship);
+    scholarship[name] = value
+    setScholarship(scholarship)
   }
 
   const handleForKeywords = (data) =>{
     scholarship['keywords'] = data;
    }
 
-  const onSumit = async(data, event) => {
-    console.log(event)
+  const onSumit = async (_, event) => {
     event.preventDefault()
-    
-    console.log(errors)
-    const res = await createScholarship(scholarship);
 
-    console.log(res);
+    console.log(errors)
+    const res = await createScholarship(scholarship)
+
+    console.log(res)
 
     if (res.status === 201) {
         setMessage({
@@ -86,7 +91,7 @@ export default function CreateScholarship() {
           isError: false,
 
         })
-    }else {
+    } else {
       setMessage({
         visible: true,
         status: res.status || 501,
@@ -95,72 +100,84 @@ export default function CreateScholarship() {
       })
     }
 
-    hideMessageAfter(5000);
+    hideMessageAfter(5000)
     return
   }
 
-  const hideMessageAfter =(miliseconds) => {
-    message.visible = false;
+  const hideMessageAfter = miliseconds => {
+    message.visible = false
     setTimeout(() => {
       setMessage(message)
-    }, miliseconds);
+    }, miliseconds)
   }
 
-  const onDismiss= () => {
-    message.visible = false;
-    setMessage(message);
+  const onDismiss = () => {
+    message.visible = false
+    setMessage(message)
   }
    
-    return (
-      <div className="createCVContainer">
-        <Container>
-          <div className="createCVTitle">Upload Scholarship</div>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Form className="formInputCreateCV">
-              <div style={{ width: '100%', justifyContent: 'center', marginBottom:'30px', marginLeft:'60px', fontSize:'20px' }}>
-                <Message visible={message.visible} success={!message.isError} error={message.isError} onDismiss={onDismiss}>
-                  <p>{message.message || message.defaultMessage}</p>
-                </Message>
+  return (
+    <div className="createCVContainer">
+      <Container>
+        <div className="createCVTitle">Upload Scholarship</div>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Form className="formInputCreateCV">
+            <div
+              style={{
+                width: '100%',
+                justifyContent: 'center',
+                marginBottom: '30px',
+                marginLeft: '60px',
+                fontSize: '20px',
+              }}>
+              <Message
+                visible={message.visible}
+                success={!message.isError}
+                error={message.isError}
+                onDismiss={onDismiss}
+              >
+                <p>{message.message || message.defaultMessage}</p>
+              </Message>
+            </div>
+            <Form.Field className="formFieldCreateCV" required>
+              <label>Scholarship ID</label>
+              <input
+                type="text"
+                className="inputCV"
+                name="scholarship_id"
+                {...register('scholarship_id', { required: true })}
+                onChange={handleInputChange}
+              ></input>
+            </Form.Field>
+            {errors.scholarship_id ? (
+              <div className="validate-error-message">
+                <span>This field is required</span>
               </div>
-              <Form.Field className="formFieldCreateCV" required>
-                <label>Scholarship ID</label>
-                <input
-                  type="text"
-                  className="inputCV"
-                  name="scholarship_id"
-                  {...register('scholarship_id',{ required: true })}
-                  onChange={handleInputChange}
-                ></input>
-              </Form.Field>
-              {
-                errors.scholarship_id ? 
-                <div className="validate-error-message" >
-                  <span >This field is required</span>
-                </div>
-                : null
-              }
-              <Form.Field className="formFieldCreateCV" required>
-                <label>Title</label>
-                <input type="text" className="inputCV" name="title" 
-                  {...register('title',{ required: true })}
-                  onChange={handleInputChange}/>
-
-              </Form.Field>
-              {
-                errors.title ? 
-                <div className="validate-error-message" >
-                  <span >This field is required</span>
-                </div>
-                : null
-              }
-              <Form.Field className="formFieldCreateCV" required>
-                <label> Posted By</label>
-
-                <input type="text" className="inputCV" name="posted_by"
-                  {...register('posted_by',{ required: true })}
-                  onChange={handleInputChange}/>
-
-              </Form.Field>
+            ) : null}
+            <Form.Field className="formFieldCreateCV" required>
+              <label>Title</label>
+              <input
+                type="text"
+                className="inputCV"
+                name="title"
+                {...register('title', { required: true })}
+                onChange={handleInputChange}
+              />
+            </Form.Field>
+            {errors.title ? (
+              <div className="validate-error-message">
+                <span>This field is required</span>
+              </div>
+            ) : null}
+            <Form.Field className="formFieldCreateCV" required>
+              <label> Posted By</label>
+              <input
+                type="text"
+                className="inputCV"
+                name="posted_by"
+                {...register('posted_by', { required: true })}
+                onChange={handleInputChange} />
+            </Form.Field>
               {
                 errors.posted_by ? 
                 <div className="validate-error-message" >
@@ -213,7 +230,6 @@ export default function CreateScholarship() {
                   type="dropdown"
                   fluid
                   selection
-                  name="scholarship_field"
                   className="dropdownOption"
                   {...register('scholarship_field',{ required: false })}
                   options={schoolarshipFieldTypes}
@@ -228,7 +244,7 @@ export default function CreateScholarship() {
                 </div>
                 : null
               }
-              <Form.Field className="formFieldCreateCV">
+              <Form.Field className="formFieldCreateCV" required>
                 <label>Keywords</label>
                 <AddTagKeyWord
                   refs = {register('keywords', { required: false })}
@@ -277,7 +293,7 @@ export default function CreateScholarship() {
               Post
             </Button>
           </div>
-        </Container>
-      </div>
-    )
+      </Container>
+    </div>
+  )
 }

@@ -1,7 +1,16 @@
-.updateCVContainer {
-    width: 86%;
+.updateCVContainerDB {
+    width: 80%;
     height: 100vh;
+    position: absolute;
+    left: 20%;
 }
+
+.createCVContainerDB {
+    height: auto;
+    padding: 82px;
+    background: #f3f3f3;
+}
+
 .cardCV {
     background-color: #f3f3f3;
     height: 90%;
@@ -50,8 +59,6 @@
     color: #ffffff;
 }
 
-.dateCreateCV {
-}
 .created,
 .dateCreate {
     font-weight: 700;
@@ -112,13 +119,9 @@
     color: #090909 !important;
 }
 
-Input[className="inputCV"] {
-    border-radius: 28px;
-    -webkit-border-radius: 28px;
-    -moz-border-radius: 28px;
-    -ms-border-radius: 28px;
-    -o-border-radius: 28px;
-}
+/* Input {
+    border-radius: 28px !important;
+} */
 SemanticDatepicker {
     width: 100% !important;
     height: 56px;
@@ -150,7 +153,7 @@ SemanticDatepicker {
     background: #ffffff;
     box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1);
     border-radius: 7px;
-    word-wrap: break-word !important;
+    word-wrap: normal;
     font-size: 18px !important;
     font-weight: 300 !important;
     font-size: 24px !important;
