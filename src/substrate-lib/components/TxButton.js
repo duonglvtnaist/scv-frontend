@@ -2,9 +2,17 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Button } from 'semantic-ui-react'
 import { web3FromSource } from '@polkadot/extension-dapp'
-
+import 'semantic-ui-css/components/reset.min.css';
+import 'semantic-ui-css/components/site.min.css';
+import 'semantic-ui-css/components/container.min.css';
+import 'semantic-ui-css/components/icon.min.css';
+import 'semantic-ui-css/components/message.min.css';
+import 'semantic-ui-css/components/header.min.css';
+import { SemanticToastContainer, toast } from 'react-semantic-toasts';
+import 'react-semantic-toasts/styles/react-semantic-alert.css';
 import { useSubstrateState } from '../'
 import utils from '../utils'
+import "./btnStyle.css"
 
 function TxButton({
   label,
@@ -58,13 +66,36 @@ function TxButton({
     return [address, { signer: injector.signer }]
   }
 
-  const txResHandler = ({ status }) =>
+  const txResHandler = ({ status }) => {
     status.isFinalized
-      ? setStatus(`😉 Finalized. Block hash: ${status.asFinalized.toString()}`)
-      : setStatus(`Current transaction status: ${status.type}`)
+    ? setStatus(`😉 Finalized. Block hash: ${status.asFinalized.toString()}`)
+    : setStatus(`Current transaction status: ${status.type}`)
+      toast(
+          {
+              type : 'success',
+              title: 'Success',
+              description: status
+          },
+          () => console.log('toast closed')
+      );
+    return <SemanticToastContainer />
+  }
 
-  const txErrHandler = err =>
+      
+
+  const txErrHandler = err =>{
     setStatus(`😞 Transaction Failed: ${err.toString()}`)
+    toast({
+          type: 'error',
+          // icon: 'envelope',
+          title: 'Error',
+          description: `😞 Transaction Failed: ${err.toString()}`,
+      });
+    
+    return <SemanticToastContainer />
+  }
+
+   
 
   const sudoTx = async () => {
     const fromAcct = await getFromAcct()
@@ -122,8 +153,10 @@ function TxButton({
     setUnsub(() => unsub)
   }
 
-  const queryResHandler = result =>
-    result.isNone ? setStatus('None') : setStatus(result.toString())
+  const queryResHandler = result => 
+    {result.isNone ? setStatus('None') : setStatus(result.toString())
+      
+    }
 
   const query = async () => {
     const transformed = transformParams(paramFields, inputParams)
@@ -148,7 +181,9 @@ function TxButton({
 
   const constant = () => {
     const result = api.consts[palletRpc][callable]
+
     result.isNone ? setStatus('None') : setStatus(result.toString())
+    
   }
 
   const transaction = async () => {
@@ -158,6 +193,14 @@ function TxButton({
     }
 
     setStatus('Sending...')
+    toast({
+      type: 'info',
+      // icon: 'envelope',
+      title: 'Info Toast',
+      description: 'Sending...',
+    });
+
+    
     ;(isSudo() && sudoTx()) ||
       (isUncheckedSudo() && uncheckedSudoTx()) ||
       (isSigned() && signedTx()) ||
@@ -165,6 +208,7 @@ function TxButton({
       (isQuery() && query()) ||
       (isRpc() && rpc()) ||
       (isConstant() && constant())
+    return <SemanticToastContainer />
   }
 
   const transformParams = (
@@ -257,12 +301,13 @@ function TxButton({
       color={color}
       style={style}
       type="submit"
+      className="buttonPostCV" 
       onClick={transaction}
       disabled={
         disabled ||
         !palletRpc ||
         !callable ||
-        !allParamsFilled() ||
+        // !allParamsFilled() ||
         // These txs required currentAccount to be set
         ((isSudo() || isUncheckedSudo() || isSigned()) && !currentAccount) ||
         ((isSudo() || isUncheckedSudo()) && !isSudoer(currentAccount))
@@ -296,11 +341,11 @@ TxButton.propTypes = {
 function TxGroupButton(props) {
   return (
     <Button.Group>
-      <TxButton label="Unsigned" type="UNSIGNED-TX" color="grey" {...props} />
-      <Button.Or />
-      <TxButton label="Signed" type="SIGNED-TX" color="blue" {...props} />
-      <Button.Or />
-      <TxButton label="SUDO" type="SUDO-TX" color="red" {...props} />
+      {/* <TxButton label="Unsigned" type="UNSIGNED-TX" color="grey" {...props} />
+      <Button.Or /> */}
+      <TxButton label="Post" type="SIGNED-TX" color="red" {...props} />
+      {/* <Button.Or />
+      <TxButton label="SUDO" type="SUDO-TX" color="red" {...props} /> */}
     </Button.Group>
   )
 }

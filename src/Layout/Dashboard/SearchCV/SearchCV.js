@@ -1,6 +1,6 @@
 // import React from 'react'
-import './updateCV.css'
-import HeaderDashboard from './../HeaderDashboard/HeaderDashboard'
+import './searchCV.css'
+import HeaderDashboard from '../HeaderDashboard/HeaderDashboard'
 import { useSubstrateState } from '../../../substrate-lib'
 import imgCV from '../../../assets/Image/img1.png'
 import React, { useState, useEffect, createRef } from 'react'
@@ -27,23 +27,34 @@ import { Link } from 'react-router-dom'
 import AccountMain from '../../../Components/CreateCV/AccountMain'
 import SemanticDatepicker from 'react-semantic-ui-datepickers'
 import { TxButton, TxGroupButton } from '../../../substrate-lib/components'
+import Query from './Query'
 
 const argIsOptional = arg => arg.type.toString().startsWith('Option<')
 
-export default function UpdateCV() {
+export default function SearchCV() {
   const { api, jsonrpc } = useSubstrateState()
   const [status, setStatus] = useState(null)
 
-  const [interxType, setInterxType] = useState('EXTRINSIC')
+  const [interxType, setInterxType] = useState('QUERY')
+  const [submitType, setSubmitType] = useState('EXTRINSIC')
   const [palletRPCs, setPalletRPCs] = useState([])
   const [callables, setCallables] = useState([])
   const [paramFields, setParamFields] = useState([])
 
+  const [submitPalletRPC, setsubmitPalletRPC] = useState('cv')
+  const [submitCallable, setsubmitCallable] = useState('revokeItem')
   const [inforDebugMes, setInforDebugMes] = useState('Initital value')
+
+  const [submitInputParam, setsubmitInputParam] = useState([
+    { type: 'u32', value: 'noID' },
+  ])
+  const [submitParamField, setsubmitParamField] = useState([
+    { name: 'itemId', type: 'u32', optional: false },
+  ])
 
   const initFormState = {
     palletRpc: 'cv',
-    callable: 'updateItem',
+    callable: 'itemById',
     inputParams: [],
   }
 
@@ -171,7 +182,7 @@ export default function UpdateCV() {
 
   useEffect(updatePalletRPCs, [api, interxType])
   useEffect(updateCallables, [api, interxType, palletRpc])
-  // useEffect(updateParamFields, [api, interxType, palletRpc, callable, jsonrpc])
+  useEffect(updateParamFields, [api, interxType, palletRpc, callable, jsonrpc])
 
   const onPalletCallableParamChange = (_, data) => {
     setFormState(formState => {
@@ -186,6 +197,7 @@ export default function UpdateCV() {
         const inputParams = [...formState.inputParams]
 
         inputParams[ind] = { type, value }
+        setsubmitInputParam([{ type: 'u32', value }])
         res = { ...formState, inputParams }
       } else if (state === 'palletRpc') {
         res = { ...formState, [state]: value, callable: '', inputParams: [] }
@@ -324,61 +336,17 @@ export default function UpdateCV() {
     <div className="updateCVContainerDB">
       <HeaderDashboard />
       <div className="cardCV">
-        {/* <div className="cardCVInfo">
-            <div className="cardCVInfoItem">
-              <Image src={imgCV} className="imgCV"></Image>
-              <div className="buttonEditCV">Edit CV</div>
-              <div className="dateCreateCV">
-                <p className="created">Created</p>
-                <p className="dateCreate">8/20/2019</p>
-              </div>
-            </div>
-            <div className="cardCVInfoItem">
-              <Image src={imgCV} className="imgCV"></Image>
-              <div className="buttonEditCV">Edit CV</div>
-              <div className="dateCreateCV">
-                <p className="created">Created</p>
-                <p className="dateCreate">8/20/2019</p>
-              </div>
-            </div>
-          </div>
-          <Link to="/create-cv">
-            <div className="buttonCreateNewCV">
-              <Icon name="plus" className="iconAddNewCV" size="massive"></Icon>
-            </div>
-          </Link> */}
         <div className="createCVContainerDB">
-          <div className="createCVTitle">Update CV</div>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              height: '100%',
-            }}
-          >
-            <Form className="formInputCreateCV">
-              {/* <Form.Field className="formFieldCreateCV">
-                <label>CVID</label>
-                <input
-                  type="text"
-                  className="inputCV"
-                  placeholder="Bytes"
-                  name="cvid"
-                  // value={JSON.stringify(paramFields)}
-                />
-              </Form.Field> */}
-              <Form.Field className="formFieldCreateCV">
-                <label> Submitter ID</label>
-                {/* <input type="text" className="inputCV" name="submitterid" /> */}
-                <AccountMain className="inputCV" />
-              </Form.Field>
+          <Container>
+            <div className="createCVTitle">Search CV</div>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Form className="formInputCreateCV">
+                <Form.Field className="formFieldCreateCV">
+                  <label> Submitter ID</label>
+                  <AccountMain className="inputCV" />
+                </Form.Field>
 
-              {paramFields.map((paramField, ind) => {
-                if (
-                  paramField.name === 'createdDate' ||
-                  paramField.name === 'periodFrom' ||
-                  paramField.name === 'periodTo'
-                ) {
+                {paramFields.map((paramField, ind) => {
                   return (
                     <Form.Field
                       key={`${paramField.name}-${paramField.type}`}
@@ -387,52 +355,22 @@ export default function UpdateCV() {
                       {paramField.optional ? (
                         <label>
                           {
-                            // labelNames[ind].value +" (*)" + "-" + paramField.name
-                            labelNames[ind].value
-                            // paramField.name
-                          }
-                        </label>
-                      ) : (
-                        <label>
-                          {
-                            labelNames[ind].value
-                            // labelNames[ind].value + "-" + paramField.name
-                            //
-                          }
-                        </label>
-                      )}
-                      <SemanticDatepicker
-                        // label={labelNames[ind].value}
-                        fluid
-                        state={{ ind, paramField }}
-                        onChange={handleDateChange}
-                        className="inputCV"
-                      />
-                    </Form.Field>
-                  )
-                } else if (paramField.name !== 'metadata') {
-                  return (
-                    <Form.Field
-                      key={`${paramField.name}-${paramField.type}`}
-                      className="formFieldCreateCV"
-                    >
-                      {paramField.optional ? (
-                        <label>
-                          {
-                            labelNames[ind].value
+                            // labelNames[ind].value
+                            'CV ID'
                             // labelNames[ind].value + " (*)" + "-" + paramField.name
                           }
                         </label>
                       ) : (
                         <label>
                           {
-                            labelNames[ind].value
+                            // labelNames[ind].value
+                            'CV ID'
                             // labelNames[ind].value + "-" + paramField.name
                           }
                         </label>
                       )}
                       <Input
-                        placeholder={paramField.type}
+                        placeholder={'Bytes'}
                         fluid
                         type="text"
                         className="inputCV"
@@ -442,151 +380,44 @@ export default function UpdateCV() {
                         value={inputParams[ind] ? inputParams[ind].value : ''}
                         onChange={onPalletCallableParamChange}
                       />
-                      {/* {paramField.optional ? (
-                                      <Label
-                                        basic
-                                        pointing = "left"
-                                        color="teal"
-                                        content={getOptionalMsg(interxType)}
-                                      />
-                                    ) : null} */}
                     </Form.Field>
                   )
-                }
+                })}
 
-                return (
-                  <div>
-                    <Form.Field className="formFieldCreateCV">
-                      <label>Profile</label>
-                      <Input
-                        className="inputCV"
-                        placeholder="Bytes"
-                        fluid
-                        type="text"
-                        // label={labelNames[ind].value}
-                        // label='Profile'
-                        state={indMetaProf}
-                        value={
-                          metaDataInputs.profile ? metaDataInputs.profile : ''
-                        }
-                        onChange={onMetaDataChange}
-                      />
-                    </Form.Field>
-                    <Form.Field className="formFieldCreateCV">
-                      <label>Employment History</label>
-                      <Input
-                        className="inputCV"
-                        placeholder="Bytes"
-                        fluid
-                        type="text"
-                        // label={labelNames[ind].value}
-                        // label='Employment History'
-                        state={indMetaEmpl}
-                        value={
-                          metaDataInputs.employment_history
-                            ? metaDataInputs.employment_history
-                            : ''
-                        }
-                        onChange={onMetaDataChange}
-                      />
-                    </Form.Field>
-                    <Form.Field className="formFieldCreateCV">
-                      <label>Education</label>
-                      <Input
-                        className="inputCV"
-                        placeholder="Bytes"
-                        fluid
-                        type="text"
-                        // label={labelNames[ind].value}
-                        // label='Education'
-                        state={indMetaEdu}
-                        value={
-                          metaDataInputs.education
-                            ? metaDataInputs.education
-                            : ''
-                        }
-                        onChange={onMetaDataChange}
-                      />
-                    </Form.Field>
-                    <Form.Field
-                      style={{ marginBottom: '15px' }}
-                      className="formFieldCreateCV"
-                    >
-                      <label>References</label>
-                      <Input
-                        className="inputCV"
-                        placeholder="Bytes"
-                        fluid
-                        type="text"
-                        // label={labelNames[ind].value}
-                        // label='References'
-                        state={indMetaRef}
-                        value={
-                          metaDataInputs.references
-                            ? metaDataInputs.references
-                            : ''
-                        }
-                        onChange={onMetaDataChange}
-                      />
-                    </Form.Field>
-                    <Form.Field
-                      style={{ marginBottom: '15px' }}
-                      className="formFieldCreateCV"
-                    >
-                      <label>Type</label>
-                      <Input
-                        className="inputCV"
-                        placeholder="Bytes"
-                        fluid
-                        type="text"
-                        // label={labelNames[ind].value}
-                        // label='Type'
-                        state={indMetaType}
-                        value={metaDataInputs.type ? metaDataInputs.type : ''}
-                        onChange={onMetaDataChange}
-                      />
-                    </Form.Field>
-                  </div>
-                )
-              })}
-              <Form.Field className="formFieldCreateCV contentForm">
-                <label>Content</label>
-                <TextArea
-                  type="text"
-                  placeholder="Content"
-                  className="textContent"
-                  // value={JSON.stringify(inputParams)}
-                />
-              </Form.Field>
-            </Form>
-          </div>
-          <div className="buttonSavePostCV">
-            <Link to="/home-page">
-              <Icon name="arrow left" size="big"></Icon>
-            </Link>
-            <Button type="submit" className="buttonSaveCV">
-              Save
-            </Button>
-            {/* <Button type="submit" className="buttonPostCV">
-                  Post
-                </Button> */}
-            <InteractorSubmit
-              setStatus={setStatus}
-              attrs={{
-                interxType,
-                palletRpc,
-                callable,
-                inputParams,
-                paramFields,
-              }}
-            />
-          </div>
-          <div
-            style={{ overflowWrap: 'break-word' }}
-            className="formInputCreateCV formFieldCreateCV statusMes inputCV"
-          >
-            {status}
-          </div>
+                <Query value={status} style={{ marginBottom: '100px' }} />
+              </Form>
+            </div>
+            <div className="buttonSavePostCV">
+              <Link to="/home-page">
+                <Icon name="arrow left" size="big"></Icon>
+              </Link>
+              <Button type="submit" className="buttonSaveCV">
+                Save
+              </Button>
+              <InteractorSubmit
+                setStatus={setStatus}
+                attrs={{
+                  interxType,
+                  palletRpc,
+                  callable,
+                  inputParams,
+                  paramFields,
+                }}
+              />
+              {/* <InteractorSubmit
+                  setStatus={setStatus}
+                  attrs={{
+                    interxType:submitType,
+                    palletRpc:submitPalletRPC,
+                    callable:submitCallable,
+                    inputParams:submitInputParam,
+                    paramFields:submitParamField,
+                  }}
+                /> */}
+            </div>
+
+            {/* <div style={{ overflowWrap: 'break-word', marginTop:"50px", width:"100px" }} className="formInputCreateCV formFieldCreateCV statusMes inputCV">{status}</div> */}
+          </Container>
         </div>
       </div>
     </div>
@@ -597,10 +428,18 @@ function InteractorSubmit(props) {
     attrs: { interxType },
   } = props
   if (interxType === 'QUERY') {
-    return <TxButton label="Query" type="QUERY" color="blue" {...props} />
+    return <TxButton label="Search" type="QUERY" color="blue" {...props} />
   } else if (interxType === 'EXTRINSIC') {
-    return <TxGroupButton {...props} />
+    return <TxButton label="Revoke" type="EXTRINSIC" color="red" {...props} />
   } else if (interxType === 'RPC' || interxType === 'CONSTANT') {
     return <TxButton label="Submit" type={interxType} color="blue" {...props} />
   }
+}
+function IsJsonString(str) {
+  try {
+    JSON.parse(str)
+  } catch (e) {
+    return false
+  }
+  return true
 }

@@ -1,8 +1,84 @@
+.updateCVContainer {
+    width: 86%;
+    height: 100vh;
+}
+.cardCV {
+    background-color: #f3f3f3;
+    height: 90%;
+}
+.cardCVInfo {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.cardCVInfoItem {
+    width: 336px;
+    height: 416px;
+    background: #959595;
+    border-radius: 67px;
+    margin: 100px 20px;
+    -webkit-border-radius: 67px;
+    -moz-border-radius: 67px;
+    -ms-border-radius: 67px;
+    -o-border-radius: 67px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.imgCV {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+.buttonEditCV {
+    width: 169px;
+    height: 50px;
+    background: #ef6565;
+    border-radius: 19px;
+    padding: 10px 40px;
+
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 29px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.created,
+.dateCreate {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+
+    color: #ffffff;
+}
+
+.buttonCreateNewCV {
+    width: 246px;
+    height: 246px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    background: #ef6565;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iconAddNewCV {
+    color: #ffffff !important;
+}
 .createCVContainer {
-    height: 100% !important;
+    height: 100vh;
     padding: 82px;
     background: #f3f3f3;
-    margin-top: 103px;
 }
 .createCVTitle {
     font-weight: 700;
@@ -34,18 +110,10 @@
     color: #090909 !important;
 }
 
-Input {
+Input{
     border-radius: 28px !important;
-    border: none !important;
-    outline: none;
-    flex-grow: 1;
-    padding: 8px 0;
-    -webkit-border-radius: 28px !important;
-    -moz-border-radius: 28px !important;
-    -ms-border-radius: 28px !important;
-    -o-border-radius: 28px !important;
 }
-SemanticDatepicker {
+SemanticDatepicker{
     width: 100% !important;
     height: 56px;
     box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1) !important;
@@ -57,15 +125,6 @@ SemanticDatepicker {
     margin-right: 0px;
     color: #000000;
 }
-.validate-error-message {
-    display: flex !important;
-    margin-bottom: 30px;
-    justify-content: center !important;
-    /* font-weight: 400 !important; */
-    font-size: 20px !important;
-    color: red !important;
-}
-
 .inputCV {
     width: 80% !important;
     height: 56px;
@@ -134,51 +193,4 @@ SemanticDatepicker {
     -moz-border-radius: 20px !important;
     -ms-border-radius: 20px !important;
     -o-border-radius: 20px !important;
-}
-
-.statusMes {
-    margin: 20px auto;
-    background-color: #ffffff;
-    padding: 20px;
-}
-.tagKeyWordContainer {
-    padding: 8px;
-    width: 80%;
-    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 28px;
-    background-color: #ffffff;
-    -webkit-border-radius: 28px;
-    -moz-border-radius: 28px;
-    -ms-border-radius: 28px;
-    -o-border-radius: 28px;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.tagItem {
-    background-color: rgb(218, 216, 216);
-    display: inline-block;
-    padding: 8px 12px;
-    border-radius: 20px;
-    margin: 0 10px 10px 0;
-}
-
-.tagItem .iconClose {
-    height: 20px;
-    width: 20px;
-    background-color: #000000;
-    display: inline-block;
-    color: #ffffff;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 8px;
-    font-size: 18px;
 }
