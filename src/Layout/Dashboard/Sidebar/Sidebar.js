@@ -56,10 +56,12 @@ export default function Sidebar() {
           </div>
         </Link>
       </div>
-      <div className="buttonLogOut">
-        <Icon name="sign-out" className="iconMenu" size="big"></Icon>
-        <span className="textMenu">Log Out</span>
-      </div>
+      <Link to="/">
+        <div className="buttonLogOut">
+          <Icon name="sign-out" className="iconMenu" size="big"></Icon>
+          <span className="textMenu">Log Out</span>
+        </div>
+      </Link>
     </div>
   )
 }

@@ -1,6 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Container, Form, Icon, Radio } from 'semantic-ui-react'
+import {
+  Button,
+  Container,
+  Form,
+  Icon,
+  Radio,
+  TextArea,
+} from 'semantic-ui-react'
 import './createJob.css'
 
 export default function CreateJob() {
@@ -51,7 +58,7 @@ export default function CreateJob() {
             </Form.Field>
             <Form.Field className="formFieldCreateCV contentForm">
               <label>Content</label>
-              <input
+              <TextArea
                 type="text"
                 placeholder="Content"
                 className="textContent"

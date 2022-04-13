@@ -76,7 +76,7 @@
     color: #ffffff !important;
 }
 .createCVContainer {
-    height: 100vh;
+    height: 100%;
     padding: 82px;
     background: #f3f3f3;
 }
@@ -110,10 +110,10 @@
     color: #090909 !important;
 }
 
-Input{
+Input {
     border-radius: 28px !important;
 }
-SemanticDatepicker{
+SemanticDatepicker {
     width: 100% !important;
     height: 56px;
     box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1) !important;
@@ -144,7 +144,7 @@ SemanticDatepicker{
     background: #ffffff;
     box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1);
     border-radius: 7px;
-    word-wrap: normal;
+    word-wrap: break-word !important;
     font-size: 18px !important;
     font-weight: 300 !important;
     font-size: 24px !important;

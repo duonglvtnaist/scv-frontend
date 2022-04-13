@@ -1,6 +1,8 @@
 .history {
-    width: 86%;
+    width: 80%;
     height: 100vh;
+    position: absolute;
+    left: 20%;
 }
 
 .historyInfo {
@@ -65,7 +67,7 @@
     height: 49px;
     background: #959595;
     border-radius: 16px;
-    padding: 12px 23px;
+    padding: 12px 15px;
     cursor: pointer;
 }
 

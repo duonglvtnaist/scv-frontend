@@ -25,11 +25,9 @@ import {
 } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import AccountMain from '../../../Components/CreateCV/AccountMain'
-import SemanticDatepicker from 'react-semantic-ui-datepickers';
+import SemanticDatepicker from 'react-semantic-ui-datepickers'
 import { TxButton, TxGroupButton } from '../../../substrate-lib/components'
 import Query from './Query'
-
-
 
 const argIsOptional = arg => arg.type.toString().startsWith('Option<')
 
@@ -46,11 +44,14 @@ export default function SearchCV() {
   const [submitPalletRPC, setsubmitPalletRPC] = useState('cv')
   const [submitCallable, setsubmitCallable] = useState('revokeItem')
   const [inforDebugMes, setInforDebugMes] = useState('Initital value')
-  
-  const [submitInputParam, setsubmitInputParam] = useState([{"type":"u32","value":"noID"}])
-  const [submitParamField, setsubmitParamField] = useState([{"name":"itemId","type":"u32","optional":false}])
 
-  
+  const [submitInputParam, setsubmitInputParam] = useState([
+    { type: 'u32', value: 'noID' },
+  ])
+  const [submitParamField, setsubmitParamField] = useState([
+    { name: 'itemId', type: 'u32', optional: false },
+  ])
+
   const initFormState = {
     palletRpc: 'cv',
     callable: 'itemById',
@@ -59,7 +60,7 @@ export default function SearchCV() {
 
   const [formState, setFormState] = useState(initFormState)
   const { palletRpc, callable, inputParams } = formState
-  
+
   const getApiType = (api, interxType) => {
     if (interxType === 'QUERY') {
       return api.query
@@ -76,21 +77,20 @@ export default function SearchCV() {
   const indMetaEdu = 3
   const indMetaRef = 4
   const indMetaType = 5
- 
 
   const metaDataLabels = {
-    profile:'Profile',
-    employment_history:'Employment History',
-    education:'Education',
-    references:'References',
-    type: 'Type'
+    profile: 'Profile',
+    employment_history: 'Employment History',
+    education: 'Education',
+    references: 'References',
+    type: 'Type',
   }
   const initMetaDataInputs = {
-    profile:'',
-    employment_history:'',
-    education:'',
-    references:'',
-    type:'',
+    profile: '',
+    employment_history: '',
+    education: '',
+    references: '',
+    type: '',
   }
   const [metaDataInputs, setMetaInputs] = useState(initMetaDataInputs)
   const updatePalletRPCs = () => {
@@ -195,9 +195,9 @@ export default function SearchCV() {
           paramField: { type },
         } = state
         const inputParams = [...formState.inputParams]
-        
+
         inputParams[ind] = { type, value }
-        setsubmitInputParam([{type:"u32", value}])
+        setsubmitInputParam([{ type: 'u32', value }])
         res = { ...formState, inputParams }
       } else if (state === 'palletRpc') {
         res = { ...formState, [state]: value, callable: '', inputParams: [] }
@@ -208,11 +208,9 @@ export default function SearchCV() {
     })
 
     setInforDebugMes(JSON.stringify(formState))
-    
   }
 
   const handleDateChange = (_, data) => {
-    
     setFormState(formState => {
       let res
       const { state, value } = data
@@ -223,138 +221,171 @@ export default function SearchCV() {
       } = state
       const inputParams = [...formState.inputParams]
       const date = new Date(value).getTime()
-      inputParams[ind] = { type, value: date.toString()}  
+      inputParams[ind] = { type, value: date.toString() }
       res = { ...formState, inputParams }
       setInforDebugMes(inputParams[ind].value)
       return res
     })
-  
   }
-  const onMetaDataChange = (_,data) => {
-    const {state, value} = data
+  const onMetaDataChange = (_, data) => {
+    const { state, value } = data
     const inputParams = [...formState.inputParams]
-    setInforDebugMes("Changing Meta")
-    if(state===indMetaProf){
-      setMetaInputs({profile: value, employment_history: metaDataInputs.employment_history, education: metaDataInputs.education, references: metaDataInputs.references, type: metaDataInputs.type })
-      setInforDebugMes("Changing Prof")
-    } else if(state===indMetaEmpl){
-      setMetaInputs({profile: metaDataInputs.profile, employment_history: value, education: metaDataInputs.education, references: metaDataInputs.references, type: metaDataInputs.type })
-      setInforDebugMes("Changing Emp")
-    } else if(state===indMetaEdu){
-      setMetaInputs({profile: metaDataInputs.profile, employment_history: metaDataInputs.employment_history, education: value, references: metaDataInputs.references, type: metaDataInputs.type })
-      setInforDebugMes("Changing Edu")
-    } else if(state===indMetaRef){
-      setMetaInputs({profile: metaDataInputs.profile, employment_history: metaDataInputs.employment_history, education: metaDataInputs.education, references: value, type: metaDataInputs.type })
-      setInforDebugMes("Changing Ref")
-    } else if(state===indMetaType){
-      setMetaInputs({profile: metaDataInputs.profile, employment_history: metaDataInputs.employment_history, education: metaDataInputs.education, references: metaDataInputs.references, type: value })
-      setInforDebugMes("Changing Type")
+    setInforDebugMes('Changing Meta')
+    if (state === indMetaProf) {
+      setMetaInputs({
+        profile: value,
+        employment_history: metaDataInputs.employment_history,
+        education: metaDataInputs.education,
+        references: metaDataInputs.references,
+        type: metaDataInputs.type,
+      })
+      setInforDebugMes('Changing Prof')
+    } else if (state === indMetaEmpl) {
+      setMetaInputs({
+        profile: metaDataInputs.profile,
+        employment_history: value,
+        education: metaDataInputs.education,
+        references: metaDataInputs.references,
+        type: metaDataInputs.type,
+      })
+      setInforDebugMes('Changing Emp')
+    } else if (state === indMetaEdu) {
+      setMetaInputs({
+        profile: metaDataInputs.profile,
+        employment_history: metaDataInputs.employment_history,
+        education: value,
+        references: metaDataInputs.references,
+        type: metaDataInputs.type,
+      })
+      setInforDebugMes('Changing Edu')
+    } else if (state === indMetaRef) {
+      setMetaInputs({
+        profile: metaDataInputs.profile,
+        employment_history: metaDataInputs.employment_history,
+        education: metaDataInputs.education,
+        references: value,
+        type: metaDataInputs.type,
+      })
+      setInforDebugMes('Changing Ref')
+    } else if (state === indMetaType) {
+      setMetaInputs({
+        profile: metaDataInputs.profile,
+        employment_history: metaDataInputs.employment_history,
+        education: metaDataInputs.education,
+        references: metaDataInputs.references,
+        type: value,
+      })
+      setInforDebugMes('Changing Type')
     }
-    inputParams[metaInd]= {type:'Bytes', value:(JSON.stringify(metaDataInputs))}
-    
-    // setFormState({palletRpc:'cv', callable:'createItem',inputParams: inputParams})
-    setFormState(formState => {
-      return {...formState, inputParams}
-    })
-  }
-  
-    const onInterxTypeChange = (ev, data) => {
-      setInterxType(data.value)
-      // clear the formState
-      setFormState({palletRpc:''})
+    inputParams[metaInd] = {
+      type: 'Bytes',
+      value: JSON.stringify(metaDataInputs),
     }
 
-    const getOptionalMsg = interxType =>
-      interxType === 'RPC'
-        ? 'Optional Parameter'
-        : 'Leaving this field as blank will submit a NONE value'
-    const cvIDInd = 0
-    const ownerInd = 1
-    const metaInd = 2
-    const createdInd = 3
-    const orgDateInd = 4
-    const expDataInd = 5
-    const keywordsInd = 6
-    const certificateIdInd = 7
-    const labelNames = [
-      {
-        value: 'CV ID',
-      },
-      {
-        value: 'Owner ID',
-      },
-      {
-        value: 'Metadata',
-      },
-      // {
-      //   value: 'Issued date',
-      // },
-      {
-        value: 'Time original date',
-      },
-      {
-        value: 'Time expired date',
-      },    
-      {
-        value: 'Keywords',
-      },
-      {
-        value: 'Certificate ID',
-      },
-    ]
+    // setFormState({palletRpc:'cv', callable:'createItem',inputParams: inputParams})
+    setFormState(formState => {
+      return { ...formState, inputParams }
+    })
+  }
+
+  const onInterxTypeChange = (ev, data) => {
+    setInterxType(data.value)
+    // clear the formState
+    setFormState({ palletRpc: '' })
+  }
+
+  const getOptionalMsg = interxType =>
+    interxType === 'RPC'
+      ? 'Optional Parameter'
+      : 'Leaving this field as blank will submit a NONE value'
+  const cvIDInd = 0
+  const ownerInd = 1
+  const metaInd = 2
+  const createdInd = 3
+  const orgDateInd = 4
+  const expDataInd = 5
+  const keywordsInd = 6
+  const certificateIdInd = 7
+  const labelNames = [
+    {
+      value: 'CV ID',
+    },
+    {
+      value: 'Owner ID',
+    },
+    {
+      value: 'Metadata',
+    },
+    // {
+    //   value: 'Issued date',
+    // },
+    {
+      value: 'Time original date',
+    },
+    {
+      value: 'Time expired date',
+    },
+    {
+      value: 'Keywords',
+    },
+    {
+      value: 'Certificate ID',
+    },
+  ]
   return (
-    <div className="updateCVContainer">
+    <div className="updateCVContainerDB">
       <HeaderDashboard />
       <div className="cardCV">
-        <div className="createCVContainer">
+        <div className="createCVContainerDB">
           <Container>
             <div className="createCVTitle">Search CV</div>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Form className="formInputCreateCV">
-
                 <Form.Field className="formFieldCreateCV">
                   <label> Submitter ID</label>
                   <AccountMain className="inputCV" />
                 </Form.Field>
-               
 
                 {paramFields.map((paramField, ind) => {
-                        return <Form.Field key={`${paramField.name}-${paramField.type}` } className="formFieldCreateCV">
-                                  
-                        { paramField.optional?(
-                          <label>{
+                  return (
+                    <Form.Field
+                      key={`${paramField.name}-${paramField.type}`}
+                      className="formFieldCreateCV"
+                    >
+                      {paramField.optional ? (
+                        <label>
+                          {
                             // labelNames[ind].value
-                            "CV ID"
+                            'CV ID'
                             // labelNames[ind].value + " (*)" + "-" + paramField.name
-                          }</label>
-                        ):
-                          <label>{
+                          }
+                        </label>
+                      ) : (
+                        <label>
+                          {
                             // labelNames[ind].value
-                            "CV ID"
+                            'CV ID'
                             // labelNames[ind].value + "-" + paramField.name
-                          }</label>
-                        }
-                        <Input
-                          placeholder={"Bytes"}
-                          fluid
-                          type="text"
-                          className="inputCV"
-                          // // label={labelNames[ind].value}
-                          // label={labelNames[ind].value}
-                          state={{ ind, paramField }}
-                          value={inputParams[ind] ? inputParams[ind].value : ''}
-                          onChange={onPalletCallableParamChange}
-                        />
-                   
-                      </Form.Field>
-                              
-                      }
+                          }
+                        </label>
                       )}
-             
-           
-                <Query value={status} style={{marginBottom:"100px"}}/>
+                      <Input
+                        placeholder={'Bytes'}
+                        fluid
+                        type="text"
+                        className="inputCV"
+                        // // label={labelNames[ind].value}
+                        // label={labelNames[ind].value}
+                        state={{ ind, paramField }}
+                        value={inputParams[ind] ? inputParams[ind].value : ''}
+                        onChange={onPalletCallableParamChange}
+                      />
+                    </Form.Field>
+                  )
+                })}
+
+                <Query value={status} style={{ marginBottom: '100px' }} />
               </Form>
-              
             </div>
             <div className="buttonSavePostCV">
               <Link to="/home-page">
@@ -363,17 +394,17 @@ export default function SearchCV() {
               <Button type="submit" className="buttonSaveCV">
                 Save
               </Button>
-                <InteractorSubmit
-                  setStatus={setStatus}
-                  attrs={{
-                    interxType,
-                    palletRpc,
-                    callable,
-                    inputParams,
-                    paramFields,
-                  }}
-                />
-                 {/* <InteractorSubmit
+              <InteractorSubmit
+                setStatus={setStatus}
+                attrs={{
+                  interxType,
+                  palletRpc,
+                  callable,
+                  inputParams,
+                  paramFields,
+                }}
+              />
+              {/* <InteractorSubmit
                   setStatus={setStatus}
                   attrs={{
                     interxType:submitType,
@@ -383,14 +414,11 @@ export default function SearchCV() {
                     paramFields:submitParamField,
                   }}
                 /> */}
-                
-
             </div>
-           
+
             {/* <div style={{ overflowWrap: 'break-word', marginTop:"50px", width:"100px" }} className="formInputCreateCV formFieldCreateCV statusMes inputCV">{status}</div> */}
           </Container>
-    </div>
-  )
+        </div>
       </div>
     </div>
   )
@@ -409,9 +437,9 @@ function InteractorSubmit(props) {
 }
 function IsJsonString(str) {
   try {
-      JSON.parse(str);
+    JSON.parse(str)
   } catch (e) {
-      return false;
+    return false
   }
-  return true;
+  return true
 }

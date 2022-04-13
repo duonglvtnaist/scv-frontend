@@ -1,6 +1,6 @@
 body {
     background-color: rgb(252, 252, 252);
-    font-family: "adineue PRO";
+    font-family: "adineue PRO" !important;
     font-style: normal;
     box-sizing: border-box;
     margin: 0;
@@ -9,6 +9,11 @@ body {
 .headerLandingHome {
     background-color: #ffffff;
     padding: 22px 0px 22px 0px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 .buttonConnectWallet {
@@ -62,7 +67,7 @@ body {
 
 .headerButton {
     width: 70%;
-    margin: 0 auto;
+    margin: 103px auto 0 auto;
     padding: 123px 0;
 
     display: flex;

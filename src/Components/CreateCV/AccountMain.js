@@ -10,6 +10,7 @@ import {
   Image,
   Label,
   Grid,
+  Input,
 } from 'semantic-ui-react'
 
 import '../addCV.css'
@@ -52,19 +53,14 @@ function Main(props) {
   }
 
   return (
-    <Dropdown
-    search
-    fluid
-    selection
-    clearable
-    placeholder="Select an account"
-    options={keyringOptions}
-    onChange={(_, dropdown) => {
-      onChange(dropdown.value)
-    }}
-    className="inputCV"
-    value={acctAddr(currentAccount)}
-  />
+    <Input
+      placeholder="Select an account"
+      onChange={(_, dropdown) => {
+        onChange(dropdown.value)
+      }}
+      className="inputCV"
+      value={acctAddr(currentAccount)}
+    />
   )
 }
 

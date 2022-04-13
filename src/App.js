@@ -20,6 +20,7 @@ import UpdateCV from './Layout/Dashboard/UpdateCV/UpdateCV'
 import SearchCV from './Layout/Dashboard/SearchCV/SearchCV'
 import CreateCVDB from './Layout/Dashboard/CreateCVDB/CreateCVDB'
 import RevokeCV from './Layout/Dashboard/RevokeCV/RevokeCV'
+import ContentHomePage from './Layout/HomePage/Components/Container/ContentHomePage'
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
 
@@ -57,13 +58,15 @@ function Main() {
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
-        <Route path="home-page" element={<HomePage />}></Route>
-        <Route path="/create-cv" element={<CreateCV />}></Route>
-        <Route path="/upload-job" element={<CreateJob />}></Route>
-        <Route
-          path="/upload-scholarship"
-          element={<CreateScholarship />}
-        ></Route>
+        <Route path="home-page" element={<HomePage />}>
+          <Route index element={<ContentHomePage />}></Route>
+          <Route path="create-cv" element={<CreateCV />}></Route>
+          <Route path="upload-job" element={<CreateJob />}></Route>
+          <Route
+            path="upload-scholarship"
+            element={<CreateScholarship />}
+          ></Route>
+        </Route>
         <Route path="login" element={<Login />}></Route>
         <Route path="sign-up" element={<SignUp />}></Route>
         <Route path="dashboard" element={<Dashboard />}>

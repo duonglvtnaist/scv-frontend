@@ -1,6 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Container, Dropdown, Form, Icon } from 'semantic-ui-react'
+import {
+  Button,
+  Container,
+  Dropdown,
+  Form,
+  Icon,
+  TextArea,
+} from 'semantic-ui-react'
 import './createScholarship.css'
 import { workingType } from './../Data/Data'
 
@@ -61,7 +68,7 @@ export default function CreateScholarship() {
             </Form.Field>
             <Form.Field className="formFieldCreateCV contentForm">
               <label>Description In Detail</label>
-              <input
+              <TextArea
                 type="text"
                 placeholder="Content"
                 className="textContent"

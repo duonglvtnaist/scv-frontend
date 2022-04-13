@@ -25,10 +25,8 @@ import {
 } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import AccountMain from '../../../Components/CreateCV/AccountMain'
-import SemanticDatepicker from 'react-semantic-ui-datepickers';
+import SemanticDatepicker from 'react-semantic-ui-datepickers'
 import { TxButton, TxGroupButton } from '../../../substrate-lib/components'
-
-
 
 const argIsOptional = arg => arg.type.toString().startsWith('Option<')
 
@@ -41,10 +39,7 @@ export default function RevokeCV() {
   const [callables, setCallables] = useState([])
   const [paramFields, setParamFields] = useState([])
 
-
   const [inforDebugMes, setInforDebugMes] = useState('Initital value')
-  
- 
 
   const initFormState = {
     palletRpc: 'cv',
@@ -54,7 +49,7 @@ export default function RevokeCV() {
 
   const [formState, setFormState] = useState(initFormState)
   const { palletRpc, callable, inputParams } = formState
-  
+
   const getApiType = (api, interxType) => {
     if (interxType === 'QUERY') {
       return api.query
@@ -71,21 +66,20 @@ export default function RevokeCV() {
   const indMetaEdu = 3
   const indMetaRef = 4
   const indMetaType = 5
- 
 
   const metaDataLabels = {
-    profile:'Profile',
-    employment_history:'Employment History',
-    education:'Education',
-    references:'References',
-    type: 'Type'
+    profile: 'Profile',
+    employment_history: 'Employment History',
+    education: 'Education',
+    references: 'References',
+    type: 'Type',
   }
   const initMetaDataInputs = {
-    profile:'',
-    employment_history:'',
-    education:'',
-    references:'',
-    type:'',
+    profile: '',
+    employment_history: '',
+    education: '',
+    references: '',
+    type: '',
   }
   const [metaDataInputs, setMetaInputs] = useState(initMetaDataInputs)
   const updatePalletRPCs = () => {
@@ -190,7 +184,7 @@ export default function RevokeCV() {
           paramField: { type },
         } = state
         const inputParams = [...formState.inputParams]
-        
+
         inputParams[ind] = { type, value }
         res = { ...formState, inputParams }
       } else if (state === 'palletRpc') {
@@ -202,11 +196,9 @@ export default function RevokeCV() {
     })
 
     setInforDebugMes(JSON.stringify(formState))
-    
   }
 
   const handleDateChange = (_, data) => {
-    
     setFormState(formState => {
       let res
       const { state, value } = data
@@ -217,87 +209,119 @@ export default function RevokeCV() {
       } = state
       const inputParams = [...formState.inputParams]
       const date = new Date(value).getTime()
-      inputParams[ind] = { type, value: date.toString()}  
+      inputParams[ind] = { type, value: date.toString() }
       res = { ...formState, inputParams }
       setInforDebugMes(inputParams[ind].value)
       return res
     })
-  
   }
-  const onMetaDataChange = (_,data) => {
-    const {state, value} = data
+  const onMetaDataChange = (_, data) => {
+    const { state, value } = data
     const inputParams = [...formState.inputParams]
-    setInforDebugMes("Changing Meta")
-    if(state===indMetaProf){
-      setMetaInputs({profile: value, employment_history: metaDataInputs.employment_history, education: metaDataInputs.education, references: metaDataInputs.references, type: metaDataInputs.type })
-      setInforDebugMes("Changing Prof")
-    } else if(state===indMetaEmpl){
-      setMetaInputs({profile: metaDataInputs.profile, employment_history: value, education: metaDataInputs.education, references: metaDataInputs.references, type: metaDataInputs.type })
-      setInforDebugMes("Changing Emp")
-    } else if(state===indMetaEdu){
-      setMetaInputs({profile: metaDataInputs.profile, employment_history: metaDataInputs.employment_history, education: value, references: metaDataInputs.references, type: metaDataInputs.type })
-      setInforDebugMes("Changing Edu")
-    } else if(state===indMetaRef){
-      setMetaInputs({profile: metaDataInputs.profile, employment_history: metaDataInputs.employment_history, education: metaDataInputs.education, references: value, type: metaDataInputs.type })
-      setInforDebugMes("Changing Ref")
-    } else if(state===indMetaType){
-      setMetaInputs({profile: metaDataInputs.profile, employment_history: metaDataInputs.employment_history, education: metaDataInputs.education, references: metaDataInputs.references, type: value })
-      setInforDebugMes("Changing Type")
+    setInforDebugMes('Changing Meta')
+    if (state === indMetaProf) {
+      setMetaInputs({
+        profile: value,
+        employment_history: metaDataInputs.employment_history,
+        education: metaDataInputs.education,
+        references: metaDataInputs.references,
+        type: metaDataInputs.type,
+      })
+      setInforDebugMes('Changing Prof')
+    } else if (state === indMetaEmpl) {
+      setMetaInputs({
+        profile: metaDataInputs.profile,
+        employment_history: value,
+        education: metaDataInputs.education,
+        references: metaDataInputs.references,
+        type: metaDataInputs.type,
+      })
+      setInforDebugMes('Changing Emp')
+    } else if (state === indMetaEdu) {
+      setMetaInputs({
+        profile: metaDataInputs.profile,
+        employment_history: metaDataInputs.employment_history,
+        education: value,
+        references: metaDataInputs.references,
+        type: metaDataInputs.type,
+      })
+      setInforDebugMes('Changing Edu')
+    } else if (state === indMetaRef) {
+      setMetaInputs({
+        profile: metaDataInputs.profile,
+        employment_history: metaDataInputs.employment_history,
+        education: metaDataInputs.education,
+        references: value,
+        type: metaDataInputs.type,
+      })
+      setInforDebugMes('Changing Ref')
+    } else if (state === indMetaType) {
+      setMetaInputs({
+        profile: metaDataInputs.profile,
+        employment_history: metaDataInputs.employment_history,
+        education: metaDataInputs.education,
+        references: metaDataInputs.references,
+        type: value,
+      })
+      setInforDebugMes('Changing Type')
     }
-    inputParams[metaInd]= {type:'Bytes', value:(JSON.stringify(metaDataInputs))}
-    
-    // setFormState({palletRpc:'cv', callable:'createItem',inputParams: inputParams})
-    setFormState(formState => {
-      return {...formState, inputParams}
-    })
-  }
-  
-    const onInterxTypeChange = (ev, data) => {
-      setInterxType(data.value)
-      // clear the formState
-      setFormState({palletRpc:''})
+    inputParams[metaInd] = {
+      type: 'Bytes',
+      value: JSON.stringify(metaDataInputs),
     }
 
-    const getOptionalMsg = interxType =>
-      interxType === 'RPC'
-        ? 'Optional Parameter'
-        : 'Leaving this field as blank will submit a NONE value'
-    const cvIDInd = 0
-    const ownerInd = 1
-    const metaInd = 2
-    const createdInd = 3
-    const orgDateInd = 4
-    const expDataInd = 5
-    const keywordsInd = 6
-    const certificateIdInd = 7
-    const labelNames = [
-      {
-        value: 'CV ID',
-      },
-      {
-        value: 'Owner ID',
-      },
-      {
-        value: 'Metadata',
-      },
-      // {
-      //   value: 'Issued date',
-      // },
-      {
-        value: 'Time original date',
-      },
-      {
-        value: 'Time expired date',
-      },    
-      {
-        value: 'Keywords',
-      },
-      {
-        value: 'Certificate ID',
-      },
-    ]
+    // setFormState({palletRpc:'cv', callable:'createItem',inputParams: inputParams})
+    setFormState(formState => {
+      return { ...formState, inputParams }
+    })
+  }
+
+  const onInterxTypeChange = (ev, data) => {
+    setInterxType(data.value)
+    // clear the formState
+    setFormState({ palletRpc: '' })
+  }
+
+  const getOptionalMsg = interxType =>
+    interxType === 'RPC'
+      ? 'Optional Parameter'
+      : 'Leaving this field as blank will submit a NONE value'
+  const cvIDInd = 0
+  const ownerInd = 1
+  const metaInd = 2
+  const createdInd = 3
+  const orgDateInd = 4
+  const expDataInd = 5
+  const keywordsInd = 6
+  const certificateIdInd = 7
+  const labelNames = [
+    {
+      value: 'CV ID',
+    },
+    {
+      value: 'Owner ID',
+    },
+    {
+      value: 'Metadata',
+    },
+    // {
+    //   value: 'Issued date',
+    // },
+    {
+      value: 'Time original date',
+    },
+    {
+      value: 'Time expired date',
+    },
+    {
+      value: 'Keywords',
+    },
+    {
+      value: 'Certificate ID',
+    },
+  ]
   return (
-    <div className="updateCVContainer">
+    <div className="updateCVContainerDB">
       <HeaderDashboard />
       <div className="cardCV">
         {/* <div className="cardCVInfo">
@@ -323,7 +347,7 @@ export default function RevokeCV() {
             <Icon name="plus" className="iconAddNewCV" size="massive"></Icon>
           </div>
         </Link> */}
-        <div className="createCVContainer">
+        <div className="createCVContainerDB">
           <Container>
             <div className="createCVTitle">Revoke CV</div>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -342,59 +366,77 @@ export default function RevokeCV() {
                   {/* <input type="text" className="inputCV" name="submitterid" /> */}
                   <AccountMain className="inputCV" />
                 </Form.Field>
-              
+
                 {paramFields.map((paramField, ind) => {
-                        if (paramField.name === "createdDate" || paramField.name === "periodFrom" || paramField.name === "periodTo" ){
-                          return  <Form.Field key={`${paramField.name}-${paramField.type}`} className="formFieldCreateCV">
-                                    { paramField.optional?(
-                                      <label>{
-                                        // labelNames[ind].value +" (*)" + "-" + paramField.name
-                                        labelNames[ind].value
-                                        // paramField.name
-                                      }</label>
-                                      ):
-                                        <label>{
-                                          labelNames[ind].value
-                                          // labelNames[ind].value + "-" + paramField.name
-                                          // 
-                                        }</label>
-                                      }
-                                    <SemanticDatepicker 
-                                      // label={labelNames[ind].value}
-                                      fluid
-                                      state={{ ind, paramField }}
-                                      onChange={handleDateChange}
-                                      className="inputCV"
-                                    />
-                                  </Form.Field>
-                                
-                        
-                        }else if (paramField.name !== "metadata"){
-                          return <Form.Field key={`${paramField.name}-${paramField.type}` } className="formFieldCreateCV">
-                                  
-                                  { paramField.optional?(
-                                    <label>{
-                                      labelNames[ind].value
-                                      // labelNames[ind].value + " (*)" + "-" + paramField.name
-                                    }</label>
-                                  ):
-                                    <label>{
-                                      labelNames[ind].value
-                                      // labelNames[ind].value + "-" + paramField.name
-                                    }</label>
-                                  }
-                                  <Input
-                                    placeholder={paramField.type}
-                                    fluid
-                                    type="text"
-                                    className="inputCV"
-                                    // // label={labelNames[ind].value}
-                                    // label={labelNames[ind].value}
-                                    state={{ ind, paramField }}
-                                    value={inputParams[ind] ? inputParams[ind].value : ''}
-                                    onChange={onPalletCallableParamChange}
-                                  />
-                                  {/* {paramField.optional ? (
+                  if (
+                    paramField.name === 'createdDate' ||
+                    paramField.name === 'periodFrom' ||
+                    paramField.name === 'periodTo'
+                  ) {
+                    return (
+                      <Form.Field
+                        key={`${paramField.name}-${paramField.type}`}
+                        className="formFieldCreateCV"
+                      >
+                        {paramField.optional ? (
+                          <label>
+                            {
+                              // labelNames[ind].value +" (*)" + "-" + paramField.name
+                              labelNames[ind].value
+                              // paramField.name
+                            }
+                          </label>
+                        ) : (
+                          <label>
+                            {
+                              labelNames[ind].value
+                              // labelNames[ind].value + "-" + paramField.name
+                              //
+                            }
+                          </label>
+                        )}
+                        <SemanticDatepicker
+                          // label={labelNames[ind].value}
+                          fluid
+                          state={{ ind, paramField }}
+                          onChange={handleDateChange}
+                          className="inputCV"
+                        />
+                      </Form.Field>
+                    )
+                  } else if (paramField.name !== 'metadata') {
+                    return (
+                      <Form.Field
+                        key={`${paramField.name}-${paramField.type}`}
+                        className="formFieldCreateCV"
+                      >
+                        {paramField.optional ? (
+                          <label>
+                            {
+                              labelNames[ind].value
+                              // labelNames[ind].value + " (*)" + "-" + paramField.name
+                            }
+                          </label>
+                        ) : (
+                          <label>
+                            {
+                              labelNames[ind].value
+                              // labelNames[ind].value + "-" + paramField.name
+                            }
+                          </label>
+                        )}
+                        <Input
+                          placeholder={paramField.type}
+                          fluid
+                          type="text"
+                          className="inputCV"
+                          // // label={labelNames[ind].value}
+                          // label={labelNames[ind].value}
+                          state={{ ind, paramField }}
+                          value={inputParams[ind] ? inputParams[ind].value : ''}
+                          onChange={onPalletCallableParamChange}
+                        />
+                        {/* {paramField.optional ? (
                                     <Label
                                       basic
                                       pointing = "left"
@@ -402,86 +444,105 @@ export default function RevokeCV() {
                                       content={getOptionalMsg(interxType)}
                                     />
                                   ) : null} */}
-                                </Form.Field>
-                        }
-                        
-                        return <div>
-                              <Form.Field className="formFieldCreateCV">
-                                <label>Profile</label>
-                                <Input
-                                  className="inputCV"
-                                  placeholder='Bytes'
-                                  fluid
-                                  type="text"
-                                  // label={labelNames[ind].value}
-                                  // label='Profile'
-                                  state={indMetaProf}
-                                  value={metaDataInputs.profile ? metaDataInputs.profile : ''}
-                                  onChange={onMetaDataChange}
-                                />
-                              </Form.Field>
-                              <Form.Field className="formFieldCreateCV">
-                                <label>Employment History</label>
-                                <Input
-                                  className="inputCV"
-                                  placeholder='Bytes'
-                                  fluid
-                                  type="text"
-                                  // label={labelNames[ind].value}
-                                  // label='Employment History'
-                                  state={indMetaEmpl}
-                                  value={metaDataInputs.employment_history ? metaDataInputs.employment_history : ''}
-                                  onChange={onMetaDataChange}
-                                />
-                              </Form.Field>
-                              <Form.Field className="formFieldCreateCV">
-                                <label>Education</label>
-                                <Input
-                                  className="inputCV"
-                                  placeholder='Bytes'
-                                  fluid
-                                  type="text"
-                                  // label={labelNames[ind].value}
-                                  // label='Education'
-                                  state={indMetaEdu}
-                                  value={metaDataInputs.education ? metaDataInputs.education : ''}
-                                  onChange={onMetaDataChange}
-                                />
-                              </Form.Field>
-                              <Form.Field style={{ marginBottom: '15px' }} className="formFieldCreateCV">
-                                <label>References</label>
-                                <Input
-                                  className="inputCV"
-                                  placeholder='Bytes'
-                                  fluid
-                                  type="text"
-                                  // label={labelNames[ind].value}
-                                  // label='References'
-                                  state={indMetaRef}
-                                  value={metaDataInputs.references ? metaDataInputs.references : ''}
-                                  onChange={onMetaDataChange}
-                                />
-                              </Form.Field>
-                              <Form.Field style={{ marginBottom: '15px' }} className="formFieldCreateCV">
-                                <label>Type</label>
-                                <Input
-                                  className="inputCV"
-                                  placeholder='Bytes'
-                                  fluid
-                                  type="text"
-                                  // label={labelNames[ind].value}
-                                  // label='Type'
-                                  state={indMetaType}
-                                  value={metaDataInputs.type ? metaDataInputs.type : ''}
-                                  onChange={onMetaDataChange}
-                                />
-                              </Form.Field>
-                              
-                          </div>
-      
-                              
-                      })}
+                      </Form.Field>
+                    )
+                  }
 
+                  return (
+                    <div>
+                      <Form.Field className="formFieldCreateCV">
+                        <label>Profile</label>
+                        <Input
+                          className="inputCV"
+                          placeholder="Bytes"
+                          fluid
+                          type="text"
+                          // label={labelNames[ind].value}
+                          // label='Profile'
+                          state={indMetaProf}
+                          value={
+                            metaDataInputs.profile ? metaDataInputs.profile : ''
+                          }
+                          onChange={onMetaDataChange}
+                        />
+                      </Form.Field>
+                      <Form.Field className="formFieldCreateCV">
+                        <label>Employment History</label>
+                        <Input
+                          className="inputCV"
+                          placeholder="Bytes"
+                          fluid
+                          type="text"
+                          // label={labelNames[ind].value}
+                          // label='Employment History'
+                          state={indMetaEmpl}
+                          value={
+                            metaDataInputs.employment_history
+                              ? metaDataInputs.employment_history
+                              : ''
+                          }
+                          onChange={onMetaDataChange}
+                        />
+                      </Form.Field>
+                      <Form.Field className="formFieldCreateCV">
+                        <label>Education</label>
+                        <Input
+                          className="inputCV"
+                          placeholder="Bytes"
+                          fluid
+                          type="text"
+                          // label={labelNames[ind].value}
+                          // label='Education'
+                          state={indMetaEdu}
+                          value={
+                            metaDataInputs.education
+                              ? metaDataInputs.education
+                              : ''
+                          }
+                          onChange={onMetaDataChange}
+                        />
+                      </Form.Field>
+                      <Form.Field
+                        style={{ marginBottom: '15px' }}
+                        className="formFieldCreateCV"
+                      >
+                        <label>References</label>
+                        <Input
+                          className="inputCV"
+                          placeholder="Bytes"
+                          fluid
+                          type="text"
+                          // label={labelNames[ind].value}
+                          // label='References'
+                          state={indMetaRef}
+                          value={
+                            metaDataInputs.references
+                              ? metaDataInputs.references
+                              : ''
+                          }
+                          onChange={onMetaDataChange}
+                        />
+                      </Form.Field>
+                      <Form.Field
+                        style={{ marginBottom: '15px' }}
+                        className="formFieldCreateCV"
+                      >
+                        <label>Type</label>
+                        <Input
+                          className="inputCV"
+                          placeholder="Bytes"
+                          fluid
+                          type="text"
+                          // label={labelNames[ind].value}
+                          // label='Type'
+                          state={indMetaType}
+                          value={metaDataInputs.type ? metaDataInputs.type : ''}
+                          onChange={onMetaDataChange}
+                        />
+                      </Form.Field>
+                    </div>
+                  )
+                })}
               </Form>
             </div>
             <div className="buttonSavePostCV">
@@ -494,22 +555,25 @@ export default function RevokeCV() {
               {/* <Button type="submit" className="buttonPostCV">
                 Post
               </Button> */}
-                  <InteractorSubmit
-                    setStatus={setStatus}
-                    attrs={{
-                      interxType,
-                      palletRpc,
-                      callable,
-                      inputParams,
-                      paramFields,
-                    }}
-                  />
-          
+              <InteractorSubmit
+                setStatus={setStatus}
+                attrs={{
+                  interxType,
+                  palletRpc,
+                  callable,
+                  inputParams,
+                  paramFields,
+                }}
+              />
             </div>
-            <div style={{ overflowWrap: 'break-word' }} className="formInputCreateCV formFieldCreateCV statusMes inputCV">{status}</div>
+            <div
+              style={{ overflowWrap: 'break-word' }}
+              className="formInputCreateCV formFieldCreateCV statusMes inputCV"
+            >
+              {status}
+            </div>
           </Container>
-    </div>
-  )
+        </div>
       </div>
     </div>
   )
