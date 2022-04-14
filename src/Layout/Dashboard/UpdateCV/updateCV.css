@@ -49,6 +49,7 @@
     text-align: center;
     color: #ffffff;
 }
+
 .dateCreateCV {
 }
 .created,
@@ -75,4 +76,127 @@
 
 .iconAddNewCV {
     color: #ffffff !important;
+}
+.createCVContainer {
+    height: 100%;
+    padding: 82px;
+    background: #f3f3f3;
+}
+.createCVTitle {
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 59px;
+    text-align: center;
+    /* Text */
+    color: #090909;
+    margin-bottom: 65px;
+}
+.formInputCreateCV {
+    width: 70%;
+}
+.formFieldCreateCV {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+    /* border: solid; */
+}
+
+.formFieldCreateCV label {
+    margin-right: 22px !important;
+    width: 250px;
+    font-weight: 400 !important;
+    font-size: 24px !important;
+    line-height: 28px !important;
+    text-align: right !important;
+    color: #090909 !important;
+}
+
+Input[className="inputCV"] {
+    border-radius: 28px;
+    -webkit-border-radius: 28px;
+    -moz-border-radius: 28px;
+    -ms-border-radius: 28px;
+    -o-border-radius: 28px;
+}
+SemanticDatepicker {
+    width: 100% !important;
+    height: 56px;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 28px !important;
+    font-size: 18px !important;
+    font-weight: 300 !important;
+    font-size: 24px !important;
+    line-height: 35px;
+    margin-right: 0px;
+    color: #000000;
+}
+.inputCV {
+    width: 80% !important;
+    height: 56px;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 28px !important;
+    font-size: 18px !important;
+    font-weight: 300 !important;
+    font-size: 24px !important;
+    line-height: 35px;
+    margin-right: 0px;
+    color: #000000;
+}
+
+.textContent {
+    width: 80% !important;
+    height: 100px !important;
+    background: #ffffff;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 7px;
+    word-wrap: break-word !important;
+    font-size: 18px !important;
+    font-weight: 300 !important;
+    font-size: 24px !important;
+}
+
+.formFieldCreateCV.contentForm {
+    height: 100px !important;
+}
+
+.buttonSavePostCV {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+    width: 400px;
+    margin: 50px 160px auto auto;
+}
+.buttonSaveCV {
+    width: 137px;
+    height: 50px;
+    background: #090909 !important;
+    border-radius: 20px !important;
+    padding: 14px 20px !important;
+
+    font-weight: 700;
+    font-size: 20px !important;
+    line-height: 24px;
+    text-align: center;
+    color: #ffffff !important;
+    -webkit-border-radius: 20px !important;
+    -moz-border-radius: 20px !important;
+    -ms-border-radius: 20px !important;
+    -o-border-radius: 20px !important;
+}
+.buttonPostCV {
+    width: 137px;
+    height: 50px;
+    background: #ef6565 !important;
+    border-radius: 20px !important;
+    font-weight: 700;
+    font-size: 20px !important;
+    line-height: 24px;
+    text-align: center;
+    color: #ffffff !important;
+    -webkit-border-radius: 20px !important;
+    -moz-border-radius: 20px !important;
+    -ms-border-radius: 20px !important;
+    -o-border-radius: 20px !important;
 }

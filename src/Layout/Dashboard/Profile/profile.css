@@ -1,6 +1,8 @@
 .profile {
-    width: 86%;
+    width: 80%;
     height: 100vh;
+    position: absolute;
+    left: 20%;
 }
 
 .navbar {
@@ -25,7 +27,7 @@
     background: #f3f3f3;
     border-radius: 106px;
     position: absolute;
-    left: 25%;
+    left: 17.5%;
     top: 230px;
 }
 
@@ -66,7 +68,7 @@
     position: absolute;
     left: 80%;
     top: 80px;
-    padding: 9px 26px;
+    padding: 9px 15px;
     cursor: pointer;
     text-align: center;
 }

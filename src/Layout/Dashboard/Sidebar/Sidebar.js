@@ -7,7 +7,7 @@ export default function Sidebar() {
   return (
     <div className="sidebar">
       <div>
-        <Link to="/home-page">
+        <Link to="/home">
           <div className="menuDashboard">
             <Icon name="home" className="iconMenu" size="big"></Icon>
             <span className="textMenu">Home</span>
@@ -31,6 +31,24 @@ export default function Sidebar() {
             <span className="textMenu">History</span>
           </div>
         </Link>
+        <Link to="create-cv-dashboard">
+          <div className="menuDashboard">
+            <Icon name="save" className="iconMenu" size="big"></Icon>
+            <span className="textMenu">Create CV</span>
+          </div>
+        </Link>
+        <Link to="revoke-cv">
+          <div className="menuDashboard">
+            <Icon name="eraser" className="iconMenu" size="big"></Icon>
+            <span className="textMenu">Revoke CV</span>
+          </div>
+        </Link>
+        <Link to="search-cv">
+          <div className="menuDashboard">
+            <Icon name="address book" className="iconMenu" size="big"></Icon>
+            <span className="textMenu">Search CV</span>
+          </div>
+        </Link>
         <Link to="update-cv">
           <div className="menuDashboard">
             <Icon name="upload" className="iconMenu" size="big"></Icon>
@@ -38,10 +56,12 @@ export default function Sidebar() {
           </div>
         </Link>
       </div>
-      <div className="buttonLogOut">
-        <Icon name="sign-out" className="iconMenu" size="big"></Icon>
-        <span className="textMenu">Log Out</span>
-      </div>
+      <Link to="/">
+        <div className="buttonLogOut">
+          <Icon name="sign-out" className="iconMenu" size="big"></Icon>
+          <span className="textMenu">Log Out</span>
+        </div>
+      </Link>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Image } from 'semantic-ui-react'
 import './header.css'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 export default class Header extends Component {
   render() {
@@ -17,9 +17,14 @@ export default class Header extends Component {
               <p className="logoSCV">SMARTCV</p>
             </div>
             <div className="headerCenter">
-              <div className="Menu">Home</div>
+              <Link to="/home">
+                <div className="Menu">Home</div>
+              </Link>
               <div className="Menu">Team</div>
               <div className="Menu">Docs</div>
+              <Link to="/dashboard">
+                <div className="Menu">Dashboard</div>
+              </Link>
             </div>
             <div className="headerRight">
               <button className="buttonConnectWallet">Connect wallet</button>
@@ -32,18 +37,6 @@ export default class Header extends Component {
             </div>
           </div>
         </Container>
-
-        <div className="headerButton">
-          <Link to="/upload-scholarship">
-            <div className="headerButtonUpLoad">UPLOAD SCHOLARSHIP</div>
-          </Link>
-          <Link to="/upload-job">
-            <div className="headerButtonPostJob">POST JOB</div>
-          </Link>
-          <Link to="/create-cv">
-            <div className="headerButtonCreateCV">CREATE CV</div>
-          </Link>
-        </div>
       </div>
     )
   }

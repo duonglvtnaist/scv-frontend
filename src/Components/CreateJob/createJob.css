@@ -1,7 +1,8 @@
 .createJobContainer {
-    height: 100vh;
+    height: 100%;
     padding: 82px;
     background: #f3f3f3;
+    margin-top: 103px;
 }
 
 .formFieldGroupRadio {

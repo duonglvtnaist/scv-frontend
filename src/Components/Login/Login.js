@@ -27,7 +27,7 @@ export default function Login() {
               className="inputPassword"
               type="password"
             />
-            <Link to="/dashboard">
+            <Link to="/home">
               <Button type="submit" className="buttonLogin">
                 LOG IN
               </Button>

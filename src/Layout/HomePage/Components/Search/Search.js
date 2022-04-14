@@ -1,46 +1,60 @@
 import React from 'react'
-import { Input, Icon, Dropdown } from 'semantic-ui-react'
-import { position, workingType } from '../../../../Components/Data/Data'
+import { Dropdown, Icon } from 'semantic-ui-react'
+import {
+  category,
+  experience,
+  position,
+  searchType,
+  workingType,
+} from '../../../../Components/Data/Data'
 import './search.css'
-import { category, experience } from './../../../../Components/Data/Data'
 
-export default function Search() {
+export default function Search({onChangeKeywords, onSearchSmartCV, 
+  onChangeWorkType, onChangeCategory, onChangePosition, 
+  onChangeExperience, onApplyToFilterJob, onKeySearch}) {
   return (
     <div className="searchJob">
       <div className="search">
-        <input placeholder="Search" className="inputSearch" type="search" />
-        <button className="iconSearch">
+        <input placeholder="Search" className="inputSearch" type="search" onChange={onChangeKeywords} 
+        onKeyUp ={onKeySearch} />
+        {/* <Dropdown
+          placeholder="Search Type"
+          selection
+          options={searchType}
+          className="searchOption"
+        /> */}
+        <button className="iconSearch" onClick={onSearchSmartCV}>
           <Icon name="search" style={{ color: '#ffffff' }} size="large" />
         </button>
       </div>
       <div className="filterBar">
         <div className="filterJob">
-          <Dropdown
+          <Dropdown onChange={onChangeWorkType}
             placeholder="Working Type"
             selection
             options={workingType}
             className="filterType"
           />
-          <Dropdown
+          <Dropdown onChange={onChangeCategory}
             placeholder="Category"
             selection
             options={category}
             className="filterType"
           />
-          <Dropdown
+          <Dropdown onChange= {onChangePosition}
             placeholder="Position"
             selection
             options={position}
             className="filterType"
           />
-          <Dropdown
+          <Dropdown onChange={onChangeExperience}
             placeholder="Experience"
             selection
             options={experience}
             className="filterType"
           />
         </div>
-        <div className="buttonApplyFilter">
+        <div className="buttonApplyFilter" onClick={onApplyToFilterJob}>
           <Icon name="sliders" size="large" style={{ color: '#ffffff' }}></Icon>
           <span className="textApply">Apply</span>
         </div>
@@ -50,7 +64,7 @@ export default function Search() {
           className="sortBy"
           selection
           placeholder="Sort By"
-          options={experience}
+          options={searchType}
         ></Dropdown>
       </div>
     </div>

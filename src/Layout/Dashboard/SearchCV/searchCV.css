@@ -1,0 +1,202 @@
+.updateCVContainer {
+    width: 86%;
+    height: 100vh;
+}
+.cardCV {
+    background-color: #f3f3f3;
+    height: 90%;
+}
+.cardCVInfo {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.cardCVInfoItem {
+    width: 336px;
+    height: 416px;
+    background: #959595;
+    border-radius: 67px;
+    margin: 100px 20px;
+    -webkit-border-radius: 67px;
+    -moz-border-radius: 67px;
+    -ms-border-radius: 67px;
+    -o-border-radius: 67px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.imgCV {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+.buttonEditCV {
+    width: 169px;
+    height: 50px;
+    background: #ef6565;
+    border-radius: 19px;
+    padding: 10px 40px;
+
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 29px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.created,
+.dateCreate {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+
+    color: #ffffff;
+}
+
+.buttonCreateNewCV {
+    width: 246px;
+    height: 246px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    background: #ef6565;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iconAddNewCV {
+    color: #ffffff !important;
+}
+.createCVContainer {
+    height: 100vh;
+    padding: 82px;
+    background: #f3f3f3;
+}
+.createCVTitle {
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 59px;
+    text-align: center;
+    /* Text */
+    color: #090909;
+    margin-bottom: 65px;
+}
+.formInputCreateCV {
+    width: 70%;
+}
+.formFieldCreateCV {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+    /* border: solid; */
+}
+
+.formFieldCreateCV label {
+    margin-right: 22px !important;
+    width: 250px;
+    font-weight: 400 !important;
+    font-size: 24px !important;
+    line-height: 28px !important;
+    text-align: right !important;
+    color: #090909 !important;
+}
+
+/* Input {
+    border-radius: 28px !important;
+} */
+SemanticDatepicker {
+    width: 100% !important;
+    height: 56px;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 28px !important;
+    font-size: 18px !important;
+    font-weight: 300 !important;
+    font-size: 24px !important;
+    line-height: 35px;
+    margin-right: 0px;
+    color: #000000;
+}
+.inputCV {
+    width: 80% !important;
+    height: 56px;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 28px !important;
+    font-size: 18px !important;
+    font-weight: 300 !important;
+    font-size: 24px !important;
+    line-height: 35px;
+    margin-right: 0px;
+    color: #000000;
+}
+
+.textContent {
+    width: 80% !important;
+    height: 100px !important;
+    background: #ffffff;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 7px;
+    word-wrap: normal;
+    font-size: 18px !important;
+    font-weight: 300 !important;
+    font-size: 24px !important;
+}
+
+.formFieldCreateCV.contentForm {
+    height: 100px !important;
+}
+
+.buttonSavePostCV {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* margin-top: 50px; */
+    width: 400px;
+    margin: 50px 160px 50px auto;
+}
+.buttonSaveCV {
+    width: 137px;
+    height: 50px;
+    background: #090909 !important;
+    border-radius: 20px !important;
+    padding: 14px 20px !important;
+
+    font-weight: 700;
+    font-size: 20px !important;
+    line-height: 24px;
+    text-align: center;
+    color: #ffffff !important;
+    -webkit-border-radius: 20px !important;
+    -moz-border-radius: 20px !important;
+    -ms-border-radius: 20px !important;
+    -o-border-radius: 20px !important;
+}
+.buttonPostCV {
+    width: 137px;
+    height: 50px;
+    background: #ef6565 !important;
+    border-radius: 20px !important;
+    font-weight: 700;
+    font-size: 20px !important;
+    line-height: 24px;
+    text-align: center;
+    color: #ffffff !important;
+    -webkit-border-radius: 20px !important;
+    -moz-border-radius: 20px !important;
+    -ms-border-radius: 20px !important;
+    -o-border-radius: 20px !important;
+}
+.searchResultLabel {
+    text-align: right;
+    clear: both;
+    float: left;
+    margin-right: 50px;
+}
